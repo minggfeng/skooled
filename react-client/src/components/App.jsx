@@ -17,12 +17,13 @@ class App extends React.Component {
   }
 
   render () {
+    console.log('HELLO', this.props);
     if (!this.props.isLoggedIn) {
       return (<Redirect to="login"/>);
     } else {
       return (
         <div>
-          <Nav/>
+          <Nav userType={this.props.userType}/>
           <div className="main container-fluid col-md-12">
             <Route name="home" exact path="/" component={() => (<Home firstName={this.props.firstName}/> )} />
             <Route name="nav" path="/nav" component={Nav} />
