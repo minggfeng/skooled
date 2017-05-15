@@ -12,21 +12,16 @@ describe('Login', () => {
   //   expect(React.Component.isPrototypeOf(Login)).toBe(true);
   // });
 
-  test('contains an image', () => {
-    // let wrapper = shallow(<Login />);
-    expect(wrapper.contains(<img src="stock_logo.jpg" height="200" width="200"></img>)).toEqual(true);
-  });
-
   test('contains a form for entering the users credentials.', () => {
-    // expect(wrapper.contains(<form>)).toEqual(true);
+    expect(wrapper.contains(<form>)).toEqual(true)
   });
 
   test('should call `handleSubmit` when button is clicked.', () => {
-    expect(handleSubmit.called).toBe(true);
+    expect(handleSubmit.called).toBe(true)
   });
 
   test('one plus one equals two', () => {
-    expect(1 + 1).toBe(2);
+    expect(1 + 1).toBe(2)
   });
 
 

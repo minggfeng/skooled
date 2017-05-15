@@ -11,7 +11,7 @@
     "start": "node ./server/index.js",
     "postinstall": "webpack"
   },
-  "author": "Nick Anderson",
+  "author": "Nick, Tom and Preda",
   "license": "ISC",
   "repository": {
     "type": "git"
