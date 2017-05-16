@@ -52,6 +52,26 @@ module.exports = function (knex, Promise) {
     }
   });
 
+  knex.schema.hasTable('users_students').then((exists) => {
+    if (!exists) {
+      return knex.schema.createTable('users_students', (table) => {
+      table.increments('id');
+      table.integer('id_user').references('users.id');
+      table.integer('id_student').references('students.id');
+    })
+    }
+  });
+
+  knex.schema.hasTable('classes').then((exists) => {
+    if (!exists) {
+      return knex.schema.createTable('classes', (table) => {
+      table.increments('id');
+      table.string('name');
+    })
+    }
+  });
+
+
 };
 
 // module.exports.down = function (knex, Promise) {
