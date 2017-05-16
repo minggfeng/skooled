@@ -63,6 +63,6 @@
     "jest-cli": "^19.0.2",
     "mocha": "^3.3.0",
     "react-test-renderer": "^15.5.4",
-    "sinon": "^2.2.0",
+    "sinon": "^2.2.0"
   }
 }
