@@ -52,6 +52,15 @@ module.exports = function (knex, Promise) {
     }
   });
 
+  knex.schema.hasTable('classes').then((exists) => {
+    if (!exists) {
+      return knex.schema.createTable('classes', (table) => {
+      table.increments('id');
+      table.string('name');
+    })
+    }
+  });
+
 };
 
 // module.exports.down = function (knex, Promise) {
