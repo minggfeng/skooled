@@ -24,7 +24,9 @@ class AppIndex extends React.Component {
       password: '',
       loggedIn: false,
       userType: '',
-      firstName: ''
+      firstName: '',
+      students: [],
+      classes: []
     }
     this.sendCredentials = this.sendCredentials.bind(this);
     this.revokeCredentials = this.revokeCredentials.bind(this);
