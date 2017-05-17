@@ -13,7 +13,7 @@ module.exports = function (knex, Promise) {
         table.string('role', 20);
       });
     }
-  })
+  });
 
   knex.schema.hasTable('students').then((exists) => {
     if (!exists) {
@@ -57,6 +57,26 @@ module.exports = function (knex, Promise) {
       return knex.schema.createTable('classes', (table) => {
       table.increments('id');
       table.string('name');
+    })
+    }
+  });
+
+  knex.schema.hasTable('classes_teacher').then((exists) => {
+    if (!exists) {
+      return knex.schema.createTable('classes_teacher', (table) => {
+      table.increments('id');
+      table.integer('class_id').references('classes.id');
+      table.integer('teacher_id').references('users.id');
+    })
+    }
+  });
+
+  knex.schema.hasTable('classes_student').then((exists) => {
+    if (!exists) {
+      return knex.schema.createTable('classes_student', (table) => {
+      table.increments('id');
+      table.integer('class_id').references('classes.id');
+      table.integer('student_id').references('students.id');
     })
     }
   });
