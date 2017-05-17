@@ -1,7 +1,10 @@
 const User = require('./models/user.js');
 const Student = require('./models/student.js');
 const UserStudent = require('./models/user_student.js');
-const Document = require('./models/document.js')
+const Document = require('./models/document.js');
+const Classes = require('./models/classes.js');
+const ClassesStudent = require('./models/classes_student.js');
+const ClassesTeacher = require('./models/classes_teacher.js');
 const services = require('../services');
 
 module.exports = {
@@ -176,8 +179,23 @@ module.exports = {
       console.log('ERROR UPDATING DOCUMENT PERMISSION STATUS', error);
       callback(error, null);
     })
-  }
+  },
 
+  //admin activity for classes
+
+  insertClass : (classObj, callback) => {
+    Classes
+    .forge(classObj)
+    .save()
+    .then(classRow => {
+      console.log('SUCCESSFUL UPDATE OF CLASS:', classRow);
+      callback(null, classRow);
+    })
+    .catch(error => {
+      console.log('ERROR UPDATING CLASS', error);
+      callback(error, null);
+    })
+  }
 };
 
 /*
