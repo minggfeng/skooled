@@ -13,8 +13,12 @@ class Home extends React.Component {
       	<div>
           <div className="rowOne" >
             <h3>Students and Classes</h3>
-            <Link to="studentList">My Students</Link>
-            <Link to="classList">My Classes</Link>
+            <div>
+              <Link to="studentList">My Students</Link>
+            </div>
+            <div>
+              <Link to="classList">My Classes</Link>
+            </div>
           </div>
           <div className="rowTwo">
             <h3>Admin</h3>

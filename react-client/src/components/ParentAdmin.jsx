@@ -149,7 +149,7 @@ class ParentAdmin extends React.Component {
             <DropDownMenu onChange={this.handleStudentSelect} value="Please choose" >
               <MenuItem value={'Please choose'} primaryText="Please choose" />
               {this.state.students.map((student, index) =>
-                <MenuItem value={student.id} primaryText={student.first_name + ' ' + student.last_name} />
+                <MenuItem value={student.id} key={student.id} primaryText={student.first_name + ' ' + student.last_name} />
               )}
             </DropDownMenu>
             <br></br>
