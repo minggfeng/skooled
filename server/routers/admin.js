@@ -12,7 +12,7 @@ router.use(bodyParser.json());
 
 router.get('/students', ensureAuthorized, (req, res) => {
   // Select all students from db to send back to client for ParentAdmin form.
-  pg.selectAllStudents(req.body, (error, data) => {
+  pg.selectAllStudents((error, data) => {
     if (error) {
       console.error('Error retrieving all students from db', error);
       res.sendStatus(500);

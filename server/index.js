@@ -79,6 +79,10 @@ app.post('/login', (req, res) => {
   });
 });
 
+app.get('/*', (req, res) => {
+  res.redirect('/');
+  //res.sendFile(__dirname + '/../../dist/index.html');
+});
 
 app.listen(process.env.PORT || 5000, function() {
   console.log('Listening on enviornment port or 5000!');
