@@ -1,7 +1,10 @@
 const User = require('./models/user.js');
 const Student = require('./models/student.js');
 const UserStudent = require('./models/user_student.js');
-const Document = require('./models/document.js')
+const Document = require('./models/document.js');
+const Classes = require('./models/classes.js');
+const ClassesStudent = require('./models/classes_student.js');
+const ClassesTeacher = require('./models/classes_teacher.js');
 const services = require('../services');
 
 module.exports = {
@@ -55,6 +58,19 @@ module.exports = {
     });
   },
 
+  selectAllUsersByRole: (role, cb) => {
+    User
+    .where('role', role)
+    .fetchAll()
+    .then((collection) => {
+
+      return cb(null, collection);
+    })
+    .catch((err) => {
+      return cb(err, null);
+    })
+  },
+
   // ADMIN PAGE: ADD STUDENT
   insertStudent : (student, callback) => {
     Student.forge({
@@ -85,7 +101,7 @@ module.exports = {
   },
 
   // ADMIN PAGE: GET ALL STUDENTS
-  selectAllStudents : (user, callback) => {
+  selectAllStudents : (callback) => {
     Student.collection().fetch()
     .then(function(students) {
       callback(null, students);
@@ -176,7 +192,76 @@ module.exports = {
       console.log('ERROR UPDATING DOCUMENT PERMISSION STATUS', error);
       callback(error, null);
     })
+  },
+
+  //admin activity for classes
+
+  insertClass : (classObj, callback) => {
+    Classes
+    .forge(classObj)
+    .save()
+    .then(classRow => {
+      console.log('SUCCESSFUL UPDATE OF CLASS:', classRow);
+      callback(null, classRow);
+    })
+    .catch(error => {
+      console.log('ERROR UPDATING CLASS', error);
+      callback(error, null);
+    })
+  },
+
+  selectAllClasses : (callback) => {
+    Classes.collection().fetch()
+    .then(function(classes) {
+      callback(null, classes);
+    }).catch(function(err) {
+      callback(err, null);
+    });
+  },
+
+  insertClassesTeachers : (class_id, teacher_id) => {
+    ClassesTeacher
+    .forge({ 
+      class_id: class_id,
+      teacher_id: teacher_id
+     })
+    .save()
+    .then((relationship) => {
+      console.log('SUCCESSFUL INSERT IN CLASSESTEACHERS');
+    })
+    .catch((err) => {
+      console.log('ERROR WITH INSERT IN CLASSESTEACHERS');
+    })
+  },
+
+  selectClassesTeacher : (options, callback) => {
+    ClassesTeacher
+    .query('where', options)
+    .fetch()
+    .then(function (classesTeacher) {
+      callback(null, classesTeacher);
+    })
+    .catch(function (err) {
+      callback(err, null);
+    });
+  },
+
+
+  insertClassesStudent : (class_id, student_id) => {
+    ClassesStudent
+    .forge({ 
+      class_id: class_id,
+      student_id: student_id
+     })
+    .save()
+    .then((relationship) => {
+      console.log('SUCCESSFUL INSERT IN CLASSESSTUDENTS');
+    })
+    .catch((err) => {
+      console.log('ERROR WITH INSERT IN CLASSESSTUDENTS');
+    })
   }
+
 
 };
 

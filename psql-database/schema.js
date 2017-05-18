@@ -56,7 +56,7 @@ module.exports = function (knex, Promise) {
     if (!exists) {
       return knex.schema.createTable('classes', (table) => {
       table.increments('id');
-      table.string('name');
+      table.string('name').unique();
     })
     }
   });

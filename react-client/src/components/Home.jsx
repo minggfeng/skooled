@@ -8,12 +8,40 @@ class Home extends React.Component {
   }
 
   render() {
-    return (
-    	<h2>
-    		Welcome back {this.props.firstName}!
-  		</h2>
-
-    	);
+    if (this.props.userType === 'teacher') {
+      return (
+      	<div>
+          <div>
+            <h3>Students and Classes</h3>
+            <div>
+              <Link to="studentList">My Students</Link>
+            </div>
+            <div>
+              <Link to="classList">My Classes</Link>
+            </div>
+          </div>
+          <div>
+            <h3>Admin</h3>
+            <Link to="documents">Permission Slips</Link>
+            <Link to="video">Video</Link>
+            <Link to="admin">Create Users</Link>
+          </div>
+        </div>
+      )
+    } else {
+      return (
+        <div>
+          <div>
+            <h3>Students</h3>
+          </div>
+          <div>
+            <h3>Activities</h3>
+            <Link to="documents">Permission Slips</Link>
+            <Link to="video">Video</Link>
+          </div>
+        </div>
+      )
+    }
   }
 }
 
