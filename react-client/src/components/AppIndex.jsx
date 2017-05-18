@@ -25,6 +25,7 @@ class AppIndex extends React.Component {
       loggedIn: false,
       userType: '',
       firstName: '',
+      userId: ''
     }
     this.sendCredentials = this.sendCredentials.bind(this);
     this.revokeCredentials = this.revokeCredentials.bind(this);
@@ -37,7 +38,8 @@ class AppIndex extends React.Component {
       this.setState({
         loggedIn: response.data.isLoggedIn,
         userType: response.data.userRole,
-        firstName: response.data.firstName
+        firstName: response.data.firstName,
+        userId: response.data.userId
       });
       window.localStorage.accessToken = response.data.jwtToken;
     })
@@ -53,7 +55,8 @@ class AppIndex extends React.Component {
       password: '',
       loggedIn: false,
       userType: '',
-      firstName: ''
+      firstName: '',
+      userId: ''
     });
     window.localStorage.accessToken = '';
   }
@@ -70,23 +73,23 @@ class AppIndex extends React.Component {
       this.setState({
         loggedIn: true,
         userType: response.data.userRole,
-        firstName: response.data.firstName
-      });
-      console.log(response);
+        firstName: response.data.firstName,
+        userId: response.data.userid
+      })
     })
     .catch(error => {
       console.log('error, received no response from server');
     });
   }
 
-  render () {
+  render() {
     return (
       <MuiThemeProvider>
         <BrowserRouter>
           <div>
             <Switch>
               <Route name="login" path="/login" component={() => (<Login enterCredentials={this.sendCredentials} isLoggedIn={this.state.loggedIn} /> )}/>
-              <Route name="app" path="/" component={() => (<App isLoggedIn={this.state.loggedIn} revokeCredentials={this.revokeCredentials} userType={this.state.userType} firstName={this.state.firstName} username/> )}/>
+              <Route name="app" path="/" component={() => (<App isLoggedIn={this.state.loggedIn} revokeCredentials={this.revokeCredentials} userType={this.state.userType} firstName={this.state.firstName} userId={this.state.userId}/> )}/>
             </Switch>
           </div>
         </BrowserRouter>
