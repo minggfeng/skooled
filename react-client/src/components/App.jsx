@@ -19,7 +19,7 @@ class App extends React.Component {
   render () {
     console.log('HELLO', this.props);
     if (!this.props.isLoggedIn) {
-      return (<Redirect to="login"/>);
+      return (<Redirect to="/login"/>);
     } else {
       return (
         <div>
