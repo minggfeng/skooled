@@ -7,6 +7,7 @@ var admin = require('./routers/admin');
 var doc = require('./routers/document');
 var video = require('./routers/video');
 var twilio = require('../services/twilio');
+var home = require('./routers/home');
 
 var ensureAuthorized = services.ensureAuth;
 var createToken = services.createToken;
@@ -16,6 +17,7 @@ var app = express();
 app.use('/admin', admin);
 app.use('/doc', doc);
 app.use('/video', video);
+app.use('/home', home);
 app.use(express.static(__dirname + '/../react-client/dist'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended : false }));
@@ -27,7 +29,6 @@ app.get('/checkOnClientLoad', ensureAuthorized, (req, res) => {
       res.json({userid: req.decoded.id});
     } else {
       let user = {
-        userid: req.decoded.id,
         userRole: data.attributes.role,
         firstName: data.attributes.first_name
       };
@@ -52,6 +53,8 @@ app.get('/checkOnClientLoad', ensureAuthorized, (req, res) => {
 //   }
 // });
 
+
+
 app.post('/login', (req, res) => {
   let retrievedUser;
   pg.selectUser({email: req.body.username}, (error, data) => {
@@ -63,13 +66,13 @@ app.post('/login', (req, res) => {
       .then((match) => {
         if (match) {
           var payload = {id: data.attributes.id};
-          var token = createToken(payload);
-          res.json({
-            isLoggedIn: true,
-            jwtToken: token,
-            userRole: data.attributes.role,
-            firstName: data.attributes.first_name
-          });
+          let token = createToken(payload)
+            res.json({
+              isLoggedIn: true,
+              jwtToken: token,
+              userRole: data.attributes.role,
+              firstName: data.attributes.first_name,
+            });
         } else {
           res.json({isLoggedIn: false});
         }

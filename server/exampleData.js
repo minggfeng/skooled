@@ -3,22 +3,27 @@ var Promise = require('bluebird');
 
 
 //run once -- type node server/exampleData.js in command line and then exit
-pg.insertUser({
-  email: '123abc@example.com',
-  password: '123',
-  firstName: 'John',
-  lastName: 'Doe',
-  phone: '18001234567',
-  role: 'teacher'
-}, (error, data) => {
-  if (error) {
-    console.error('Error inserting fake user.', error);
-  } else {
-    console.log('Inserted fake user ok.', data);
-  }
-});
+// pg.insertUser({
+//   email: '123abc@example.com',
+//   password: '123',
+//   firstName: 'John',
+//   lastName: 'Doe',
+//   phone: '18001234567',
+//   role: 'teacher'
+// }, (error, data) => {
+//   if (error) {
+//     console.error('Error inserting fake user.', error);
+//   } else {
+//     console.log('Inserted fake user ok.', data);
+//   }
+// });
 
 let alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
+let photos = ['https://s3-us-west-1.amazonaws.com/skooledds-bucket/agnes_chu.jpg', 'https://s3-us-west-1.amazonaws.com/skooledds-bucket/airyque_ervin.jpg','https://s3-us-west-1.amazonaws.com/skooledds-bucket/alan_zheng.jpg',
+'https://s3-us-west-1.amazonaws.com/skooledds-bucket/alex_everhart.jpg',
+'https://s3-us-west-1.amazonaws.com/skooledds-bucket/alex_liang.jpg']
+
+
 
 var userGenerator = (letter, role) => {
   return {
@@ -34,7 +39,10 @@ var userGenerator = (letter, role) => {
 var studentGenerator = (letter) => {
   return {
     firstName: `Student${letter}`,
-    lastName: `Student${letter}`
+    lastName: `Student${letter}`,
+    gpa: Math.random() * 4.0,
+    attendance: Math.floor(Math.random() * 100),
+    photo: photos[Math.floor(3 * Math.random())]
   }
 }
 
@@ -114,10 +122,10 @@ var makeStudentParentRelationships = () => {
       let numberofParents = users.length;
         pg.selectAllStudents((err, students) => {
           if (students) {
-            for (var i = 0; i < students.length/2; i++) {
-              let parentIndex = Math.floor(numberofParents * Math.random());
-              let studentId = students.models[i].attributes.id;
-              pg.insertUserStudent(users[parentIndex], studentId);
+            let numOfStudents = students.models.length;
+            let studentId = students.models[Math.floor(Math.random() * numOfStudents)].attributes.id;
+            for (var i = 0; i < numberofParents; i++) {
+              pg.insertUserStudent(users[i], studentId);
             }
           }
         })
@@ -178,13 +186,13 @@ var makeStudentRelationships = () => {
   })
 }
 
-teacherMassInsert();
-studentMassInsert();
-parentMassInsert();
-classMassInsert();
-makeStudentParentRelationships();
-makeClassesTeacherRelationships();
-makeStudentRelationships();
+// teacherMassInsert();
+// studentMassInsert();
+// parentMassInsert();
+// classMassInsert();
+// makeStudentParentRelationships();
+// makeClassesTeacherRelationships();
+// makeStudentRelationships();
 
 
 

@@ -75,7 +75,10 @@ module.exports = {
   insertStudent : (student, callback) => {
     Student.forge({
       first_name: student.firstName,
-      last_name: student.lastName
+      last_name: student.lastName,
+      gpa: student.gpa,
+      attendance: student.attendance,
+      photo: student.photo
     }).save()
     .then(function(student) {
       callback(null, student);
@@ -246,6 +249,29 @@ module.exports = {
     });
   },
 
+  selectAllClassesTeacher : (options, callback) => {
+    ClassesTeacher
+    .query('where', options)
+    .fetchAll()
+    .then(function (classesTeacher) {
+      callback(null, classesTeacher);
+    })
+    .catch(function (err) {
+      callback(err, null);
+    });
+  },
+
+  selectClassesById : (options, callback) => {
+    Classes
+    .query('where', options)
+    .fetchAll()
+    .then(function (classes) {
+      callback(null, classes);
+    })
+    .catch(function (err) {
+      callback(err, null);
+    });
+  },
 
   insertClassesStudent : (class_id, student_id) => {
     ClassesStudent

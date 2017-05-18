@@ -1,10 +1,35 @@
 import React from 'react';
 import { BrowserRouter, Route, Link, Switch, Redirect } from 'react-router-dom';
+import axios from 'axios';
 
 class Home extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {}
+    this.state = {
+      myStudents: []
+    }
+    this.handleStudentClick = this.handleStudentClick.bind(this);
+  }
+
+  componentDidMount() {
+    var currentToken = window.localStorage.accessToken;
+    var config = {
+      headers: {'Authorization': currentToken}
+    };
+    axios.get('/home/myStudents', config)
+    .then(response => {
+      console.log('response received from server', response);
+      this.setState({
+        myStudents: response.data
+      });
+    })
+    .catch(error => {
+      console.log('error, received no response from server', error);
+    });
+  }
+
+  handleStudentClick(student) {
+    this.props.studentOnClick(student);
   }
 
   render() {
@@ -29,10 +54,17 @@ class Home extends React.Component {
         </div>
       )
     } else {
+    const studentList = this.state.myStudents.map((student) =>
+      <div key={student.id} onClick={() => {this.handleStudentClick(student)}}>
+        <img src={student.photo} width="200px"/>
+        <div>Name: {student.first_name} {student.last_name}</div>
+      </div>
+    );
       return (
         <div>
           <div>
-            <h3>Students</h3>
+            <h3>My Children</h3>
+            <div>{studentList}</div>
           </div>
           <div>
             <h3>Activities</h3>
