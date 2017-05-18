@@ -66,13 +66,4 @@ router.get('/myStudents', ensureAuthorized, (req, res) => {
   })
 });
 
-
-router.post('/currentStudent', ensureAuthorized, (req, res) => {
-  let studentId = req.body.studentId;
-  pg.selectStudent(studentId, (err, student) => {
-    console.log('studnet', student)
-    res.send(student.attributes)
-  })
-})
-
 module.exports = router;

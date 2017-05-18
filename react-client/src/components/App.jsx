@@ -13,7 +13,6 @@ import ClassList from './ClassList.jsx';
 import StudentList from './StudentList.jsx';
 import MyChildrenList from './MyChildrenList.jsx';
 import StudentProfile from './StudentProfile.jsx';
-import $ from 'jquery';
 
 class App extends React.Component {
   constructor(props) {
@@ -25,22 +24,12 @@ class App extends React.Component {
     this.studentOnClick = this.studentOnClick.bind(this);
   }
 
-  studentOnClick(e) {
-    let ancestor = $(e.target).parent();
-    let studentId = ancestor[0].attributes.id.value;
-    var currentToken = window.localStorage.accessToken;
-    var config = {
-      headers: {'Authorization': currentToken},
-    };
-    let options = { studentId: studentId }
-    axios.post('/home/currentStudent', options, config)
-    .then(res => {
-      this.setState({
-        currentStudent: res.data
+  studentOnClick(student) {
+    this.setState({
+        currentStudent: student
       }, () => {
         this.props.history.push('/studentProfile')
       })
-    })
   }
 
   render () {

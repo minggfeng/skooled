@@ -2,7 +2,6 @@ import React from 'react';
 import { BrowserRouter, Route, Link, Switch, Redirect } from 'react-router-dom';
 
 const StudentProfile = (props) => {
-  console.log(props);
   return (
     <div>
       <img src={props.currentStudent.photo} width="250px"/>

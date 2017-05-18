@@ -2,7 +2,6 @@ import React from 'react';
 import MyChildrenList from './MyChildrenList.jsx';
 import { BrowserRouter, Route, Link, Switch, Redirect } from 'react-router-dom';
 import axios from 'axios';
-import $ from 'jquery';
 
 class Home extends React.Component {
   constructor(props) {
@@ -30,8 +29,8 @@ class Home extends React.Component {
     });
   }
 
-  handleStudentClick(e) {
-    this.props.studentOnClick(e);
+  handleStudentClick(student) {
+    this.props.studentOnClick(student);
   }
 
   render() {
@@ -57,7 +56,7 @@ class Home extends React.Component {
       )
     } else {
     const studentList = this.state.myStudents.map((student) =>
-      <div key={student.id} id={student.id} onClick={this.handleStudentClick}>
+      <div key={student.id} onClick={() => {this.handleStudentClick(student)}}>
         <img src={student.photo} width="200px"/>
         <div>Name: {student.first_name} {student.last_name}</div>
       </div>

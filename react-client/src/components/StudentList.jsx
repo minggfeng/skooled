@@ -30,13 +30,13 @@ class StudentList extends React.Component {
     });
   }
 
-  handleStudentClick(e) {
-    this.props.studentOnClick(e);
+  handleStudentClick(student) {
+    this.props.studentOnClick(student);
   }
 
   render() {
     const studentList = this.state.myStudents.map((student) =>
-      <div key={student.id} id={student.id} onClick={this.handleStudentClick}>
+      <div key={student.id} onClick={() => {this.handleStudentClick(student)}}>
         <div>Name: {student.first_name} {student.last_name}</div>
       </div>
     );
