@@ -24,8 +24,7 @@ class AppIndex extends React.Component {
       password: '',
       loggedIn: false,
       userType: '',
-      firstName: '',
-      userId: ''
+      firstName: ''
     }
     this.sendCredentials = this.sendCredentials.bind(this);
     this.revokeCredentials = this.revokeCredentials.bind(this);
@@ -39,7 +38,6 @@ class AppIndex extends React.Component {
         loggedIn: response.data.isLoggedIn,
         userType: response.data.userRole,
         firstName: response.data.firstName,
-        userId: response.data.userId
       });
       window.localStorage.accessToken = response.data.jwtToken;
     })
@@ -74,7 +72,6 @@ class AppIndex extends React.Component {
         loggedIn: true,
         userType: response.data.userRole,
         firstName: response.data.firstName,
-        userId: response.data.userid
       })
     })
     .catch(error => {
@@ -89,7 +86,7 @@ class AppIndex extends React.Component {
           <div>
             <Switch>
               <Route name="login" path="/login" component={() => (<Login enterCredentials={this.sendCredentials} isLoggedIn={this.state.loggedIn} /> )}/>
-              <Route name="app" path="/" component={() => (<App isLoggedIn={this.state.loggedIn} revokeCredentials={this.revokeCredentials} userType={this.state.userType} firstName={this.state.firstName} userId={this.state.userId}/> )}/>
+              <Route name="app" path="/" component={() => (<App isLoggedIn={this.state.loggedIn} revokeCredentials={this.revokeCredentials} userType={this.state.userType} firstName={this.state.firstName} /> )}/>
             </Switch>
           </div>
         </BrowserRouter>

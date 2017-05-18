@@ -19,6 +19,11 @@ pg.insertUser({
 });
 
 let alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
+let photos = ['https://s3-us-west-1.amazonaws.com/skooledds-bucket/agnes_chu.jpg', 'https://s3-us-west-1.amazonaws.com/skooledds-bucket/airyque_ervin.jpg','https://s3-us-west-1.amazonaws.com/skooledds-bucket/alan_zheng.jpg',
+'https://s3-us-west-1.amazonaws.com/skooledds-bucket/alex_everhart.jpg',
+'https://s3-us-west-1.amazonaws.com/skooledds-bucket/alex_liang.jpg']
+
+
 
 var userGenerator = (letter, role) => {
   return {
@@ -34,7 +39,8 @@ var userGenerator = (letter, role) => {
 var studentGenerator = (letter) => {
   return {
     firstName: `Student${letter}`,
-    lastName: `Student${letter}`
+    lastName: `Student${letter}`,
+    photo: photos[Math.floor(3 * Math.random())]
   }
 }
 
@@ -178,13 +184,13 @@ var makeStudentRelationships = () => {
   })
 }
 
-teacherMassInsert();
-studentMassInsert();
-parentMassInsert();
-classMassInsert();
-makeStudentParentRelationships();
-makeClassesTeacherRelationships();
-makeStudentRelationships();
+// teacherMassInsert();
+// studentMassInsert();
+// parentMassInsert();
+// classMassInsert();
+// makeStudentParentRelationships();
+// makeClassesTeacherRelationships();
+// makeStudentRelationships();
 
 
 

@@ -32,7 +32,7 @@ class Home extends React.Component {
       return (
         <div>
           <div>
-            <h3>Students</h3>
+            <h3>My Children</h3>
           </div>
           <div>
             <h3>Activities</h3>

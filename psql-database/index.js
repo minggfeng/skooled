@@ -75,7 +75,8 @@ module.exports = {
   insertStudent : (student, callback) => {
     Student.forge({
       first_name: student.firstName,
-      last_name: student.lastName
+      last_name: student.lastName,
+      photo: student.photo
     }).save()
     .then(function(student) {
       callback(null, student);
@@ -90,7 +91,7 @@ module.exports = {
   insertUserStudent : (id_user, student_id) => {
     UserStudent.forge({
       id_user: id_user,
-      id_student: student_id
+      id_student: student_id,
     }).save()
     .then(function(student) {
       console.log('SUCCESSFUL INSERT IN JOIN TABLE:', student);
@@ -238,6 +239,18 @@ module.exports = {
     ClassesTeacher
     .query('where', options)
     .fetch()
+    .then(function (classesTeacher) {
+      callback(null, classesTeacher);
+    })
+    .catch(function (err) {
+      callback(err, null);
+    });
+  },
+
+  selectAllClassesTeacher : (options, callback) => {
+    ClassesTeacher
+    .query('where', options)
+    .fetchAll()
     .then(function (classesTeacher) {
       callback(null, classesTeacher);
     })
