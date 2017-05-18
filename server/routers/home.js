@@ -41,7 +41,7 @@ router.get('/classes', ensureAuthorized, (req, res) => {
 var selectStudentAsync = Promise.promisify(pg.selectStudent);
 
 router.get('/myStudents', ensureAuthorized, (req, res) => {
-  let user_id = req.decoded.id
+  let user_id = req.decoded.id;
   pg.retrieveSelectedUsersStudents(user_id, (err, myStudents) => {
     if (myStudents) {
       Promise.map(myStudents.models, (model) => {
@@ -52,14 +52,15 @@ router.get('/myStudents', ensureAuthorized, (req, res) => {
           let studentId = studentRelation.id_student;
           return selectStudentAsync(studentId)
           .then((student) => {
-            console.log('!!' ,student)
             return student.attributes;
           })
         })
         .then((students) => {
-          console.log(students);
           res.send(students);
         })
+      })
+      .catch((err) => {
+        res.send(err);
       })
     }
   })

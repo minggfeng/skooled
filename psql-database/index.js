@@ -76,6 +76,8 @@ module.exports = {
     Student.forge({
       first_name: student.firstName,
       last_name: student.lastName,
+      gpa: student.gpa,
+      attendance: student.attendance,
       photo: student.photo
     }).save()
     .then(function(student) {
@@ -91,7 +93,7 @@ module.exports = {
   insertUserStudent : (id_user, student_id) => {
     UserStudent.forge({
       id_user: id_user,
-      id_student: student_id,
+      id_student: student_id
     }).save()
     .then(function(student) {
       console.log('SUCCESSFUL INSERT IN JOIN TABLE:', student);

@@ -24,7 +24,8 @@ class AppIndex extends React.Component {
       password: '',
       loggedIn: false,
       userType: '',
-      firstName: ''
+      firstName: '',
+      myStudents: []
     }
     this.sendCredentials = this.sendCredentials.bind(this);
     this.revokeCredentials = this.revokeCredentials.bind(this);
@@ -33,13 +34,13 @@ class AppIndex extends React.Component {
   sendCredentials(username, password) {
     axios.post('/login', {username: username, password: password})
     .then(response => {
+      window.localStorage.accessToken = response.data.jwtToken;
       console.log('response invoking sendCredentials received from server', response.data);
       this.setState({
         loggedIn: response.data.isLoggedIn,
         userType: response.data.userRole,
-        firstName: response.data.firstName,
+        firstName: response.data.firstName
       });
-      window.localStorage.accessToken = response.data.jwtToken;
     })
     .catch(error => {
       console.log('error, received no response from server');
@@ -54,7 +55,7 @@ class AppIndex extends React.Component {
       loggedIn: false,
       userType: '',
       firstName: '',
-      userId: ''
+      myStudents: []
     });
     window.localStorage.accessToken = '';
   }
@@ -80,13 +81,14 @@ class AppIndex extends React.Component {
   }
 
   render() {
+    console.log(this.state)
     return (
       <MuiThemeProvider>
         <BrowserRouter>
           <div>
             <Switch>
               <Route name="login" path="/login" component={() => (<Login enterCredentials={this.sendCredentials} isLoggedIn={this.state.loggedIn} /> )}/>
-              <Route name="app" path="/" component={() => (<App isLoggedIn={this.state.loggedIn} revokeCredentials={this.revokeCredentials} userType={this.state.userType} firstName={this.state.firstName} /> )}/>
+              <Route name="app" path="/" component={(props) => (<App isLoggedIn={this.state.loggedIn} revokeCredentials={this.revokeCredentials} userType={this.state.userType} firstName={this.state.firstName} {...props}/> )} />
             </Switch>
           </div>
         </BrowserRouter>

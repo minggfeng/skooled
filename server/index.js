@@ -53,6 +53,8 @@ app.get('/checkOnClientLoad', ensureAuthorized, (req, res) => {
 //   }
 // });
 
+
+
 app.post('/login', (req, res) => {
   let retrievedUser;
   pg.selectUser({email: req.body.username}, (error, data) => {
@@ -64,13 +66,13 @@ app.post('/login', (req, res) => {
       .then((match) => {
         if (match) {
           var payload = {id: data.attributes.id};
-          var token = createToken(payload);
-          res.json({
-            isLoggedIn: true,
-            jwtToken: token,
-            userRole: data.attributes.role,
-            firstName: data.attributes.first_name,
-          });
+          let token = createToken(payload)
+            res.json({
+              isLoggedIn: true,
+              jwtToken: token,
+              userRole: data.attributes.role,
+              firstName: data.attributes.first_name,
+            });
         } else {
           res.json({isLoggedIn: false});
         }

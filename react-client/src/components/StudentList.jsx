@@ -9,6 +9,7 @@ class StudentList extends React.Component {
     this.state = {
       myStudents: []
     }
+    this.handleStudentClick = this.handleStudentClick.bind(this);
   }
 
   componentDidMount() {
@@ -29,9 +30,13 @@ class StudentList extends React.Component {
     });
   }
 
+  handleStudentClick(student) {
+    this.props.studentOnClick(student);
+  }
+
   render() {
     const studentList = this.state.myStudents.map((student) =>
-      <div key={student.id}>
+      <div key={student.id} onClick={() => {this.handleStudentClick(student)}}>
         <div>Name: {student.first_name} {student.last_name}</div>
       </div>
     );
