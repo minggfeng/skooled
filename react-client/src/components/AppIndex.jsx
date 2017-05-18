@@ -24,7 +24,7 @@ class AppIndex extends React.Component {
       password: '',
       loggedIn: false,
       userType: '',
-      firstName: ''
+      firstName: '',
     }
     this.sendCredentials = this.sendCredentials.bind(this);
     this.revokeCredentials = this.revokeCredentials.bind(this);
@@ -86,7 +86,7 @@ class AppIndex extends React.Component {
           <div>
             <Switch>
               <Route name="login" path="/login" component={() => (<Login enterCredentials={this.sendCredentials} isLoggedIn={this.state.loggedIn} /> )}/>
-              <Route name="app" path="/" component={() => (<App isLoggedIn={this.state.loggedIn} revokeCredentials={this.revokeCredentials} userType={this.state.userType} firstName={this.state.firstName} /> )}/>
+              <Route name="app" path="/" component={() => (<App isLoggedIn={this.state.loggedIn} revokeCredentials={this.revokeCredentials} userType={this.state.userType} firstName={this.state.firstName} username/> )}/>
             </Switch>
           </div>
         </BrowserRouter>
