@@ -68,7 +68,8 @@ app.post('/login', (req, res) => {
             isLoggedIn: true,
             jwtToken: token,
             userRole: data.attributes.role,
-            firstName: data.attributes.first_name
+            firstName: data.attributes.first_name,
+            userId: data.attributes.id
           });
         } else {
           res.json({isLoggedIn: false});
