@@ -13,7 +13,6 @@ module.exports = {
     var token = req.headers['authorization'];
     jwt.verify(token, jwtOptions.secretOrKey, function(err, decoded) {
       if (err) {
-        console.log('err', err);
         res.sendStatus(403);
       } else {
         req.decoded = decoded;
@@ -25,6 +24,5 @@ module.exports = {
   createToken : (payload) => {
     return jwt.sign(payload, jwtOptions.secretOrKey);
   },
-
 
 };
