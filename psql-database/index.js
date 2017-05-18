@@ -246,6 +246,17 @@ module.exports = {
     });
   },
 
+  selectClassesById : (options, callback) => {
+    Classes
+    .query('where', options)
+    .fetchAll()
+    .then(function (classes) {
+      callback(null, classes);
+    })
+    .catch(function (err) {
+      callback(err, null);
+    });
+  },
 
   insertClassesStudent : (class_id, student_id) => {
     ClassesStudent
