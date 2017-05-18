@@ -1,6 +1,8 @@
 var pg = require('../psql-database');
 var Promise = require('bluebird');
 
+
+//run once -- type node server/exampleData.js in command line and then exit
 pg.insertUser({
   email: '123abc@example.com',
   password: '123',
@@ -182,6 +184,8 @@ parentMassInsert();
 classMassInsert();
 makeStudentParentRelationships();
 makeClassesTeacherRelationships();
+makeStudentRelationships();
+makeStudentRelationships();
 makeStudentRelationships();
 
 

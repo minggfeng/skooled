@@ -11,7 +11,7 @@ class Home extends React.Component {
     if (this.props.userType === 'teacher') {
       return (
       	<div>
-          <div className="rowOne" >
+          <div>
             <h3>Students and Classes</h3>
             <div>
               <Link to="studentList">My Students</Link>
@@ -20,7 +20,7 @@ class Home extends React.Component {
               <Link to="classList">My Classes</Link>
             </div>
           </div>
-          <div className="rowTwo">
+          <div>
             <h3>Admin</h3>
             <Link to="documents">Permission Slips</Link>
             <Link to="video">Video</Link>
@@ -31,10 +31,10 @@ class Home extends React.Component {
     } else {
       return (
         <div>
-          <div className="rowOne" >
+          <div>
             <h3>Students</h3>
           </div>
-          <div className="rowTwo">
+          <div>
             <h3>Activities</h3>
             <Link to="documents">Permission Slips</Link>
             <Link to="video">Video</Link>
