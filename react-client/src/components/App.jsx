@@ -11,7 +11,6 @@ import Logout from './Logout.jsx';
 import Home from './Home.jsx';
 import ClassList from './ClassList.jsx';
 import StudentList from './StudentList.jsx';
-import MyChildrenList from './MyChildrenList.jsx';
 import StudentProfile from './StudentProfile.jsx';
 
 class App extends React.Component {
@@ -47,7 +46,6 @@ class App extends React.Component {
             <Route name="createDocument" path="/createDocument" component={() => (<CreateDocument userType={this.props.userType} reRender={this.reRender}/>)} />
             <Route name="video" path="/video" component={() => (<Video /> )} />
             <Route name="classList" path="/classList" component={() => (<ClassList/> )} />
-            <Route name="childrenList" path="/childrenList" component={() => (<MyChildrenList /> )} />
             <Route name="studentList" path="/studentList" component={() => (<StudentList studentOnClick={this.studentOnClick} /> )} />
             <Route name="studentProfile" path="/studentProfile" component={() => (<StudentProfile currentStudent={this.state.currentStudent} /> )} />
             <Route name="logout" path="/logout" component={() => (<Logout revokeCredentials={this.props.revokeCredentials}/> )} />

@@ -1,5 +1,4 @@
 import React from 'react';
-import MyChildrenList from './MyChildrenList.jsx';
 import { BrowserRouter, Route, Link, Switch, Redirect } from 'react-router-dom';
 import axios from 'axios';
 
