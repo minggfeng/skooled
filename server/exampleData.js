@@ -185,8 +185,7 @@ classMassInsert();
 makeStudentParentRelationships();
 makeClassesTeacherRelationships();
 makeStudentRelationships();
-makeStudentRelationships();
-makeStudentRelationships();
+
 
 
 
