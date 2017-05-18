@@ -40,7 +40,7 @@ class AppIndex extends React.Component {
       this.setState({
         loggedIn: response.data.isLoggedIn,
         userType: response.data.userRole,
-        firstName: response.data.firstName,
+        firstName: response.data.firstName
       });
     })
     .catch(error => {

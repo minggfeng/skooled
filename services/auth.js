@@ -1,8 +1,6 @@
 var PASSPORT_JWT_SECRETORKEY = process.env.PASSPORT_JWT_SECRETORKEY || require('./config/config.js').PASSPORT_JWT_SECRETORKEY;
 var passportJWT = require("passport-jwt");
-var Promise = require('bluebird');
 var jwt = require('jsonwebtoken');
-var jwtSignAsync = Promise.promisify(jwt.sign, jwt);
 
 var ExtractJwt = passportJWT.ExtractJwt;
 var jwtOptions = {};

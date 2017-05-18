@@ -112,27 +112,6 @@ var classMassInsert = () => {
   }
 }
 
-// var makeStudentParentRelationships = () => {
-//   pg.selectAllUsersByRole('parent', (err, userData) => {
-//     Promise.map(userData.models, (model) => {
-//       return model.attributes.id;
-//     })
-//     .then((userIds) => {
-//       let users = userIds;
-//       let numberofParents = users.length;
-//         pg.selectAllStudents((err, students) => {
-//           if (students) {
-//             for (var i = 0; i < students.length; i++) {
-//               let parentIndex = Math.floor(numberofParents * Math.random());
-//               let studentId = students.models[i].attributes.id;
-//               pg.insertUserStudent(users[parentIndex], studentId);
-//             }
-//           }
-//         })
-//       })
-//   })
-// }
-
 var makeStudentParentRelationships = () => {
   pg.selectAllUsersByRole('parent', (err, userData) => {
     Promise.map(userData.models, (model) => {
