@@ -76,6 +76,8 @@ module.exports = {
     Student.forge({
       first_name: student.firstName,
       last_name: student.lastName,
+      gpa: student.gpa,
+      attendance: student.attendance,
       photo: student.photo
     }).save()
     .then(function(student) {

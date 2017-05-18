@@ -3,50 +3,44 @@ import { BrowserRouter, Route, Link, Switch, Redirect } from 'react-router-dom';
 import $ from 'jquery';
 import axios from 'axios';
 
-class StudentList extends React.Component {
+class MyChildrenList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       myStudents: []
     }
-    this.handleStudentClick = this.handleStudentClick.bind(this);
   }
 
   componentDidMount() {
     var currentToken = window.localStorage.accessToken;
     var config = {
-      headers: {'Authorization': currentToken}    
+      headers: {'Authorization': currentToken}
     };
-    // Make http request to obtain array of students to populate the dropdown for student.
     axios.get('/home/myStudents', config)
     .then(response => {
-      console.log('Success getting students list from db.', response.data);
-      this.setState ({
+      console.log('response received from server', response);
+      this.setState({
         myStudents: response.data
-      });
+      })
     })
     .catch(error => {
-      console.error('Error getting classes list from db.', error);
+      console.log('error, received no response from server', error);
     });
-  }
-
-  handleStudentClick(e) {
-    this.props.studentOnClick(e);
   }
 
   render() {
     const studentList = this.state.myStudents.map((student) =>
-      <div key={student.id} id={student.id} onClick={this.handleStudentClick}>
+      <div key={student.id}>
+        <img src={student.photo} width="100px"/>
         <div>Name: {student.first_name} {student.last_name}</div>
       </div>
     );
     return (
       <div>
-        <h3>My Students</h3>
         <div>{studentList}</div>
       </div>
     )
   }
 
 }
-export default StudentList;
+export default MyChildrenList;

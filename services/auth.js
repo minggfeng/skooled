@@ -1,6 +1,8 @@
 var PASSPORT_JWT_SECRETORKEY = process.env.PASSPORT_JWT_SECRETORKEY || require('./config/config.js').PASSPORT_JWT_SECRETORKEY;
 var passportJWT = require("passport-jwt");
+var Promise = require('bluebird');
 var jwt = require('jsonwebtoken');
+var jwtSignAsync = Promise.promisify(jwt.sign, jwt);
 
 var ExtractJwt = passportJWT.ExtractJwt;
 var jwtOptions = {};
@@ -13,6 +15,7 @@ module.exports = {
     var token = req.headers['authorization'];
     jwt.verify(token, jwtOptions.secretOrKey, function(err, decoded) {
       if (err) {
+        console.log('err', err);
         res.sendStatus(403);
       } else {
         req.decoded = decoded;
@@ -24,5 +27,6 @@ module.exports = {
   createToken : (payload) => {
     return jwt.sign(payload, jwtOptions.secretOrKey);
   },
+
 
 };
