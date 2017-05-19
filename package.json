@@ -42,6 +42,7 @@
     "react-dom": "^15.4.2",
     "react-router": "^4.1.1",
     "react-router-dom": "^4.1.1",
+    "react-stripe-checkout": "^2.2.5",
     "react-tap-event-plugin": "^2.0.1",
     "regenerator-runtime": "^0.10.5",
     "twilio": "^3.0.0",
