@@ -32,7 +32,7 @@ var userGenerator = (letter, role) => {
     firstName: `${role}${letter}`,
     lastName: `${role}${letter}`,
     phone: '18001234567',
-    role: role  
+    role: role
   }
 }
 
@@ -192,9 +192,10 @@ var makeStudentRelationships = () => {
 // classMassInsert();
 // makeStudentParentRelationships();
 // makeClassesTeacherRelationships();
-// makeStudentRelationships();
+makeStudentRelationships();
 
+// run first 4
 
+// then next 2
 
-
-
+// then last 1
