@@ -6,6 +6,7 @@ import Nav from './Nav.jsx';
 import axios from 'axios';
 import DocumentsList from './DocumentsList.jsx';
 import CreateDocument from './CreateDocument.jsx';
+import Message from './Message.jsx';
 import Video from './Video.jsx';
 import Logout from './Logout.jsx';
 import Home from './Home.jsx';
@@ -52,6 +53,7 @@ class App extends React.Component {
             <Route name="classList" path="/classList" component={() => (<ClassList/> )} />
             <Route name="studentList" path="/studentList" component={() => (<StudentList studentOnClick={this.studentOnClick} /> )} />
             <Route name="studentProfile" path="/studentProfile" component={() => (<StudentProfile currentStudent={this.state.currentStudent} /> )} />
+            <Route name="message" path="/message" component={Message} />
             <Route name="logout" path="/logout" component={() => (<Logout revokeCredentials={this.props.revokeCredentials}/> )} />
             <Route name="donate" path="/donate" component={() => (<Donate />)} />
         </div>
