@@ -1,16 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import TextField from 'material-ui/TextField';
+import RadioButton from 'material-ui/RadioButton';
 
 class MultipleChoice extends React.Component {
   constructor(props) {
     super(props);
       this.state = {
-        question: 'Question',
-        optionOne: 'Option 1',
-        optionTwo: 'Option 2',
-        optionThree: 'Option 3'
+        question: '',
+        optionOne: '',
+        optionTwo: '',
+        optionThree: ''
     }
-    this.handleMultipleChoiceSave = this.handleMultipleChoiceSave.bind(this);
     this.handleMultipleChoiceTitleChange = this.handleMultipleChoiceTitleChange.bind(this);
     this.handleChangeOptionOne = this.handleChangeOptionOne.bind(this);
     this.handleChangeOptionTwo = this.handleChangeOptionTwo.bind(this);
@@ -19,7 +20,7 @@ class MultipleChoice extends React.Component {
 
   handleMultipleChoiceTitleChange(e) {
     this.setState({
-      title: e.target.value
+      question: e.target.value
     })
   }
 
@@ -41,29 +42,23 @@ class MultipleChoice extends React.Component {
     })
   }
 
-  handleMultipleChoiceSave(e) {
-    e.preventDefault();
-    console.log('submit');
-  }
-
   render() {
     return (
       <div className="multipleChoice">
-        <form onSubmit={this.handleMultipleChoiceSave}>
-            <input type="text" value={this.state.question} onChange={this.handleMultipleChoiceTitleChange}/>
+        <form>
+            <TextField id="question" fullWidth hintText="Question" value={this.state.question} onChange={this.handleMultipleChoiceTitleChange}/>
             <div>
-              <input type="radio" value="option1" checked={false} />
-              <input type="text" value={this.state.optionOne} onChange={this.handleChangeOptionOne}/>
+              <span><RadioButton id="radioOne" checked={false} disabled={true}/></span>
+              <span><TextField fullWidth hintText="Option 1" id="textOne" value={this.state.optionOne} onChange={this.handleChangeOptionOne}/></span>
             </div>
              <div>
-              <input type="radio" value="option2" checked={false} />
-              <input type="text" value={this.state.optionTwo} onChange={this.handleChangeOptionTwo} />
+              <RadioButton id="radioTwo" checked={false} disabled/>
+              <TextField id="textTwo" fullWidth hintText="Option 2" value={this.state.optionTwo} onChange={this.handleChangeOptionTwo} />
             </div>
             <div>
-              <input type="radio" value="option3" checked={false} />
-              <input type="text" value={this.state.optionThree} onChange={this.handleChangeOptionThree}/>
+              <RadioButton id="radioThree" checked={false} disabled/>
+              <TextField id="textThree" fullWidth hintText="Option 3" value={this.state.optionThree} onChange={this.handleChangeOptionThree}/>
             </div>
-            <input type="submit" value="Save Question"/>
         </form>
       </div>
     )

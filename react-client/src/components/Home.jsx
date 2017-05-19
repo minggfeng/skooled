@@ -1,6 +1,26 @@
 import React from 'react';
 import { BrowserRouter, Route, Link, Switch, Redirect } from 'react-router-dom';
 import axios from 'axios';
+import {GridList, GridTile} from 'material-ui/GridList';
+import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
+import RaisedButton from 'material-ui/RaisedButton';
+
+
+const styles = {
+  root: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'space-around',
+  },
+  gridList: {
+    display: 'flex',
+    flexWrap: 'nowrap',
+    overflowX: 'auto',
+  },
+  titleStyle: {
+    color: 'rgb(0, 188, 212)',
+  },
+};
 
 class Home extends React.Component {
   constructor(props) {
@@ -70,21 +90,34 @@ class Home extends React.Component {
       )
     } else {
     const studentList = this.state.myStudents.map((student) =>
-      <div key={student.id} onClick={() => {this.handleStudentClick(student)}}>
-        <img src={student.photo} width="200px"/>
-        <div>Name: {student.first_name} {student.last_name}</div>
-      </div>
+      <GridTile 
+        title={`${student.first_name} ${student.last_name}`} 
+        titleStyle={styles.titleStyle} 
+        key={student.id} onClick={() => {this.handleStudentClick(student)}}
+        titleBackground="linear-gradient(to top, rgba(0,0,0,0.7) 0%,rgba(0,0,0,0.3) 70%,rgba(0,0,0,0) 100%)"
+        subtitle={`GPA: ${student.gpa}`}>
+        <img src={student.photo}/>
+      </GridTile>
     );
       return (
         <div>
           <div>
             <h3>My Children</h3>
-            <div>{studentList}</div>
+            <div style={styles.root}>
+              <GridList style={styles.gridList} cols={2.2}>{studentList}</GridList>
+            </div>
           </div>
           <div>
             <h3>Activities</h3>
-            <Link to="documents">Permission Slips</Link>
-            <Link to="video">Video</Link>
+            <GridList>
+             <Link to="documents">  
+              <RaisedButton
+                  label="Permission Slips"></RaisedButton>
+            </Link>
+            <Link to="video">
+              <RaisedButton label="Video"></RaisedButton>
+            </Link>
+            </GridList>
           </div>
         </div>
       )
