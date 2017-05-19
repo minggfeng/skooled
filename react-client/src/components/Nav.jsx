@@ -15,6 +15,7 @@ const Nav = (props) => {
         <li role="presentation"><Link to="documents">Documents</Link></li>
         <li role="presentation"><Link to="video">Video</Link></li>
         <li role="presentation"><Link to="admin">Settings</Link></li>
+        <li role="presentation"><Link to="donate">Donate</Link></li>
         </ul>
       </div>
     )
@@ -29,11 +30,12 @@ const Nav = (props) => {
         <li role="presentation"><Link to="logout">Sign Out</Link></li>
         <li role="presentation"><Link to="documents">Documents</Link></li>
         <li role="presentation"><Link to="video">Video</Link></li>
+        <li role="presentation"><Link to="donate">Donate</Link></li>
         </ul>
       </div>
     )
   }
-  
+
 }
 
 export default Nav;

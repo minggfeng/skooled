@@ -12,6 +12,7 @@ import Home from './Home.jsx';
 import ClassList from './ClassList.jsx';
 import StudentList from './StudentList.jsx';
 import StudentProfile from './StudentProfile.jsx';
+import Donate from './Donate.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -49,9 +50,10 @@ class App extends React.Component {
             <Route name="studentList" path="/studentList" component={() => (<StudentList studentOnClick={this.studentOnClick} /> )} />
             <Route name="studentProfile" path="/studentProfile" component={() => (<StudentProfile currentStudent={this.state.currentStudent} /> )} />
             <Route name="logout" path="/logout" component={() => (<Logout revokeCredentials={this.props.revokeCredentials}/> )} />
-          </div>
+            <Route name="donate" path="/donate" component={() => (<Donate />)} />
         </div>
-      )
+        </div>
+      );
     }
   }
 }
