@@ -15,6 +15,7 @@ import StudentList from './StudentList.jsx';
 import StudentProfile from './StudentProfile.jsx';
 import Donate from './Donate.jsx';
 import Grades from './Grades.jsx';
+import FormBuilder from './FormBuilder.jsx';
 
 
 class App extends React.Component {
@@ -53,7 +54,11 @@ class App extends React.Component {
             <Route name="classList" path="/classList" component={() => (<ClassList/> )} />
             <Route name="studentList" path="/studentList" component={() => (<StudentList studentOnClick={this.studentOnClick} /> )} />
             <Route name="studentProfile" path="/studentProfile" component={() => (<StudentProfile currentStudent={this.state.currentStudent} /> )} />
+<<<<<<< HEAD
             <Route name="message" path="/message" component={Message} />
+=======
+            <Route name="formBuilder" path="/formBuilder" component={() => (<FormBuilder /> )} />
+>>>>>>> Able to drag and drop questions
             <Route name="logout" path="/logout" component={() => (<Logout revokeCredentials={this.props.revokeCredentials}/> )} />
             <Route name="donate" path="/donate" component={Donate} />
         </div>

@@ -62,6 +62,9 @@ class Home extends React.Component {
             <div>
               <Link to="message">Send a message</Link>
             </div>
+            <div>
+              <Link to="formBuilder">Create Homework</Link>
+            </div>
           </div>
         </div>
       )
