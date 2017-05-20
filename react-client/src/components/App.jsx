@@ -13,6 +13,8 @@ import ClassList from './ClassList.jsx';
 import StudentList from './StudentList.jsx';
 import StudentProfile from './StudentProfile.jsx';
 import Donate from './Donate.jsx';
+import Grades from './Grades.jsx';
+
 
 class App extends React.Component {
   constructor(props) {
@@ -46,6 +48,7 @@ class App extends React.Component {
             <Route name="documents" path="/documents" component={() => (<DocumentsList userType={this.props.userType} /> )} />
             <Route name="createDocument" path="/createDocument" component={() => (<CreateDocument userType={this.props.userType} reRender={this.reRender}/>)} />
             <Route name="video" path="/video" component={() => (<Video /> )} />
+            <Route name="grades" path="/grades" component={() => (<Grades /> )} />
             <Route name="classList" path="/classList" component={() => (<ClassList/> )} />
             <Route name="studentList" path="/studentList" component={() => (<StudentList studentOnClick={this.studentOnClick} /> )} />
             <Route name="studentProfile" path="/studentProfile" component={() => (<StudentProfile currentStudent={this.state.currentStudent} /> )} />

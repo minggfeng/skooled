@@ -8,6 +8,8 @@ var doc = require('./routers/document');
 var video = require('./routers/video');
 var twilio = require('../services/twilio');
 var home = require('./routers/home');
+var grades = require('./routers/grades');
+
 
 var ensureAuthorized = services.ensureAuth;
 var createToken = services.createToken;
@@ -18,6 +20,7 @@ app.use('/admin', admin);
 app.use('/doc', doc);
 app.use('/video', video);
 app.use('/home', home);
+app.use('/grades', grades);
 app.use(express.static(__dirname + '/../react-client/dist'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended : false }));
@@ -87,7 +90,7 @@ app.post('/login', (req, res) => {
 app.post('/message', (req, res) => {
   var phoneNumber = req.body.phoneNumber;
   var message = req.body.message;
-  
+
   twilio.sendMessage(phoneNumber, message);
   res.send('Message sent!');
 });
@@ -97,6 +100,6 @@ app.get('/*', (req, res) => {
   //res.sendFile(__dirname + '/../../dist/index.html');
 });
 
-app.listen(process.env.PORT || 5000, function() {
-  console.log('Listening on enviornment port or 5000!');
+app.listen(process.env.PORT || 3000, function() {
+  console.log('Listening on enviornment port or 3000!');
 });
