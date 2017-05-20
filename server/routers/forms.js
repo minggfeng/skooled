@@ -17,9 +17,11 @@ router.post('/save', ensureAuthorized, (req, res) => {
   let questions = req.body.questions;
   let homework_name = req.body.name;
   Promise.map( questions, (question) => {
+    console.log('!!!!questions', questions);
+    console.log('conte', JSON.stringify(question))
     let questionObj = {
       type: question.type,
-      content: JSON.stringify(questions),
+      content: JSON.stringify(question),
       created_by: user_id
     }
     return questionObj;
