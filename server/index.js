@@ -8,6 +8,7 @@ var doc = require('./routers/document');
 var video = require('./routers/video');
 var twilio = require('../services/twilio');
 var home = require('./routers/home');
+var stripeCharge = require('../services/stripe');
 
 var ensureAuthorized = services.ensureAuth;
 var createToken = services.createToken;
@@ -87,9 +88,27 @@ app.post('/login', (req, res) => {
 app.post('/message', (req, res) => {
   var phoneNumber = req.body.phoneNumber;
   var message = req.body.message;
-  
+
   twilio.sendMessage(phoneNumber, message);
   res.send('Message sent!');
+});
+
+app.post('/donate', (req, res) => {
+  let options = {
+    amount: req.body.amount,
+    currency: 'usd',
+    source: req.body.token.id
+  };
+  console.log('options: ', options);
+  stripeCharge(options, (err, result) => {
+    if (err) {
+      console.log('err: ', err);
+      res.send(err);
+    } else {
+      console.log('result: ', result);
+      res.send(result);
+    }
+  });
 });
 
 app.get('/*', (req, res) => {
