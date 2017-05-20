@@ -12,6 +12,7 @@ import Menu from 'material-ui/Menu';
 import MenuItem from 'material-ui/MenuItem';
 import Paper from 'material-ui/Paper';
 import TextField from 'material-ui/TextField';
+import Homework from './forms/Homework.jsx';
 
 import { BrowserRouter, Route, Link, Switch, Redirect } from 'react-router-dom';
 
@@ -26,7 +27,9 @@ class FormBuilder extends React.Component {
     this.state = {
       homework: [],
       questions: [],
-      name: ''
+      name: '',
+      myHomework: [],
+      currentHomework: {}
     }
     this.drag = this.drag.bind(this);
     this.drop = this.drop.bind(this);
@@ -35,6 +38,23 @@ class FormBuilder extends React.Component {
     this.saveAll = this.saveAll.bind(this);
     this.saveQuestion = this.saveQuestion.bind(this);
     this.handleNameChange = this.handleNameChange.bind(this);
+    this.homeworkOnClick = this.homeworkOnClick.bind(this);
+  }
+
+  componentDidMount() {
+    let currentToken = window.localStorage.accessToken;
+    var config = {
+      headers: {'Authorization': currentToken}
+    };
+    axios.get('/forms/myHomework', config)
+    .then(response => {
+      this.setState({
+        myHomework: response.data
+      })
+    })
+    .catch(error => {
+      console.error('Failed to upload questions from db', error);
+    })
   }
 
   preventDefault(e) {
@@ -68,9 +88,14 @@ class FormBuilder extends React.Component {
     }
     axios.post('/forms/save', formInfo, config)
     .then(response => {
-      console.log(response)
+      this.setState({
+        myHomework: this.state.myHomework.concat([response.data])
+      }, () => {
+        this.props.history.push('/homework');
+      })
     })
     .catch(error => {
+      alert('Try again, failed to save!');
       console.error('Failed to add form to db', error);
     })
   }
@@ -87,6 +112,10 @@ class FormBuilder extends React.Component {
     })
   }
 
+  homeworkOnClick(e) {
+    this.props.history.push('/homework');
+  }
+
   render () {
     var questions = this.state.homework.map((type, i) => {
       var props = {
@@ -100,7 +129,15 @@ class FormBuilder extends React.Component {
         var question = <MultipleChoice {...props}/>
       }
       return  question;
-    }, this)
+    }, this);
+
+    var myHomework = this.state.myHomework.map((homework, index) => (<ListItem
+              id={index}
+              key={homework.id}
+              onClick={() => {this.homeworkOnClick(homework)}}
+              primaryText={`${homework.title}`}>
+              </ListItem>)
+    )
     return (
       <div>
         <h2>Homework Builder</h2>
@@ -108,16 +145,21 @@ class FormBuilder extends React.Component {
           <br></br>
         <Paper style={style}>
         <Menu>
+          <h5>Questions</h5>
           <List>
             <ListItem 
               primaryText="Short Essay" 
-              draggable="true" id="shortEssay" 
+              draggable="true" 
+              id="shortEssay" 
               onDragStart={(e) => {this.drag(e)}}></ListItem>
             <ListItem 
               primaryText="Multiple Choice" 
-              draggable="true" id="multipleChoice" 
+              draggable="true" 
+              id="multipleChoice" 
               onDragStart={(e) => {this.drag(e)}}></ListItem>
           </List>
+          <h5>My Homework Forms</h5>
+            <List>{myHomework}</List>
         </Menu>
         </Paper>
           <TextField 
