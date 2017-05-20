@@ -80,6 +80,7 @@ module.exports = function (knex, Promise) {
       table.increments('id');
       table.integer('class_id').references('classes.id');
       table.integer('student_id').references('students.id');
+      table.string('grade');
     })
     }
   });
