@@ -84,6 +84,28 @@ module.exports = function (knex, Promise) {
     }
   });
 
+  knex.schema.hasTable('homework').then((exists) => {
+    if (!exists) {
+      return knex.schema.createTable('homework', (table) => {
+      table.increments('id');
+      table.string('title');
+      table.integer('teacher_id');
+      table.string('questions');
+    })
+    }
+  });
+
+  knex.schema.hasTable('questions').then((exists) => {
+    if (!exists) {
+      return knex.schema.createTable('questions', (table) => {
+      table.increments('id');
+      table.string('type');
+      table.string('content');
+      table.integer('created_by');
+      table.string('created_dttm');
+    })
+    }
+  });
 };
 
 // module.exports.down = function (knex, Promise) {

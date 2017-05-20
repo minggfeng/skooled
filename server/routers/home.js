@@ -33,7 +33,6 @@ router.get('/classes', ensureAuthorized, (req, res) => {
           res.send(classes);
         })
       })
-
     }
   })
 });

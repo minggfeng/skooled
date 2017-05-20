@@ -6,7 +6,7 @@ const StudentProfile = (props) => {
     <div>
       <img src={props.currentStudent.photo} width="250px"/>
       <div>Name: {props.currentStudent.first_name} {props.currentStudent.last_name}</div>
-      <div>GPA: {props.currentStudent.GPA}</div>
+      <div>GPA: {props.currentStudent.gpa}</div>
       <div>Attendance: {props.currentStudent.attendance}%</div>
     </div>
   )  
