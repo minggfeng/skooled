@@ -55,7 +55,7 @@ class App extends React.Component {
             <Route name="studentProfile" path="/studentProfile" component={() => (<StudentProfile currentStudent={this.state.currentStudent} /> )} />
             <Route name="message" path="/message" component={Message} />
             <Route name="logout" path="/logout" component={() => (<Logout revokeCredentials={this.props.revokeCredentials}/> )} />
-            <Route name="donate" path="/donate" component={() => (<Donate />)} />
+            <Route name="donate" path="/donate" component={Donate} />
         </div>
         </div>
       );
