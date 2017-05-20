@@ -1,6 +1,13 @@
 import React from 'react';
 import { BrowserRouter, Route, Link, Switch, Redirect } from 'react-router-dom';
 import axios from 'axios';
+import {List, ListItem} from 'material-ui/List';
+
+const style = {
+  width: '50%',
+  margin: 'auto'
+}
+
 
 class ClassList extends React.Component {
   constructor(props) {
@@ -30,12 +37,15 @@ class ClassList extends React.Component {
 
   render() {
     const classesList = this.state.classes.map((classData) =>
-      <div key={classData.id}>{classData.name}</div>
+      <ListItem 
+        key={classData.id}
+        style={style}
+        primaryText={`${classData.name}`}/>
     );
     return (
       <div>
           <h3>My Classes</h3>
-          <div>{classesList}</div>
+          <List>{classesList}</List>
       </div>
     )
   }

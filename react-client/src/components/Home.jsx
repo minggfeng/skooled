@@ -18,7 +18,7 @@ const styles = {
     overflowX: 'auto',
   },
   titleStyle: {
-    color: 'rgb(0, 188, 212)',
+    color: 'FFF',
   },
 };
 

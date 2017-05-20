@@ -1,14 +1,25 @@
 import React from 'react';
 import { BrowserRouter, Route, Link, Switch, Redirect } from 'react-router-dom';
+import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
+
+const style = {
+  width: '50%',
+  margin: 'auto'
+}
 
 const StudentProfile = (props) => {
   return (
-    <div>
-      <img src={props.currentStudent.photo} width="250px"/>
-      <div>Name: {props.currentStudent.first_name} {props.currentStudent.last_name}</div>
-      <div>GPA: {props.currentStudent.gpa}</div>
-      <div>Attendance: {props.currentStudent.attendance}%</div>
-    </div>
+    <Card
+      style={style}>
+      <CardMedia>
+        <img src={props.currentStudent.photo} />
+      </CardMedia>
+      <CardTitle title={`${props.currentStudent.first_name} ${props.currentStudent.last_name}`} />
+      <CardText>
+        {`GPA: ${props.currentStudent.gpa}
+        Attendance: ${props.currentStudent.attendance}%`}
+      </CardText>
+    </Card>
   )  
 }
 
