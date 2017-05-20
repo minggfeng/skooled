@@ -71,23 +71,36 @@ class Home extends React.Component {
               <button className="btn btn-default">
                 <img src="https://s3-us-west-1.amazonaws.com/skooledds-bucket/subjects1.jpg" width="200" height="150" />
               </button>
+            </Link>
+
+            <Link to="homework">
+                <button className="btn btn-default">
+                  <img src="https://s3-us-west-1.amazonaws.com/skooledds-bucket/homework.jpg" width="200" height="150" />
+                </button>
+              </Link>    
+
+            <Link to="formBuilder">
+              <button className="btn btn-default">
+                <img src="https://s3-us-west-1.amazonaws.com/skooledds-bucket/forms.jpg" width="200" height="150" />
+              </button>
             </Link> 
           </div><br />
           <div>
             <h3>Administration</h3>
- 
+
             <Link to="grades">
               <button className="btn btn-default">
                 <img src="https://s3-us-west-1.amazonaws.com/skooledds-bucket/gradebook.jpg" width="200" height="150" />
               </button>
             </Link>
  
+            
             <Link to="documents">
               <button className="btn btn-default">
                 <img src="https://s3-us-west-1.amazonaws.com/skooledds-bucket/permission-slip.gif" width="200" height="150" />
               </button>
             </Link>
- 
+    
             <Link to="video">
               <button className="btn btn-default">
                 <img src="https://s3-us-west-1.amazonaws.com/skooledds-bucket/video.jpg" width="200" height="150" />
@@ -105,13 +118,6 @@ class Home extends React.Component {
                 <img src="https://s3-us-west-1.amazonaws.com/skooledds-bucket/administrator.jpeg" width="200" height="150" />
               </button>
             </Link>
-
-          <div>
-            <Link to="formBuilder">Create Homework</Link>
-          </div>
-          <div>
-            <Link to="homework">View Homework Forms</Link>
-          </div>   
 
           </div>
         </div>
