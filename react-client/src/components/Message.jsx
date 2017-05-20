@@ -9,7 +9,7 @@ class Message extends React.Component {
     this.state = {
       phoneNumber: '',
       message: '',
-      characterCount: ''
+      characterCount: 160
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -44,13 +44,15 @@ class Message extends React.Component {
 
   render() {
     let charCountDiv;
-    if(this.state.characterCount >= 0) {
-      charCountDiv = <div>{this.state.characterCount} characters left</div>;
+    if (this.state.characterCount >= 0 && this.state.characterCount < 160) {
+      charCountDiv = <div>{this.state.characterCount || 160} characters left</div>;
+    } else if (this.state.characterCount === 160) {
+      charCountDiv = <div />;
     } else {
       charCountDiv = <div style={charCountStyle}>{this.state.characterCount} characters left</div>;
     }
     return (
-      <div className="main container-fluid col-md-12">
+      <div className="main container-fluid">
         <div id="message-form">
           <div id="message-title">
             <h2>Send Text Messages to Parents</h2>
@@ -62,8 +64,6 @@ class Message extends React.Component {
           <TextField hintText="Message text" 
                      onChange={this.handleMessageChange}
                      multiLine={true}
-                     rows={2}
-                     rowsMax={4}
                      id="password" />
           {charCountDiv}
           <br />
