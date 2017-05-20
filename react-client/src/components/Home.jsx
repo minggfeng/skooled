@@ -55,39 +55,64 @@ class Home extends React.Component {
   render() {
     if (this.props.userType === 'teacher') {
       return (
-      	<div>
+      	<div id="teacher-dashboard">
+          <h1>Teacher Dashboard</h1>
+          <br />
           <div>
             <h3>Students and Classes</h3>
-            <div>
-              <Link to="studentList">My Students</Link>
-            </div>
-            <div>
-              <Link to="classList">My Classes</Link>
-            </div>
+            
+            <Link to="studentList">
+              <button className="btn btn-default">
+                <img src="https://s3-us-west-1.amazonaws.com/skooledds-bucket/diverse_graduates.jpg" width="200" height="150" />
+              </button>
+            </Link>
+            
+            <Link to="classList">
+              <button className="btn btn-default">
+                <img src="https://s3-us-west-1.amazonaws.com/skooledds-bucket/subjects1.jpg" width="200" height="150" />
+              </button>
+            </Link> 
+          </div><br />
+          <div>
+            <h3>Administration</h3>
+ 
+            <Link to="grades">
+              <button className="btn btn-default">
+                <img src="https://s3-us-west-1.amazonaws.com/skooledds-bucket/gradebook.jpg" width="200" height="150" />
+              </button>
+            </Link>
+ 
+            <Link to="documents">
+              <button className="btn btn-default">
+                <img src="https://s3-us-west-1.amazonaws.com/skooledds-bucket/permission-slip.gif" width="200" height="150" />
+              </button>
+            </Link>
+ 
+            <Link to="video">
+              <button className="btn btn-default">
+                <img src="https://s3-us-west-1.amazonaws.com/skooledds-bucket/video.jpg" width="200" height="150" />
+              </button>
+            </Link>
+ 
+            <Link to="message">
+              <button className="btn btn-default">
+                <img src="https://s3-us-west-1.amazonaws.com/skooledds-bucket/lower-sms-prices.jpg" width="200" height="150" />
+              </button>
+            </Link>
+
+            <Link to="admin">
+              <button className="btn btn-default">
+                <img src="https://s3-us-west-1.amazonaws.com/skooledds-bucket/administrator.jpeg" width="200" height="150" />
+              </button>
+            </Link>
+
+          <div>
+            <Link to="formBuilder">Create Homework</Link>
           </div>
           <div>
-            <h3>Admin</h3>
-            <div>
-              <Link to='grades'>Grades</Link>
-            </div>
-            <div>
-              <Link to="documents">Permission Slips</Link>
-            </div>
-            <div>
-              <Link to="video">Video</Link>
-            </div>
-            <div>
-              <Link to="admin">Create Users</Link>
-            </div>
-            <div>
-              <Link to="message">Send a message</Link>
-            </div>
-            <div>
-              <Link to="formBuilder">Create Homework</Link>
-            </div>
-            <div>
-              <Link to="homework">View Homework Forms</Link>
-            </div>
+            <Link to="homework">View Homework Forms</Link>
+          </div>   
+
           </div>
         </div>
       )
