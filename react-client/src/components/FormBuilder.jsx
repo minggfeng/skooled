@@ -38,23 +38,6 @@ class FormBuilder extends React.Component {
     this.saveAll = this.saveAll.bind(this);
     this.saveQuestion = this.saveQuestion.bind(this);
     this.handleNameChange = this.handleNameChange.bind(this);
-    this.homeworkOnClick = this.homeworkOnClick.bind(this);
-  }
-
-  componentDidMount() {
-    let currentToken = window.localStorage.accessToken;
-    var config = {
-      headers: {'Authorization': currentToken}
-    };
-    axios.get('/forms/myHomework', config)
-    .then(response => {
-      this.setState({
-        myHomework: response.data
-      })
-    })
-    .catch(error => {
-      console.error('Failed to upload questions from db', error);
-    })
   }
 
   preventDefault(e) {
@@ -88,11 +71,7 @@ class FormBuilder extends React.Component {
     }
     axios.post('/forms/save', formInfo, config)
     .then(response => {
-      this.setState({
-        myHomework: this.state.myHomework.concat([response.data])
-      }, () => {
-        this.props.history.push('/homework');
-      })
+      this.props.history.push('/homework');
     })
     .catch(error => {
       alert('Try again, failed to save!');
@@ -112,10 +91,6 @@ class FormBuilder extends React.Component {
     })
   }
 
-  homeworkOnClick(e) {
-    this.props.history.push('/homework');
-  }
-
   render () {
     var questions = this.state.homework.map((type, i) => {
       var props = {
@@ -130,14 +105,6 @@ class FormBuilder extends React.Component {
       }
       return  question;
     }, this);
-
-    var myHomework = this.state.myHomework.map((homework, index) => (<ListItem
-              id={index}
-              key={homework.id}
-              onClick={() => {this.homeworkOnClick(homework)}}
-              primaryText={`${homework.title}`}>
-              </ListItem>)
-    )
     return (
       <div>
         <h2>Homework Builder</h2>
@@ -158,8 +125,6 @@ class FormBuilder extends React.Component {
               id="multipleChoice" 
               onDragStart={(e) => {this.drag(e)}}></ListItem>
           </List>
-          <h5>My Homework Forms</h5>
-            <List>{myHomework}</List>
         </Menu>
         </Paper>
           <TextField 

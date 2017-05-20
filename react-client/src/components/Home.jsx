@@ -85,6 +85,9 @@ class Home extends React.Component {
             <div>
               <Link to="formBuilder">Create Homework</Link>
             </div>
+            <div>
+              <Link to="homework">View Homework Forms</Link>
+            </div>
           </div>
         </div>
       )
@@ -93,7 +96,8 @@ class Home extends React.Component {
       <GridTile 
         title={`${student.first_name} ${student.last_name}`} 
         titleStyle={styles.titleStyle} 
-        key={student.id} onClick={() => {this.handleStudentClick(student)}}
+        key={student.id} 
+        onClick={() => {this.handleStudentClick(student)}}
         titleBackground="linear-gradient(to top, rgba(0,0,0,0.7) 0%,rgba(0,0,0,0.3) 70%,rgba(0,0,0,0) 100%)"
         subtitle={`GPA: ${student.gpa}`}>
         <img src={student.photo}/>

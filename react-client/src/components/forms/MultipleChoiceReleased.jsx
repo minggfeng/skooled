@@ -7,71 +7,26 @@ class MultipleChoiceReleased extends React.Component {
   constructor(props) {
     super(props);
       this.state = {
-        question: '',
-        optionOne: '',
-        optionTwo: '',
-        optionThree: '',
         type: 'multipleChoice'
     }
-    this.handleMultipleChoiceTitleChange = this.handleMultipleChoiceTitleChange.bind(this);
-    this.handleChangeOptionOne = this.handleChangeOptionOne.bind(this);
-    this.handleChangeOptionTwo = this.handleChangeOptionTwo.bind(this);
-    this.handleChangeOptionThree = this.handleChangeOptionThree.bind(this);
-  }
-
-  handleMultipleChoiceTitleChange(e) {
-    let title = e.target.value
-    this.setState({
-      question: title
-    }, () => {
-      let questionObj = this.state;
-      this.props.onChange(this.props.id, questionObj);
-    })
-  }
-
-  handleChangeOptionOne(e) {
-    this.setState({
-      optionOne: e.target.value
-    }, () => {
-      let questionObj = this.state;
-      this.props.onChange(this.props.id, questionObj);
-    })
-  }
-
-  handleChangeOptionTwo(e) {
-    this.setState({
-      optionTwo: e.target.value
-    }, () => {
-      let questionObj = this.state;
-      this.props.onChange(this.props.id, questionObj);
-    })
-  }
-
-  handleChangeOptionThree(e) {
-    this.setState({
-      optionThree: e.target.value
-    }, () => {
-      let questionObj = this.state;
-      this.props.onChange(this.props.id, questionObj);
-    })
   }
 
   render() {
     return (
       <div className="multipleChoice">
         <form>
-            <TextField id="question" fullWidth hintText="Question" value={this.state.question} onChange={this.handleMultipleChoiceTitleChange}/>
+            <TextField id="question" fullWidth hintText="Question" value={this.props.question.question} disabled/>
             <div>
-              <span><RadioButton id="radioOne" checked={false} disabled={true}/></span>
-              <span><TextField fullWidth hintText="Option 1" id="textOne" value={this.state.optionOne} onChange={this.handleChangeOptionOne}/></span>
+              <span><RadioButton id="radioOne" /></span>
+              <span><TextField id="textOne" fullWidth value={this.props.question.optionOne} disabled/></span>
             </div>
              <div>
-              <RadioButton id="radioTwo" checked={false} disabled/>
-              <TextField id="textTwo" fullWidth hintText="Option 2" value={this.state.optionTwo} onChange={this.handleChangeOptionTwo} />
+              <RadioButton id="radioTwo"/>
+              <TextField id="textTwo" fullWidth value={this.props.question.optionTwo} disabled/>
             </div>
             <div>
-              <RadioButton id="radioThree" checked={false} disabled/>
-              <TextField id="textThree" fullWidth hintText="Option 3" value={this.state.optionThree} onChange={this.handleChangeOptionThree}/>
+              <RadioButton id="radioThree" />
+              <TextField id="textThree" fullWidth value={this.props.question.optionThree} disabled/>
             </div>
         </form>
       </div>
