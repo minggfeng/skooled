@@ -10,7 +10,8 @@ class MultipleChoice extends React.Component {
         question: '',
         optionOne: '',
         optionTwo: '',
-        optionThree: ''
+        optionThree: '',
+        type: 'multipleChoice'
     }
     this.handleMultipleChoiceTitleChange = this.handleMultipleChoiceTitleChange.bind(this);
     this.handleChangeOptionOne = this.handleChangeOptionOne.bind(this);
@@ -19,26 +20,39 @@ class MultipleChoice extends React.Component {
   }
 
   handleMultipleChoiceTitleChange(e) {
+    let title = e.target.value
     this.setState({
-      question: e.target.value
+      question: title
+    }, () => {
+      let questionObj = this.state;
+      this.props.onChange(this.props.id, questionObj);
     })
   }
 
   handleChangeOptionOne(e) {
     this.setState({
       optionOne: e.target.value
+    }, () => {
+      let questionObj = this.state;
+      this.props.onChange(this.props.id, questionObj);
     })
   }
 
   handleChangeOptionTwo(e) {
     this.setState({
       optionTwo: e.target.value
+    }, () => {
+      let questionObj = this.state;
+      this.props.onChange(this.props.id, questionObj);
     })
   }
 
   handleChangeOptionThree(e) {
     this.setState({
       optionThree: e.target.value
+    }, () => {
+      let questionObj = this.state;
+      this.props.onChange(this.props.id, questionObj);
     })
   }
 

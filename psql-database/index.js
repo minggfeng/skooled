@@ -5,6 +5,8 @@ const Document = require('./models/document.js');
 const Classes = require('./models/classes.js');
 const ClassesStudent = require('./models/classes_student.js');
 const ClassesTeacher = require('./models/classes_teacher.js');
+const Question = require('./models/questions.js');
+const Homework = require('./models/homework.js');
 const services = require('../services');
 
 module.exports = {
@@ -342,7 +344,56 @@ module.exports = {
       .catch(err => {
         callback(err, null);
       });
-    }
+    },
+
+  //questions
+  insertQuestion : (options, cb) => {
+    Question
+    .forge(options)
+    .save()
+    .then((question) => {
+      cb(null, question);
+    })
+    .catch((err) => {
+      cb(err, null);
+    })
+  },
+
+  fetchQuestions : (options, cb) => {
+    Question
+    .query('where', options)
+    .fetchAll()
+    .then((questions) => {
+      cb(null, questions)
+    })
+    .catch((err) => {
+      cb(err, null);
+    })
+  },
+
+  //homework
+  insertHomework : (options, cb) => {
+    Homework
+    .forge(options)
+    .save()
+    .then((homework) => {
+      cb(null, homework);
+    })
+    .catch((err) => {
+      cb(err, null);
+    })
+  },
+
+  fetchHomework : (options, cb) => {
+    Homework
+    .query('where', options)
+    .fetchAll()
+    .then((homework) => {
+      cb(null, homework)
+    })
+    .catch((err) => {
+      cb(err, null);
+    })
   }
 };
 

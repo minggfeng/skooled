@@ -6,31 +6,30 @@ class EssayForm extends React.Component {
   constructor(props) {
     super(props);
       this.state = {
-        question: ''
+        question: '',
+        type: 'shortEssay'
     }
     this.handleQuestionChange = this.handleQuestionChange.bind(this);
   }
 
   handleQuestionChange(e) {
-    this.setState({
-      question: e.target.value
-    })
-  }
+    let question = e.target.value;
 
-  handleEssaySave(e) {
-    e.preventDefault();
-    console.log('save essay')
+    this.setState({
+      question: question
+    }, () => {
+      let questionObj = this.state;
+      this.props.onChange(this.props.id, questionObj)
+    })
   }
 
   render() {
     return (
-      <div className="essayForm">
-        <form>
-          <TextField hintText="Question" fullWidth value={this.state.question} onChange={this.handleQuestionChange}/>
-          <br></br>
-          <TextField hintText="Answer" fullWidth multiLine type="text" disabled/>
-        </form>
-      </div>
+      <form>
+        <TextField hintText="Question" fullWidth value={this.state.question} onChange={this.handleQuestionChange}/>
+        <br></br>
+        <TextField hintText="Answer" fullWidth multiLine type="text" disabled/>
+      </form>
     )
   }
 }
