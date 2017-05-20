@@ -50,6 +50,7 @@ class Home extends React.Component {
             <Link to="documents">Permission Slips</Link>
             <Link to="video">Video</Link>
             <Link to="admin">Create Users</Link>
+            <Link to='grades'>Grades</Link>
           </div>
         </div>
       )

@@ -224,7 +224,7 @@ module.exports = {
 
   insertClassesTeachers : (class_id, teacher_id) => {
     ClassesTeacher
-    .forge({ 
+    .forge({
       class_id: class_id,
       teacher_id: teacher_id
      })
@@ -275,7 +275,7 @@ module.exports = {
 
   insertClassesStudent : (class_id, student_id) => {
     ClassesStudent
-    .forge({ 
+    .forge({
       class_id: class_id,
       student_id: student_id
      })
@@ -286,9 +286,64 @@ module.exports = {
     .catch((err) => {
       console.log('ERROR WITH INSERT IN CLASSESSTUDENTS');
     })
+  },
+
+  // GRADES PAGE: GET ALL ClASSES
+  selectAllClassesForUser: (user, callback) => {
+    Classes.collection().fetch()
+    .then(function(classes) {
+      callback(null, classes);
+    }).catch(function(err) {
+      callback(err, null);
+    });
+  },
+
+  selectStudentsPerClass : (id_class, callback) => {
+    ClassesStudent.forge()
+    .query('where', {class_id: id_class})
+    .fetchAll({require: true})
+    .then(classStudentEntry => {
+      console.log("***************",classStudentEntry);
+      var studentIds =[];
+      var studentGrades={};
+      classStudentEntry.forEach(function(i,v){
+        studentIds.push(i.get('student_id'));
+        studentGrades[i.get('student_id')] = i.get('grade');
+      });
+          Student.forge()
+          .where('id','in',studentIds)
+          .fetchAll({require: true})
+          .then(students => {
+              console.log('got students');
+              students.forEach(function(student){
+                student.set('grade',studentGrades[student.get('id')]);
+              });
+            callback(null, students)
+          })
+          .catch(error => {
+            callback(error, null);
+          });
+    })
+    .catch(error => {
+      callback(error, null);
+    });
+  },
+
+  updateGradesForClass: (gradeData, callback) =>{
+    var id_class = gradeData.id_class;
+    var grades = gradeData.grades;
+    for(var i of grades){
+      ClassesStudent.forge()
+      .where({class_id: id_class, student_id: i.id})
+      .save({grade:i.grade},{patch: 'true'})
+      .then(classStudent => {
+        callback(null, classStudent);
+      })
+      .catch(err => {
+        callback(err, null);
+      });
+    }
   }
-
-
 };
 
 /*
