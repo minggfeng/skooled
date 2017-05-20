@@ -47,10 +47,21 @@ class Home extends React.Component {
           </div>
           <div>
             <h3>Admin</h3>
-            <Link to="documents">Permission Slips</Link>
-            <Link to="video">Video</Link>
-            <Link to="admin">Create Users</Link>
-            <Link to='grades'>Grades</Link>
+            <div>
+              <Link to='grades'>Grades</Link>
+            </div>
+            <div>
+              <Link to="documents">Permission Slips</Link>
+            </div>
+            <div>
+              <Link to="video">Video</Link>
+            </div>
+            <div>
+              <Link to="admin">Create Users</Link>
+            </div>
+            <div>
+              <Link to="message">Send a message</Link>
+            </div>
           </div>
         </div>
       )

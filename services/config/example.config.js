@@ -7,4 +7,6 @@ module.exports = {
   PASSPORT_JWT_SECRETORKEY : '',
   MAILGUN_API_KEY : '',
   MAILGUN_DOMAIN : '',
+  TWILIO_ACCOUNT_SID : '',
+  TWILIO_AUTH_TOKEN : ''
 };

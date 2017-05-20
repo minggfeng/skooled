@@ -5,7 +5,7 @@ import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import axios from 'axios';
 import { Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn } from 'material-ui/Table';
-import $ from 'jQuery';
+import $ from 'jquery';
 
 window.j = $;
 
