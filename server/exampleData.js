@@ -192,7 +192,7 @@ var makeStudentRelationships = () => {
 // classMassInsert();
 // makeStudentParentRelationships();
 // makeClassesTeacherRelationships();
-makeStudentRelationships();
+// makeStudentRelationships();
 
 // run first 4
 

@@ -60,13 +60,13 @@ class Home extends React.Component {
           <br />
           <div>
             <h3>Students and Classes</h3>
-            
+
             <Link to="studentList">
               <button className="btn btn-default">
                 <img src="https://s3-us-west-1.amazonaws.com/skooledds-bucket/diverse_graduates.jpg" width="200" height="150" />
               </button>
             </Link>
-            
+
             <Link to="classList">
               <button className="btn btn-default">
                 <img src="https://s3-us-west-1.amazonaws.com/skooledds-bucket/subjects1.jpg" width="200" height="150" />
@@ -77,13 +77,13 @@ class Home extends React.Component {
                 <button className="btn btn-default">
                   <img src="https://s3-us-west-1.amazonaws.com/skooledds-bucket/homework.jpg" width="200" height="150" />
                 </button>
-              </Link>    
+              </Link>
 
             <Link to="formBuilder">
               <button className="btn btn-default">
                 <img src="https://s3-us-west-1.amazonaws.com/skooledds-bucket/forms.jpg" width="200" height="150" />
               </button>
-            </Link> 
+            </Link>
           </div><br />
           <div>
             <h3>Administration</h3>
@@ -93,20 +93,20 @@ class Home extends React.Component {
                 <img src="https://s3-us-west-1.amazonaws.com/skooledds-bucket/gradebook.jpg" width="200" height="150" />
               </button>
             </Link>
- 
-            
+
+
             <Link to="documents">
               <button className="btn btn-default">
                 <img src="https://s3-us-west-1.amazonaws.com/skooledds-bucket/permission-slip.gif" width="200" height="150" />
               </button>
             </Link>
-    
+
             <Link to="video">
               <button className="btn btn-default">
                 <img src="https://s3-us-west-1.amazonaws.com/skooledds-bucket/video.jpg" width="200" height="150" />
               </button>
             </Link>
- 
+
             <Link to="message">
               <button className="btn btn-default">
                 <img src="https://s3-us-west-1.amazonaws.com/skooledds-bucket/lower-sms-prices.jpg" width="200" height="150" />
@@ -122,12 +122,18 @@ class Home extends React.Component {
           </div>
         </div>
       )
-    } else {
+    } else if (this.props.userType === 'student') {
+      return (
+        <div>Hello Student
+        </div>
+        );
+
+    }else {
     const studentList = this.state.myStudents.map((student) =>
-      <GridTile 
-        title={`${student.first_name} ${student.last_name}`} 
-        titleStyle={styles.titleStyle} 
-        key={student.id} 
+      <GridTile
+        title={`${student.first_name} ${student.last_name}`}
+        titleStyle={styles.titleStyle}
+        key={student.id}
         onClick={() => {this.handleStudentClick(student)}}
         titleBackground="linear-gradient(to top, rgba(0,0,0,0.7) 0%,rgba(0,0,0,0.3) 70%,rgba(0,0,0,0) 100%)"
         subtitle={`GPA: ${student.gpa}`}>
@@ -145,7 +151,7 @@ class Home extends React.Component {
           <div>
             <h3>Activities</h3>
             <GridList>
-             <Link to="documents">  
+             <Link to="documents">
               <RaisedButton
                   label="Permission Slips"></RaisedButton>
             </Link>

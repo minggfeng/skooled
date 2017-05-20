@@ -81,4 +81,23 @@ router.post('/student', ensureAuthorized, (req, res) => {
   });
 });
 
+router.post('/studentlogin', ensureAuthorized, (req, res) => {
+
+  services.sendEmail({
+    from: 'no-reply@skooled.com',
+    to: req.body.email,
+    subject: 'Welcome ' + req.body.firstName + ' to your Skooled account!',
+    html: 'Please use \'' + req.body.password + '\' as your password.',
+  });
+
+  pg.insertUser(req.body, (error, data) => {
+    if (error) {
+      console.log('Error inserting new student info to db.', error);
+      res.sendStatus(500);
+    } else {
+      res.sendStatus(200);
+    }
+  });
+});
+
 module.exports = router;
