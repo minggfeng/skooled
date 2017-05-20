@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import TextField from 'material-ui/TextField';
 import axios from 'axios';
+import {List, ListItem} from 'material-ui/List';
 
 class Homework extends React.Component {
   constructor(props) {
@@ -11,6 +12,7 @@ class Homework extends React.Component {
         currentHomework: 0,
         currentQuestions: []
       }
+    this.homeworkOnClick = this.homeworkOnClick.bind(this);
   }
 
   componentDidMount() {
@@ -27,10 +29,11 @@ class Homework extends React.Component {
         let options = {
           questions: this.state.myHomework[this.state.currentHomework].questions
         }
-        console.log('options', options)
         axios.post('/forms/questions', options, config)
         .then(response => {
-          console.log(response);
+          this.setState({
+            currentQuestions: response.data
+          })
         })
       })
     })
@@ -39,10 +42,24 @@ class Homework extends React.Component {
     })
   }
 
+  homeworkOnClick(homework) {
+    this.setState({
+      currentHomework: homework.id
+    })
+  }
+
   render() {
+    var myHomework = this.state.myHomework.map((homework, index) => (<ListItem
+          id={index}
+          key={homework.id}
+          onClick={() => {this.homeworkOnClick(homework)}}
+          primaryText={`${homework.title}`}>
+          </ListItem>)
+    );
     return (
       <div>
-        <h1>HELO</h1>
+        <h5>My Homework Forms</h5>
+          <List>{myHomework}</List>
       </div>
     )
   }

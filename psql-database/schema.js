@@ -84,16 +84,6 @@ module.exports = function (knex, Promise) {
     }
   });
 
-  knex.schema.hasTable('classes_student').then((exists) => {
-    if (!exists) {
-      return knex.schema.createTable('classes_student', (table) => {
-      table.increments('id');
-      table.integer('class_id').references('classes.id');
-      table.integer('student_id').references('students.id');
-    })
-    }
-  });
-
   knex.schema.hasTable('homework').then((exists) => {
     if (!exists) {
       return knex.schema.createTable('homework', (table) => {

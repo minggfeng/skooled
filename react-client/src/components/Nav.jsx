@@ -29,7 +29,7 @@ const Nav = (props) => {
       <span></span>
         <ul className="nav nav-pills nav-stacked col-md-3" id="menu">
         <li role="presentation"><Link to="logout">Sign Out</Link></li>
-        <li role="presentation"><Link to="home">Home</Link></li>
+        <li role="presentation"><Link to="/">Home</Link></li>
         <li role="presentation"><Link to="documents">Documents</Link></li>
         <li role="presentation"><Link to="video">Video</Link></li>
         <li role="presentation"><Link to="donate">Donate</Link></li>

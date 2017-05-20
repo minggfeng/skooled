@@ -344,7 +344,8 @@ module.exports = {
       .catch(err => {
         callback(err, null);
       });
-    },
+    }
+  },
 
   //questions
   insertQuestion : (options, cb) => {
