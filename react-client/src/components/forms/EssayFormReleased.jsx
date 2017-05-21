@@ -24,9 +24,8 @@ class EssayFormReleased extends React.Component {
   render() {
     return (
       <div className="question">
-        <label>{this.props.question.question}
+        <label>{this.props.question.question}</label>
         <TextField id="answer" hintText="Answer" fullWidth multiLine  onChange={this.handleAnswerChange}/>
-        </label>
       </div>
     )
   }

@@ -13,7 +13,7 @@ const styles = {
   },
   radioButton: {
     width: '20px',
-    marginTop: '5px',
+    marginTop: '5px'
   },
   gridTile: {
     paddingBottom: '0px',
@@ -87,7 +87,7 @@ class MultipleChoice extends React.Component {
             </GridTile>
 
             <GridTile cols={9}>
-              <TextField style={styles.gridTile} fullWidth hintText="Option 1" id="textOne" value={this.state.optionOne} onChange={this.handleChangeOptionOne}/>
+              <TextField style={styles.gridTile} fullWidth multiLine hintText="Option 1" id="textOne" value={this.state.optionOne} onChange={this.handleChangeOptionOne}/>
             </GridTile>
 
             <GridTile cols={1}>
@@ -95,7 +95,7 @@ class MultipleChoice extends React.Component {
             </GridTile>
 
             <GridTile cols={9}>
-              <TextField id="textTwo" fullWidth hintText="Option 2" value={this.state.optionTwo} onChange={this.handleChangeOptionTwo} />
+              <TextField id="textTwo" fullWidth multiLine hintText="Option 2" value={this.state.optionTwo} onChange={this.handleChangeOptionTwo} />
             </GridTile>
 
             <GridTile cols={1}>
@@ -103,7 +103,7 @@ class MultipleChoice extends React.Component {
             </GridTile>
 
             <GridTile cols={9}>
-              <TextField id="textThree" fullWidth hintText="Option 3" value={this.state.optionThree} onChange={this.handleChangeOptionThree}/>
+              <TextField id="textThree" fullWidth multiLine hintText="Option 3" value={this.state.optionThree} onChange={this.handleChangeOptionThree}/>
             </GridTile>
 
           </GridList>

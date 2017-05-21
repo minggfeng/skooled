@@ -80,4 +80,29 @@ router.post('/questions', ensureAuthorized, (req, res) => {
   })
 })
 
+const insertAssignedFormsAsync = Promise.promisify(pg.insertAssignedForms);
+
+router.post('/assignForms', ensureAuthorized, (req, res) => {
+  let user_id = req.decoded.id;
+  let classes = req.body.classes;
+  let homework = req.body.homework.id
+  console.log(homework);
+  Promise.map(classes, (classId) => {
+    let options = {
+      homework_id: homework,
+      classes_id: classId
+    }
+    return insertAssignedFormsAsync(options)
+    .then((data) => {
+      return data.models[0].attributes;
+    })
+  })
+  .then((results) => {
+    res.send(results);
+  })
+  .catch((err) => {
+    res.send(err);
+  })
+})
+
 module.exports = router;

@@ -15,6 +15,7 @@ class ClassList extends React.Component {
     this.state = {
       classes: []
     }
+    this.handleClassCLick = this.handleClassCLick.bind(this);
   }
 
   componentDidMount() {
@@ -35,11 +36,16 @@ class ClassList extends React.Component {
     });
   }
 
+  handleClassCLick(classData) {
+    this.props.classOnClick(classData);
+  }
+
   render() {
     const classesList = this.state.classes.map((classData) =>
       <ListItem 
         key={classData.id}
         style={style}
+        onClick={() => {this.handleClassCLick(classData)}}
         primaryText={`${classData.name}`}/>
     );
     return (

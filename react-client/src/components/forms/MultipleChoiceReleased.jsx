@@ -9,8 +9,11 @@ const styles = {
     maxWidth: 500
   },
   radioButton: {
-    marginBottom: 16,
+    marginBottom: 16
   },
+  radioIcon: {
+    width: '20px',
+  }
 };
 
 class MultipleChoiceReleased extends React.Component {
@@ -31,9 +34,9 @@ class MultipleChoiceReleased extends React.Component {
         <label>{this.props.question.question}
         <br></br>
         <RadioButtonGroup name={this.props.question.question} onChange={this.handleOnChange} style={styles.block}>
-          <RadioButton id="radioOne" label={this.props.question.optionOne} value={this.props.question.optionOne} style={styles.radioButton}/>
-          <RadioButton id="radioTwo" label={this.props.question.optionTwo} value={this.props.question.optionTwo} style={styles.radioButton}/>
-          <RadioButton id="radioThree" label={this.props.question.optionThree} value={this.props.question.optionThree} style={styles.radioButton}/>
+          <RadioButton id="radioOne" label={this.props.question.optionOne} value={this.props.question.optionOne} style={styles.radioButton} iconStyle={styles.radioIcon}/>
+          <RadioButton id="radioTwo" label={this.props.question.optionTwo} value={this.props.question.optionTwo} style={styles.radioButton} iconStyle={styles.radioIcon}/>
+          <RadioButton id="radioThree" label={this.props.question.optionThree} value={this.props.question.optionThree} style={styles.radioButton} iconStyle={styles.radioIcon}/>
         </RadioButtonGroup>
         </label>
       </div>

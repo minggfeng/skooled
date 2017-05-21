@@ -7,6 +7,7 @@ const ClassesStudent = require('./models/classes_student.js');
 const ClassesTeacher = require('./models/classes_teacher.js');
 const Question = require('./models/questions.js');
 const Homework = require('./models/homework.js');
+const ClassesHomework = require('./models/classes_homework.js');
 const services = require('../services');
 
 module.exports = {
@@ -395,7 +396,46 @@ module.exports = {
     .catch((err) => {
       cb(err, null);
     })
-  }
+  },
+
+  insertAssignedForms : (options, cb) => {
+    ClassesHomework
+    .forge(options)
+    .save()
+    .then((relation) => {
+      cb(null, relation);
+    })
+    .catch((err) => {
+      cb(err, null);
+    })
+  },
+
+  //classes functions
+  fetchStudentsInClass : (options, cb) => {
+    ClassesStudent
+    .query('where', options)
+    .fetchAll()
+    .then((relations) => {
+      cb(null, relation);
+    })
+    .catch((err) => {
+      cb(err, null);
+    })
+  },
+
+  fetchAssignedForms : (options, cb) => {
+    ClassesHomework
+    .query('where', options)
+    .fetchAll()
+    .then((relation) => {
+      cb(null, relation)
+    })
+    .catch((err) => {
+      cb(err, null);
+    })
+  },
+
+
 };
 
 /*

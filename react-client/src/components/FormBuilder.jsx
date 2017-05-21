@@ -38,6 +38,9 @@ const styles = {
   title: {
     color: 'FFF',
     margin: '5px'
+  },
+  text: {
+    width: '80%'
   }
 };
 
@@ -128,6 +131,11 @@ class FormBuilder extends React.Component {
     return (
       <div>
         <h2 className="header">Form Builder</h2>
+        <TextField 
+            value={this.state.name}
+            hintText="Name of Form"
+            onChange={this.handleNameChange}
+            style={styles.text}/>
         <div style={styles.root}>
           <GridList style={styles.gridList} cols={10} padding={10} rows={2}>
             <GridTile style={styles.questions} 

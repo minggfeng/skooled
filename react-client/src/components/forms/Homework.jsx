@@ -5,7 +5,13 @@ import axios from 'axios';
 import {List, ListItem} from 'material-ui/List';
 import MultipleChoiceReleased from './MultipleChoiceReleased.jsx';
 import EssayFormReleased from './EssayFormReleased.jsx';
+import MultiSelectField from './MultiSelectField.jsx';
 import {GridList, GridTile} from 'material-ui/GridList';
+import FloatingActionButton from 'material-ui/FloatingActionButton';
+import ContentAdd from 'material-ui/svg-icons/content/add';
+import SelectField from 'material-ui/SelectField';
+import MenuItem from 'material-ui/MenuItem';
+
 
 const styles = {
   root: {
@@ -29,9 +35,18 @@ const styles = {
   title: {
     color: 'FFF',
     margin: '5px'
+  },
+  button: {
+    position: 'absolute',
+    right:    '5%',
+    bottom:   '5%',
   }
 };
 
+const currentToken = window.localStorage.accessToken;
+const config = {
+  headers: {'Authorization': currentToken}
+};
 
 class Homework extends React.Component {
   constructor(props) {
@@ -39,16 +54,16 @@ class Homework extends React.Component {
       this.state = {
         myHomework: [],
         currentHomework: null,
-        currentQuestions: []
+        currentQuestions: [],
+        classes: [],
+        selectedClasses: []
       }
     this.homeworkOnClick = this.homeworkOnClick.bind(this);
+    this.addNewForm = this.addNewForm.bind(this);
+    this.handleSelectedClasses = this.handleSelectedClasses.bind(this);
   }
 
   componentDidMount() {
-    let currentToken = window.localStorage.accessToken;
-    let config = {
-      headers: {'Authorization': currentToken}
-    };
     axios.get('/forms/myHomework', config)
     .then(response => {
       this.setState({
@@ -69,16 +84,24 @@ class Homework extends React.Component {
     .catch(error => {
       console.error('Failed to upload questions from db', error);
     })
+
+
+    axios.get('/home/classes', config)
+    .then(response => {
+      console.log('Success getting classes list from db.', response.data);
+      this.setState ({
+        classes: response.data
+      });
+    })
+    .catch(error => {
+      console.error('Error getting classes list from db.', error);
+    });
   }
 
   homeworkOnClick(homework, index) {
     this.setState({
       currentHomework: index
     }, () => {
-      let currentToken = window.localStorage.accessToken;
-      let config = {
-        headers: {'Authorization': currentToken}
-      };
       axios.get('/forms/myHomework', config)
       .then(response => {
         this.setState({
@@ -99,6 +122,25 @@ class Homework extends React.Component {
         console.error('Failed to upload questions from db', error);
       })
     })
+  }
+
+  addNewForm() {
+    this.props.history.push('/formBuilder');
+  }
+
+  handleSelectedClasses(classIds) {
+    console.log(classIds)
+    if (classIds.length > 0) {
+      let options = {
+        homework: this.state.myHomework[this.state.currentHomework],
+        classes: classIds
+      }
+      axios.post('/forms/assignForms', options, config)
+      .then(response => {
+        this.props.history.push('/classList')
+      })
+    }
+
   }
 
   render() {
@@ -124,6 +166,13 @@ class Homework extends React.Component {
       }
       return question;
     }, this);
+
+    // var myClasses = this.state.classes.map((classObj, index) => (<MenuItem
+    //   key={classObj.id}
+    //   insetChildren={true}
+    //   value={classObj.name}
+    //   primaryText={classObj.name} />));
+
     return (
       <div>
         <h2 className="header">My Forms</h2>
@@ -139,6 +188,10 @@ class Homework extends React.Component {
           </GridTile>
         </GridList>
         </div>
+        <MultiSelectField classes={this.state.classes} handleSelectedClasses={this.handleSelectedClasses}/>
+        <FloatingActionButton onClick={this.addNewForm} style={styles.button}>
+          <ContentAdd />
+        </FloatingActionButton>
       </div>
     )
   }
