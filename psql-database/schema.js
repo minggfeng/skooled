@@ -92,6 +92,7 @@ module.exports = function (knex, Promise) {
       table.increments('id');
       table.string('title');
       table.integer('teacher_id');
+      table.integer('class_id');
       table.string('questions');
     })
     }
@@ -112,12 +113,24 @@ module.exports = function (knex, Promise) {
   knex.schema.hasTable('classes_homework').then((exists) => {
     if (!exists) {
       return knex.schema.createTable('classes_homework', (table) => {
-      table.increments('id');
-      table.integer('homework_id');
-      table.integer('classes_id');
+        table.increments('id');
+        table.integer('homework_id');
+        table.integer('classes_id');
+      });
+    }
+  });
+
+  knex.schema.hasTable('student_homework').then((exists) => {
+    if (!exists) {
+      return knex.schema.createTable('student_homework', (table) => {
+        table.increments('id');
+        table.integer('student_id');
+        table.integer('homework_id');
+        table.string('grade');
     })
     }
   });
+
 };
 
 // module.exports.down = function (knex, Promise) {

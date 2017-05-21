@@ -15,7 +15,9 @@ class Grades extends React.Component{
     this.state = {
       classes: [],
       value: 'Please choose',
-      studentsPerClass: []
+      homework: 'Please choose',
+      studentsPerClass: [],
+      homeworkPerClass: []
     }
   }
 
@@ -56,6 +58,23 @@ class Grades extends React.Component{
       console.error('Error getting students per class list from db.', error);
     });
 
+    axios.get('/grades/homeworkPerClass?id='+value, config)
+    .then(response => {
+      console.log('Success getting homework list from db.', response.data);
+      // var homework = response.data.map((item) => {return item.title});
+      this.setState ({
+        homeworkPerClass: response.data
+      });
+    })
+    .catch(error => {
+      console.error('Error getting homework per class list from db.', error);
+    });
+
+  }
+
+  handleHomeworkSelect(event, index, value){
+    this.setState({homework: value})
+
   }
 
   handleChange (event, index, value2){
@@ -86,13 +105,18 @@ class Grades extends React.Component{
       }
       for(var i of this.state.studentsPerClass){
         if(i.first_name === name){
-          var newObj = $.extend(true, {}, i)
+          // var newObj = $.extend(true, {}, i)
+          var newObj = {};
+          newObj.student_id = i.id;
+          newObj.class_id = this.state.value;
           newObj.grade = grade;
+          newObj.homework_id = this.state.homework;
           gradesData.push(newObj);
           break;
         }
       }
     }
+    console.log('grades: ', gradesData)
     return gradesData;
   }
 
@@ -101,8 +125,8 @@ class Grades extends React.Component{
     var config = {
       headers: {'Authorization': currentToken}
     };
-    var gradesData = { id_class: this.state.value, grades: grades };
-    axios.post('/grades/updategrades', gradesData, config)
+    // var gradesData = { id_class: this.state.value, grades: grades };
+    axios.post('/grades/insertgrades', grades, config)
     .then(response => {
       console.log('Successfully added parent to db.', response);
     })
@@ -112,13 +136,21 @@ class Grades extends React.Component{
   }
 
   render(){
+    console.log('homework',this.state.homeworkPerClass)
+    console.log('student', this.state.studentsPerClass)
     return(
       <div>
          <h2>Grades</h2>
          <DropDownMenu onChange={this.handleClassSelect.bind(this)} value={this.state.value} >
-            <MenuItem value={'Please choose'} primaryText='Please choose' />
+            <MenuItem value={'Please choose'} primaryText='Choose Class' />
             {this.state.classes.map((subject, index) =>(
               <MenuItem key={index} value={subject.id} primaryText={subject.name} />
+            ))}
+         </DropDownMenu>
+         <DropDownMenu onChange={this.handleHomeworkSelect.bind(this)} value={this.state.homework} >
+            <MenuItem value={'Please choose'} primaryText='Choose Homework' />
+            {this.state.homeworkPerClass.map((item, index) =>(
+              <MenuItem key={index} value={item.id} primaryText={item.title} />
             ))}
          </DropDownMenu>
          <Table

@@ -5,6 +5,7 @@ const Document = require('./models/document.js');
 const Classes = require('./models/classes.js');
 const ClassesStudent = require('./models/classes_student.js');
 const ClassesTeacher = require('./models/classes_teacher.js');
+const StudentHomework = require('./models/student_homework.js');
 const Question = require('./models/questions.js');
 const Homework = require('./models/homework.js');
 const ClassesHomework = require('./models/classes_homework.js');
@@ -307,7 +308,7 @@ module.exports = {
     .query('where', {class_id: id_class})
     .fetchAll({require: true})
     .then(classStudentEntry => {
-      console.log("***************",classStudentEntry);
+     // console.log("***************",classStudentEntry);
       var studentIds =[];
       var studentGrades={};
       classStudentEntry.forEach(function(i,v){
@@ -318,7 +319,7 @@ module.exports = {
           .where('id','in',studentIds)
           .fetchAll({require: true})
           .then(students => {
-              console.log('got students');
+             // console.log('got students');
               students.forEach(function(student){
                 student.set('grade',studentGrades[student.get('id')]);
               });
@@ -349,6 +350,20 @@ module.exports = {
     }
   },
 
+  insertGradesForClass: (gradeData, callback) =>{
+    for(var i of gradeData){
+      StudentHomework.forge({student_id: i.student_id, homework_id: i.homework_id, grade: i.grade})
+      .save()
+      .then((res)=>{
+        if(res.get('id')===gradeData[gradeData.length-1].id){
+          callback(null,res);
+        }
+      })
+      .catch((err)=>{
+        callback(err, null);
+      })
+    }
+  },
   //questions
   insertQuestion : (options, cb) => {
     Question
@@ -434,9 +449,7 @@ module.exports = {
     .catch((err) => {
       cb(err, null);
     })
-  },
-
-
+  }
 };
 
 /*
