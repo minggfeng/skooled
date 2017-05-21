@@ -2,10 +2,14 @@ import React from 'react';
 import axios from 'axios';
 import { BrowserRouter, Route, Link, Switch, Redirect } from 'react-router-dom';
 import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
+import {List, ListItem} from 'material-ui/List';
 
-const style = {
-  width: '50%',
-  margin: 'auto'
+
+const styles = {
+  card: {
+    width: '50%',
+    margin: 'auto'
+  }
 }
 
 class ClassProfile extends React.Component {
@@ -13,7 +17,7 @@ class ClassProfile extends React.Component {
     super(props);
     this.state = {
       students: [],
-      assignments: []
+      assignments: [ {id: 0, title: 'No Assignments'} ]
     }
   }
 
@@ -49,12 +53,27 @@ class ClassProfile extends React.Component {
   }
 
   render() {
-    console.log('!!!', this.props)
+    const assignments = this.state.assignments.map((assignment) =>
+      <ListItem
+        key={assignment.id}
+        primaryText={assignment.title} />
+    )
+
+    const students = this.state.students.map((student) =>
+      <ListItem
+        key={student.id}
+        primaryText={`${student.first_name} ${student.last_name}`} />
+    )
+
+
     return (
-      <Card style={style}>
+      <Card style={styles.card}>
         <CardTitle title={this.props.currentClass.name} />
         <CardText>
-          <div>Hello</div>
+          <h4>Assignments</h4>
+          <List>{assignments}</List>
+          <h4>Students</h4>
+          <List>{students}</List>
         </CardText>
       </Card>
     )

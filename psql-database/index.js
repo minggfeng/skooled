@@ -416,7 +416,7 @@ module.exports = {
     .query('where', options)
     .fetchAll()
     .then((relations) => {
-      cb(null, relation);
+      cb(null, relations);
     })
     .catch((err) => {
       cb(err, null);

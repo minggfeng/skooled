@@ -41,7 +41,6 @@ class App extends React.Component {
   }
 
   classOnClick(classData) {
-    console.log(classData)
     this.setState({
       currentClass: classData
     }, () => {
