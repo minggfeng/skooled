@@ -40,6 +40,7 @@ var studentGenerator = (letter) => {
   return {
     firstName: `Student${letter}`,
     lastName: `Student${letter}`,
+    email: `student${letter}@example.com`,
     gpa: Math.random() * 4.0,
     attendance: Math.floor(Math.random() * 100),
     photo: photos[Math.floor(3 * Math.random())]
@@ -77,6 +78,19 @@ var studentMassInsert = () => {
       }
       if (studentData) {
         console.log(`Inserted student${letter}`);
+        let studentUser = {
+          email: studentObj.email,
+          password: letter,
+          first_name: studentObj.firstName,
+          last_name: studentObj.lastName,
+          phone_number: '15556786789',
+          role: 'student'
+        }
+        pg.insertUser(studentUser, (err, studentDataUser) => {
+          if (studentDataUser) {
+            console.log(`Inserted on student user ${letter}`);
+          }
+        })
       }
     })
   }
@@ -186,13 +200,26 @@ var makeStudentRelationships = () => {
   })
 }
 
-// teacherMassInsert();
-// studentMassInsert();
-// parentMassInsert();
-// classMassInsert();
-// makeStudentParentRelationships();
-// makeClassesTeacherRelationships();
-// makeStudentRelationships();
+
+
+
+var makeData = () => {
+  teacherMassInsert();
+  studentMassInsert();
+  parentMassInsert();
+  classMassInsert();
+
+  setTimeout(() => {
+    makeStudentParentRelationships();
+    makeClassesTeacherRelationships();
+  }, 3000)
+
+  setTimeout(() => {
+    makeStudentRelationships();
+  },6000)
+}
+
+makeData();
 
 // run first 4
 

@@ -15,6 +15,7 @@ class ClassList extends React.Component {
     this.state = {
       classes: []
     }
+    this.handleClassCLick = this.handleClassCLick.bind(this);
   }
 
   componentDidMount() {
@@ -25,7 +26,7 @@ class ClassList extends React.Component {
     // Make http request to obtain array of students to populate the dropdown for student.
     axios.get('/home/classes', config)
     .then(response => {
-      console.log('Success getting students list from db.', response.data);
+      console.log('Success getting classes list from db.', response.data);
       this.setState ({
         classes: response.data
       });
@@ -35,11 +36,16 @@ class ClassList extends React.Component {
     });
   }
 
+  handleClassCLick(classData) {
+    this.props.classOnClick(classData);
+  }
+
   render() {
     const classesList = this.state.classes.map((classData) =>
       <ListItem 
         key={classData.id}
         style={style}
+        onClick={() => {this.handleClassCLick(classData)}}
         primaryText={`${classData.name}`}/>
     );
     return (

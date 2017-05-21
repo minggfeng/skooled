@@ -11,6 +11,8 @@ var home = require('./routers/home');
 var grades = require('./routers/grades');
 var stripeCharge = require('../services/stripe');
 var forms = require('./routers/forms');
+var classes = require('./routers/classes');
+var exampleData = require('./exampleData.js');
 
 var ensureAuthorized = services.ensureAuth;
 var createToken = services.createToken;
@@ -23,6 +25,8 @@ app.use('/video', video);
 app.use('/home', home);
 app.use('/grades', grades);
 app.use('/forms', forms);
+app.use('/classes', classes);
+
 app.use(express.static(__dirname + '/../react-client/dist'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended : false }));

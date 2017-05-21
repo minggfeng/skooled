@@ -21,6 +21,7 @@ module.exports = function (knex, Promise) {
       table.increments('id');
       table.string('first_name', 80);
       table.string('last_name', 80);
+      table.string('email').unique();
       table.float('gpa',2);
       table.integer('attendance');
       table.string('photo');

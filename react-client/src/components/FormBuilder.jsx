@@ -16,9 +16,32 @@ import Homework from './forms/Homework.jsx';
 
 import { BrowserRouter, Route, Link, Switch, Redirect } from 'react-router-dom';
 
-const style = {
-  display: 'inline-block',
-  margin: '16px 32px 16px 0',
+const styles = {
+  root: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'space-around',
+  },
+  gridList: {
+    width: '80%'
+  },
+  questions: {
+    overflowY: 'auto',
+    overflowX: 'auto',
+    border: '1px solid #E0E0E0'
+  },
+  toolbar: {
+    overflowY: 'auto',
+    overflowX: 'auto',
+    border: '1px solid #E0E0E0'
+  },
+  title: {
+    color: 'FFF',
+    margin: '5px'
+  },
+  text: {
+    width: '80%'
+  }
 };
 
 class FormBuilder extends React.Component {
@@ -107,36 +130,45 @@ class FormBuilder extends React.Component {
     }, this);
     return (
       <div>
-        <h2>Homework Builder</h2>
-          <RaisedButton label="Save Homework" onClick={this.saveAll}></RaisedButton>
-          <br></br>
-        <Paper style={style}>
-        <Menu>
-          <h5>Questions</h5>
-          <List>
-            <ListItem 
-              primaryText="Short Essay" 
-              draggable="true" 
-              id="shortEssay" 
-              onDragStart={(e) => {this.drag(e)}}></ListItem>
-            <ListItem 
-              primaryText="Multiple Choice" 
-              draggable="true" 
-              id="multipleChoice" 
-              onDragStart={(e) => {this.drag(e)}}></ListItem>
-          </List>
-        </Menu>
-        </Paper>
-          <TextField 
+        <h2 className="header">Form Builder</h2>
+        <TextField 
             value={this.state.name}
-            fullWidth
-            hintText="name of homework"
-            onChange={this.handleNameChange}/>
-          <div id="dropArea" onDragOver={this.preventDefault} onDrop={this.drop}>
-            <h3>Drag to Here</h3>
-            <div>{questions}</div>
-          </div>
-        <div>
+            hintText="Name of Form"
+            onChange={this.handleNameChange}
+            style={styles.text}/>
+        <div style={styles.root}>
+          <GridList style={styles.gridList} cols={10} padding={10} rows={2}>
+            <GridTile style={styles.questions} 
+              cols={8} 
+              rows={2} 
+              title="Drop Area" 
+              titlePosition="top" 
+              titleStyle={styles.title} 
+              titleBackground="#00BCD4" id="dropArea" onDragOver={this.preventDefault} onDrop={this.drop}>
+              <br></br>
+              <List>{questions}</List>
+            </GridTile>
+            <GridTile style={styles.toolbar} cols={2} rows={2} title="Fields" titlePosition="top" titleStyle={styles.title} titleBackground="#00BCD4">
+              <br></br>
+              <List>
+                <ListItem 
+                  primaryText="Short Essay" 
+                  draggable="true" 
+                  id="shortEssay" 
+                  onDragStart={(e) => {this.drag(e)}}></ListItem>
+                <ListItem 
+                  primaryText="Multiple Choice" 
+                  draggable="true" 
+                  id="multipleChoice" 
+                  onDragStart={(e) => {this.drag(e)}}></ListItem>
+              </List>
+            </GridTile>
+            <GridTile
+              cols={8} 
+              rows={2}>
+              <RaisedButton label="Save Form" onClick={this.saveAll}></RaisedButton>
+            </GridTile>
+          </GridList>
         </div>
       </div>
     )

@@ -17,16 +17,19 @@ import Donate from './Donate.jsx';
 import Grades from './Grades.jsx';
 import FormBuilder from './FormBuilder.jsx';
 import Homework from './forms/Homework.jsx';
+import ClassProfile from './ClassProfile.jsx';
 
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentStudent: ''
+      currentStudent: '',
+      currentClass: ''
     }
 
     this.studentOnClick = this.studentOnClick.bind(this);
+    this.classOnClick = this.classOnClick.bind(this);
   }
 
   studentOnClick(student) {
@@ -35,6 +38,14 @@ class App extends React.Component {
       }, () => {
         this.props.history.push('/studentProfile')
       })
+  }
+
+  classOnClick(classData) {
+    this.setState({
+      currentClass: classData
+    }, () => {
+      this.props.history.push('/classProfile')
+    })
   }
 
   render () {
@@ -52,12 +63,13 @@ class App extends React.Component {
             <Route name="createDocument" path="/createDocument" component={() => (<CreateDocument userType={this.props.userType} reRender={this.reRender}/>)} />
             <Route name="video" path="/video" component={() => (<Video /> )} />
             <Route name="grades" path="/grades" component={() => (<Grades /> )} />
-            <Route name="classList" path="/classList" component={() => (<ClassList/> )} />
+            <Route name="classList" path="/classList" component={() => (<ClassList classOnClick={this.classOnClick}/> )} />
             <Route name="studentList" path="/studentList" component={() => (<StudentList studentOnClick={this.studentOnClick} /> )} />
             <Route name="studentProfile" path="/studentProfile" component={() => (<StudentProfile currentStudent={this.state.currentStudent} /> )} />
             <Route name="message" path="/message" component={Message} />
             <Route name="formBuilder" path="/formBuilder" component={(props) => (<FormBuilder {...props}/> )} />
-            <Route name="homework" path="/homework" component={() => (<Homework />)} />
+            <Route name="homework" path="/homework" component={(props) => (<Homework {...props}/>)} />
+            <Route name="classProfile" path="/classProfile" component={() => (<ClassProfile currentClass={this.state.currentClass} />)} />
             <Route name="logout" path="/logout" component={() => (<Logout revokeCredentials={this.props.revokeCredentials}/> )} />
             <Route name="donate" path="/donate" component={Donate} />
         </div>
