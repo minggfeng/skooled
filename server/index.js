@@ -12,6 +12,7 @@ var grades = require('./routers/grades');
 var stripeCharge = require('../services/stripe');
 var forms = require('./routers/forms');
 var classes = require('./routers/classes');
+var exampleData = require('./exampleData.js');
 
 var ensureAuthorized = services.ensureAuth;
 var createToken = services.createToken;

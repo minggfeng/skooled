@@ -79,6 +79,7 @@ module.exports = {
     Student.forge({
       first_name: student.firstName,
       last_name: student.lastName,
+      email: student.email,
       gpa: student.gpa,
       attendance: student.attendance,
       photo: student.photo
