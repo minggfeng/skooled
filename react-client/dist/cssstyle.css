@@ -11,6 +11,33 @@
   border-color: orange !important;
 }
 
+#loginform {
+  background-color: rgb(0, 188, 212);
+  height: 440px;
+  width: 330px;
+  margin: auto;
+  margin-top: 100px;
+}
+
+#loginpage {
+  background-image: url("https://s3-us-west-1.amazonaws.com/skooledds-bucket/pencils.jpg");
+  background-size:     cover;
+  background-repeat:   no-repeat;
+}
+
+#logintitle {
+  height: 175px;
+  width: 263px;
+  margin: auto; 
+  margin-bottom: 20px
+}
+
+h1 {
+  text-align: center;
+  padding-top: 20px;
+  padding-bottom: 50px;
+}
+
 h2 {
   text-align: center;
   padding-bottom: 80px;
