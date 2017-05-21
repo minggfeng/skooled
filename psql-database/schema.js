@@ -107,6 +107,16 @@ module.exports = function (knex, Promise) {
     })
     }
   });
+
+  knex.schema.hasTable('classes_homework').then((exists) => {
+    if (!exists) {
+      return knex.schema.createTable('classes_homework', (table) => {
+      table.increments('id');
+      table.integer('homework_id');
+      table.integer('classes_id');
+    })
+    }
+  });
 };
 
 // module.exports.down = function (knex, Promise) {
