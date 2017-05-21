@@ -32,6 +32,11 @@
   margin-bottom: 20px
 }
 
+#username, #password {
+  left: 3px !important;
+  width: 240px !important;
+}
+
 h1 {
   text-align: center;
   padding-top: 20px;
