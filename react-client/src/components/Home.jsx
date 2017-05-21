@@ -23,7 +23,8 @@ const styles = {
   },
   list: {
     width: '85%',
-    margin: 'auto'
+    margin: 'auto',
+    col: '1'
   },
 };
 
@@ -63,9 +64,9 @@ class Home extends React.Component {
       return (
         <div>
         <List style={styles.list}>
+          <ListItem hoverColor="FFF"><h3>Students and Classes</h3></ListItem>
           <ListItem hoverColor="FFF">
           <div style={styles.root}>
-            <h3>Students and Classes</h3>
             <GridList style={styles.gridlist}>
 
               <Link to="studentList">  
@@ -87,7 +88,7 @@ class Home extends React.Component {
               </Link>
 
               <Link to="formBuilder">  
-                <GridTile title="Homework Builder" titleBackground="#00BCD4">
+                <GridTile title="Form Builder" titleBackground="#00BCD4">
                   <img src="https://s3-us-west-1.amazonaws.com/skooledds-bucket/homework.jpg" width="200" height="150" />
                 </GridTile>
               </Link>
@@ -95,9 +96,9 @@ class Home extends React.Component {
             </GridList>
           </div>
           </ListItem>
+          <ListItem hoverColor="FFF"><h3>Administration</h3></ListItem>
           <ListItem hoverColor="FFF">
             <div style={styles.root}>
-              <h3>Administration</h3>
               <GridList style={styles.gridlist}>
  
                 <Link to="grades">  
@@ -140,8 +141,8 @@ class Home extends React.Component {
       return (
         <div>
           <List style={styles.list}>
+            <ListItem hoverColor="FFF"><h3>Activities</h3></ListItem>
             <ListItem hoverColor="FFF">
-              <h3>Activities</h3>
               <div style={styles.root}>
 
                 <Link to="video">
@@ -172,7 +173,7 @@ class Home extends React.Component {
       return (
         <div>
           <List style={styles.list}>
-            <h3>My Children</h3>
+            <ListItem hoverColor="FFF"><h3>My Children</h3></ListItem>
             <ListItem hoverColor="FFF">
               <div style={styles.root}>
                 <GridList 
@@ -182,8 +183,8 @@ class Home extends React.Component {
                 </GridList>
               </div>
             </ListItem>
+            <ListItem hoverColor="FFF"><h3>Activities</h3></ListItem>
             <ListItem hoverColor="FFF">
-              <h3>Activities</h3>
               <div style={styles.root}>
                 <GridList style={styles.gridlist} padding={10}>
                   <Link to="documents">  

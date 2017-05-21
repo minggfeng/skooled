@@ -5,6 +5,33 @@ import axios from 'axios';
 import {List, ListItem} from 'material-ui/List';
 import MultipleChoiceReleased from './MultipleChoiceReleased.jsx';
 import EssayFormReleased from './EssayFormReleased.jsx';
+import {GridList, GridTile} from 'material-ui/GridList';
+
+const styles = {
+  root: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'space-around',
+  },
+  gridList: {
+    width: '80%'
+  },
+  questions: {
+    overflowY: 'auto',
+    overflowX: 'auto',
+    border: '1px solid #E0E0E0'
+  },
+  toolbar: {
+    overflowY: 'auto',
+    overflowX: 'auto',
+    border: '1px solid #E0E0E0'
+  },
+  title: {
+    color: 'FFF',
+    margin: '5px'
+  }
+};
+
 
 class Homework extends React.Component {
   constructor(props) {
@@ -91,6 +118,7 @@ class Homework extends React.Component {
       }
       if (question.type === "shortEssay") {
         var question = <EssayFormReleased {...props}/>
+
       } else {
         var question = <MultipleChoiceReleased {...props}/>
       }
@@ -98,11 +126,19 @@ class Homework extends React.Component {
     }, this);
     return (
       <div>
-        <h5>My Homework Forms</h5>
-          <List>{myHomework}</List>
-
-        <h5>Current Homework</h5>
-          <List>{questions}</List>
+        <h2 className="header">My Forms</h2>
+        <div style={styles.root}>
+        <GridList style={styles.gridList} cols={10} padding={10} rows={2}>
+          <GridTile style={styles.questions} cols={8} rows={2} title="Current Form" titlePosition="top" titleStyle={styles.title} titleBackground="#00BCD4">
+            <br></br>
+            <List>{questions}</List>
+          </GridTile>
+          <GridTile style={styles.toolbar} cols={2} rows={2} title="My Saved Forms" titlePosition="top" titleStyle={styles.title} titleBackground="#00BCD4">
+            <br></br>
+            <List>{myHomework}</List>
+          </GridTile>
+        </GridList>
+        </div>
       </div>
     )
   }

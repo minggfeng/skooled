@@ -35,11 +35,11 @@ const MoreMenuTeacher = (props) => (
     anchorOrigin={{horizontal: 'right', vertical: 'top'}}
   >
     <Link to="/"><MenuItem primaryText="Home" /></Link>
-    <Link to="studentList"><MenuItem primaryText="Students" /></Link>
-    <Link to="classList"><MenuItem primaryText="Classes" /></Link>
-    <Link to="homework"><MenuItem primaryText="Homework Forms" /></Link>
-    <Link to="formBuilder"><MenuItem primaryText="Homework Builder" /></Link>
-    <Link to="grades"><MenuItem primaryText="GradeBook" /></Link>
+    <Link to="studentList"><MenuItem primaryText="Student List" /></Link>
+    <Link to="classList"><MenuItem primaryText="Class List" /></Link>
+    <Link to="homework"><MenuItem primaryText="My Forms" /></Link>
+    <Link to="formBuilder"><MenuItem primaryText="Form Builder" /></Link>
+    <Link to="grades"><MenuItem primaryText="Grades" /></Link>
     <Link to="documents"><MenuItem primaryText="Permission Slips" /></Link>
     <Link to="video"><MenuItem primaryText="Video" /></Link>
     <Link to="message"><MenuItem primaryText="Message" /></Link>

@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import TextField from 'material-ui/TextField';
+import Divider from 'material-ui/Divider';
 
 class EssayForm extends React.Component {
   constructor(props) {
@@ -25,11 +26,11 @@ class EssayForm extends React.Component {
 
   render() {
     return (
-      <form>
-        <TextField hintText="Question" fullWidth value={this.state.question} onChange={this.handleQuestionChange}/>
+      <div className="formBuilder">
+        <TextField hintText="Question" multiLine fullWidth value={this.state.question} onChange={this.handleQuestionChange}/>
         <br></br>
-        <TextField hintText="Answer" fullWidth multiLine type="text" disabled/>
-      </form>
+        <TextField hintText="Answer" fullWidth disabled/>
+      </div>
     )
   }
 }

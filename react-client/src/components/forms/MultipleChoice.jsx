@@ -2,6 +2,26 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import TextField from 'material-ui/TextField';
 import RadioButton from 'material-ui/RadioButton';
+import {GridList, GridTile} from 'material-ui/GridList';
+
+
+const styles = {
+  root: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'space-around',
+  },
+  radioButton: {
+    width: '20px',
+    marginTop: '5px',
+  },
+  gridTile: {
+    paddingBottom: '0px',
+    marginBottom: '0px',
+    paddingTop: '0px',
+    marginTop: '0px'
+  }
+};
 
 class MultipleChoice extends React.Component {
   constructor(props) {
@@ -58,22 +78,36 @@ class MultipleChoice extends React.Component {
 
   render() {
     return (
-      <div className="multipleChoice">
-        <form>
-            <TextField id="question" fullWidth hintText="Question" value={this.state.question} onChange={this.handleMultipleChoiceTitleChange}/>
-            <div>
-              <span><RadioButton id="radioOne" checked={false} disabled={true}/></span>
-              <span><TextField fullWidth hintText="Option 1" id="textOne" value={this.state.optionOne} onChange={this.handleChangeOptionOne}/></span>
-            </div>
-             <div>
-              <RadioButton id="radioTwo" checked={false} disabled/>
+      <div className="formBuilder">
+        <TextField id="question" fullWidth hintText="Question" multiLine value={this.state.question} onChange={this.handleMultipleChoiceTitleChange}/>
+        <div style={styles.root}>
+          <GridList cols={10} cellHeight={'auto'}>
+            <GridTile cols={1}>
+              <RadioButton id="radioOne" checked={false} disabled={true} iconStyle={styles.radioButton}/>
+            </GridTile>
+
+            <GridTile cols={9}>
+              <TextField style={styles.gridTile} fullWidth hintText="Option 1" id="textOne" value={this.state.optionOne} onChange={this.handleChangeOptionOne}/>
+            </GridTile>
+
+            <GridTile cols={1}>
+              <RadioButton id="radioTwo" checked={false} disabled iconStyle={styles.radioButton}/>
+            </GridTile>
+
+            <GridTile cols={9}>
               <TextField id="textTwo" fullWidth hintText="Option 2" value={this.state.optionTwo} onChange={this.handleChangeOptionTwo} />
-            </div>
-            <div>
-              <RadioButton id="radioThree" checked={false} disabled/>
+            </GridTile>
+
+            <GridTile cols={1}>
+              <RadioButton id="radioThree" checked={false} disabled iconStyle={styles.radioButton}/>
+            </GridTile>
+
+            <GridTile cols={9}>
               <TextField id="textThree" fullWidth hintText="Option 3" value={this.state.optionThree} onChange={this.handleChangeOptionThree}/>
-            </div>
-        </form>
+            </GridTile>
+
+          </GridList>
+        </div>
       </div>
     )
   }

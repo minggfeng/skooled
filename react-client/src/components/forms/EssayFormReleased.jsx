@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import TextField from 'material-ui/TextField';
+import Divider from 'material-ui/Divider';
 
 class EssayFormReleased extends React.Component {
   constructor(props) {
@@ -22,11 +23,11 @@ class EssayFormReleased extends React.Component {
 
   render() {
     return (
-      <form>
-        <TextField id="question" fullWidth value={this.props.question.question} disabled/>
-        <br></br>
-        <TextField id="answer" hintText="Answer" fullWidth multiLine type="text" onChange={this.handleAnswerChange}/>
-      </form>
+      <div className="question">
+        <label>{this.props.question.question}
+        <TextField id="answer" hintText="Answer" fullWidth multiLine  onChange={this.handleAnswerChange}/>
+        </label>
+      </div>
     )
   }
 }
