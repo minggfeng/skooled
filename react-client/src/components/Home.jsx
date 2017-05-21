@@ -88,7 +88,7 @@ class Home extends React.Component {
               </GridTile>
 
               <GridTile title="Homework Builder" titleBackground="#00BCD4">
-                 <Link to="homework">  
+                 <Link to="formBuilder">  
                   <img src="https://s3-us-west-1.amazonaws.com/skooledds-bucket/homework.jpg" width="200" height="150" />
                 </Link>
               </GridTile>
@@ -139,7 +139,22 @@ class Home extends React.Component {
       )
     } else if (this.props.userType === 'student') {
       return (
-        <div>Hello Student
+        <div>
+          <List style={styles.list}>
+            <ListItem hoverColor="FFF">
+              <h3>Activities</h3>
+              <div style={styles.root}>
+
+                <GridTile
+                  title="Video"
+                  titleBackground="#00BCD4">
+                  <Link to="video">
+                    <img src="https://s3-us-west-1.amazonaws.com/skooledds-bucket/video.jpg" width="200" height="150" />
+                  </Link>
+                </GridTile>
+              </div>
+            </ListItem>
+          </List>
         </div>
         );
 

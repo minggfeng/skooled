@@ -40,7 +40,7 @@ const MoreMenuTeacher = (props) => (
   </IconMenu>
 );
 
-const MoreMenuParent = (props) => (
+const MoreMenuOthers = (props) => (
   <IconMenu
     {...props}
     iconButtonElement={
@@ -107,7 +107,7 @@ class Nav extends React.Component {
     <AppBar
       title="SkooledDS"
       onTitleTouchTap={() => <Redirect/>}
-      iconElementLeft={<MoreMenuParent />}
+      iconElementLeft={<MoreMenuOther />}
       iconElementRight={<Logged /> } />
     )}
   }
