@@ -236,6 +236,9 @@ option {
   padding-left: 100px; 
 }
 
+h3 {
+  align-content: center;
+}
 
 /*input[type=text] {
     width: 100%;

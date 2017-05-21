@@ -2,6 +2,12 @@ import React from 'react';
 import { BrowserRouter, Route, Link, Switch, Redirect } from 'react-router-dom';
 import $ from 'jquery';
 import axios from 'axios';
+import {List, ListItem} from 'material-ui/List';
+
+const style = {
+  width: '50%',
+  margin: 'auto'
+}
 
 class StudentList extends React.Component {
   constructor(props) {
@@ -36,14 +42,16 @@ class StudentList extends React.Component {
 
   render() {
     const studentList = this.state.myStudents.map((student) =>
-      <div key={student.id} onClick={() => {this.handleStudentClick(student)}}>
-        <div>Name: {student.first_name} {student.last_name}</div>
-      </div>
+      <ListItem 
+        key={student.id} 
+        style={style}
+        onClick={() => {this.handleStudentClick(student)}}
+        primaryText={`${student.first_name} ${student.last_name}`}/>
     );
     return (
       <div>
         <h3>My Students</h3>
-        <div>{studentList}</div>
+        <List>{studentList}</List>
       </div>
     )
   }

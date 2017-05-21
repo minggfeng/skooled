@@ -3,24 +3,30 @@ import { BrowserRouter, Route, Link, Switch, Redirect } from 'react-router-dom';
 import axios from 'axios';
 import {GridList, GridTile} from 'material-ui/GridList';
 import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
-import RaisedButton from 'material-ui/RaisedButton';
-
+import {List, ListItem} from 'material-ui/List';
 
 const styles = {
   root: {
     display: 'flex',
     flexWrap: 'wrap',
     justifyContent: 'space-around',
+
   },
-  gridList: {
+  gridlist: {
     display: 'flex',
     flexWrap: 'nowrap',
     overflowX: 'auto',
   },
   titleStyle: {
-    color: 'rgb(0, 188, 212)',
+    color: 'FFF',
+    titleBackground: '#00BCD4'
+  },
+  list: {
+    width: '85%',
+    margin: 'auto'
   },
 };
+
 
 class Home extends React.Component {
   constructor(props) {
@@ -55,76 +61,99 @@ class Home extends React.Component {
   render() {
     if (this.props.userType === 'teacher') {
       return (
-      	<div id="teacher-dashboard">
-          <h1>Teacher Dashboard</h1>
-          <br />
-          <div>
+        <div>
+        <List style={styles.list}>
+          <ListItem hoverColor="FFF">
+          <div style={styles.root}>
             <h3>Students and Classes</h3>
+            <GridList style={styles.gridlist}>
 
-            <Link to="studentList">
-              <button className="btn btn-default">
-                <img src="https://s3-us-west-1.amazonaws.com/skooledds-bucket/diverse_graduates.jpg" width="200" height="150" />
-              </button>
-            </Link>
+              <GridTile title="Student List" titleBackground="#00BCD4">
+                 <Link to="studentList">  
+                  <img src="https://s3-us-west-1.amazonaws.com/skooledds-bucket/diverse_graduates.jpg" width="200" height="150" />
+                </Link>
+              </GridTile>
 
-            <Link to="classList">
-              <button className="btn btn-default">
-                <img src="https://s3-us-west-1.amazonaws.com/skooledds-bucket/subjects1.jpg" width="200" height="150" />
-              </button>
-            </Link>
+              <GridTile title="Class List" titleBackground="#00BCD4">
+                 <Link to="classList">  
+                  <img src="https://s3-us-west-1.amazonaws.com/skooledds-bucket/subjects1.jpg" width="200" height="150" />
+                </Link>
+              </GridTile>
 
-            <Link to="homework">
-                <button className="btn btn-default">
+              <GridTile title="My Forms" titleBackground="#00BCD4">
+                 <Link to="homework">  
+                  <img src="https://s3-us-west-1.amazonaws.com/skooledds-bucket/forms.jpg" width="200" height="150" />
+                </Link>
+              </GridTile>
+
+              <GridTile title="Homework Builder" titleBackground="#00BCD4">
+                 <Link to="formBuilder">  
                   <img src="https://s3-us-west-1.amazonaws.com/skooledds-bucket/homework.jpg" width="200" height="150" />
-                </button>
-              </Link>
+                </Link>
+              </GridTile>
 
-            <Link to="formBuilder">
-              <button className="btn btn-default">
-                <img src="https://s3-us-west-1.amazonaws.com/skooledds-bucket/forms.jpg" width="200" height="150" />
-              </button>
-            </Link>
-          </div><br />
-          <div>
-            <h3>Administration</h3>
-
-            <Link to="grades">
-              <button className="btn btn-default">
-                <img src="https://s3-us-west-1.amazonaws.com/skooledds-bucket/gradebook.jpg" width="200" height="150" />
-              </button>
-            </Link>
-
-
-            <Link to="documents">
-              <button className="btn btn-default">
-                <img src="https://s3-us-west-1.amazonaws.com/skooledds-bucket/permission-slip.gif" width="200" height="150" />
-              </button>
-            </Link>
-
-            <Link to="video">
-              <button className="btn btn-default">
-                <img src="https://s3-us-west-1.amazonaws.com/skooledds-bucket/video.jpg" width="200" height="150" />
-              </button>
-            </Link>
-
-            <Link to="message">
-              <button className="btn btn-default">
-                <img src="https://s3-us-west-1.amazonaws.com/skooledds-bucket/lower-sms-prices.jpg" width="200" height="150" />
-              </button>
-            </Link>
-
-            <Link to="admin">
-              <button className="btn btn-default">
-                <img src="https://s3-us-west-1.amazonaws.com/skooledds-bucket/administrator.jpeg" width="200" height="150" />
-              </button>
-            </Link>
-
+            </GridList>
           </div>
-        </div>
+          </ListItem>
+          <ListItem hoverColor="FFF">
+            <div style={styles.root}>
+              <h3>Administration</h3>
+              <GridList style={styles.gridlist}>
+ 
+                <GridTile title="Grades" titleBackground="#00BCD4">
+                   <Link to="grades">  
+                    <img src="https://s3-us-west-1.amazonaws.com/skooledds-bucket/gradebook.jpg" width="200" height="150" />
+                  </Link>
+                </GridTile>
+
+                <GridTile title="Permission Slips" titleBackground="#00BCD4">
+                   <Link to="documents">  
+                    <img src="https://s3-us-west-1.amazonaws.com/skooledds-bucket/permission-slip.gif" width="200" height="150" />
+                  </Link>
+                </GridTile>
+        
+                <GridTile title="Video" titleBackground="#00BCD4">
+                   <Link to="video">  
+                    <img src="https://s3-us-west-1.amazonaws.com/skooledds-bucket/video.jpg" width="200" height="150" />
+                  </Link>
+                </GridTile>
+                
+                <GridTile title="Message" titleBackground="#00BCD4">
+                   <Link to="message">  
+                    <img src="https://s3-us-west-1.amazonaws.com/skooledds-bucket/lower-sms-prices.jpg" width="200" height="150" />
+                  </Link>
+                </GridTile>
+
+                <GridTile title="Create User" titleBackground="#00BCD4">
+                   <Link to="admin">  
+                    <img src="https://s3-us-west-1.amazonaws.com/skooledds-bucket/administrator.jpeg" width="200" height="150" />
+                  </Link>
+                </GridTile>
+
+            </GridList>
+          </div>
+        </ListItem>
+        </List>
+      </div>
       )
     } else if (this.props.userType === 'student') {
       return (
-        <div>Hello Student
+        <div>
+          <List style={styles.list}>
+            <ListItem hoverColor="FFF">
+              <h3>Activities</h3>
+              <div style={styles.root}>
+
+                <GridTile
+                  title="Video"
+                  titleBackground="#00BCD4">
+                  <Link to="video">
+                    <img src="https://s3-us-west-1.amazonaws.com/skooledds-bucket/video.jpg" width="200" height="150" />
+                  </Link>
+                </GridTile>
+              </div>
+            </ListItem>
+          </List>
         </div>
         );
 
@@ -142,24 +171,47 @@ class Home extends React.Component {
     );
       return (
         <div>
-          <div>
+          <List style={styles.list}>
             <h3>My Children</h3>
-            <div style={styles.root}>
-              <GridList style={styles.gridList} cols={2.2}>{studentList}</GridList>
-            </div>
-          </div>
-          <div>
-            <h3>Activities</h3>
-            <GridList>
-             <Link to="documents">
-              <RaisedButton
-                  label="Permission Slips"></RaisedButton>
-            </Link>
-            <Link to="video">
-              <RaisedButton label="Video"></RaisedButton>
-            </Link>
-            </GridList>
-          </div>
+            <ListItem hoverColor="FFF">
+              <div style={styles.root}>
+                <GridList 
+                  style={styles.gridList} 
+                  padding={10}>
+                  {studentList}
+                </GridList>
+              </div>
+            </ListItem>
+            <ListItem hoverColor="FFF">
+              <h3>Activities</h3>
+              <div style={styles.root}>
+                <GridList style={styles.gridlist} padding={10}>
+                  <GridTile
+                    title="Permission Slips"
+                    titleBackground="#00BCD4">
+                   <Link to="documents">  
+                    <img src="https://s3-us-west-1.amazonaws.com/skooledds-bucket/permission-slip.gif" width="200" height="150" />
+                  </Link>
+                </GridTile>
+                <GridTile
+                  title="Video"
+                  titleBackground="#00BCD4">
+                  <Link to="video">
+                    <img src="https://s3-us-west-1.amazonaws.com/skooledds-bucket/video.jpg" width="200" height="150" />
+                  </Link>
+                </GridTile>
+                <GridTile
+                  title="Donate"
+                  titleBackground="#00BCD4">
+                  <Link to="donate">
+                    <img src='http://www.nacasports.net/uploads/5/4/6/9/54696951/5508878_orig.png' width="200" height="150" />
+                  </Link>
+                </GridTile>
+
+                </GridList>
+              </div>
+            </ListItem>
+          </List>
         </div>
       )
     }
