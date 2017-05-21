@@ -68,29 +68,29 @@ class Home extends React.Component {
             <h3>Students and Classes</h3>
             <GridList style={styles.gridlist}>
 
-              <GridTile title="Student List" titleBackground="#00BCD4">
-                 <Link to="studentList">  
+              <Link to="studentList">  
+                <GridTile title="Student List" titleBackground="#00BCD4">
                   <img src="https://s3-us-west-1.amazonaws.com/skooledds-bucket/diverse_graduates.jpg" width="200" height="150" />
-                </Link>
-              </GridTile>
+                </GridTile>
+              </Link>
 
-              <GridTile title="Class List" titleBackground="#00BCD4">
-                 <Link to="classList">  
+              <Link to="classList">  
+                <GridTile title="Class List" titleBackground="#00BCD4">
                   <img src="https://s3-us-west-1.amazonaws.com/skooledds-bucket/subjects1.jpg" width="200" height="150" />
-                </Link>
-              </GridTile>
+                </GridTile>
+              </Link>
 
-              <GridTile title="My Forms" titleBackground="#00BCD4">
-                 <Link to="homework">  
+              <Link to="homework">  
+                <GridTile title="My Forms" titleBackground="#00BCD4">
                   <img src="https://s3-us-west-1.amazonaws.com/skooledds-bucket/forms.jpg" width="200" height="150" />
-                </Link>
-              </GridTile>
+                </GridTile>
+              </Link>
 
-              <GridTile title="Homework Builder" titleBackground="#00BCD4">
-                 <Link to="formBuilder">  
+              <Link to="formBuilder">  
+                <GridTile title="Homework Builder" titleBackground="#00BCD4">
                   <img src="https://s3-us-west-1.amazonaws.com/skooledds-bucket/homework.jpg" width="200" height="150" />
-                </Link>
-              </GridTile>
+                </GridTile>
+              </Link>
 
             </GridList>
           </div>
@@ -100,35 +100,35 @@ class Home extends React.Component {
               <h3>Administration</h3>
               <GridList style={styles.gridlist}>
  
-                <GridTile title="Grades" titleBackground="#00BCD4">
-                   <Link to="grades">  
+                <Link to="grades">  
+                  <GridTile title="Grades" titleBackground="#00BCD4">
                     <img src="https://s3-us-west-1.amazonaws.com/skooledds-bucket/gradebook.jpg" width="200" height="150" />
-                  </Link>
-                </GridTile>
+                  </GridTile>
+                </Link>
 
-                <GridTile title="Permission Slips" titleBackground="#00BCD4">
-                   <Link to="documents">  
+                <Link to="documents">  
+                  <GridTile title="Permission Slips" titleBackground="#00BCD4">
                     <img src="https://s3-us-west-1.amazonaws.com/skooledds-bucket/permission-slip.gif" width="200" height="150" />
-                  </Link>
-                </GridTile>
+                  </GridTile>
+                </Link>
         
-                <GridTile title="Video" titleBackground="#00BCD4">
-                   <Link to="video">  
+                <Link to="video">  
+                  <GridTile title="Video" titleBackground="#00BCD4">
                     <img src="https://s3-us-west-1.amazonaws.com/skooledds-bucket/video.jpg" width="200" height="150" />
-                  </Link>
-                </GridTile>
+                  </GridTile>
+                </Link>
                 
-                <GridTile title="Message" titleBackground="#00BCD4">
-                   <Link to="message">  
+                <Link to="message">  
+                  <GridTile title="Message" titleBackground="#00BCD4">
                     <img src="https://s3-us-west-1.amazonaws.com/skooledds-bucket/lower-sms-prices.jpg" width="200" height="150" />
-                  </Link>
-                </GridTile>
+                  </GridTile>
+                </Link>
 
-                <GridTile title="Create User" titleBackground="#00BCD4">
-                   <Link to="admin">  
+                <Link to="admin">  
+                  <GridTile title="Create User" titleBackground="#00BCD4">
                     <img src="https://s3-us-west-1.amazonaws.com/skooledds-bucket/administrator.jpeg" width="200" height="150" />
-                  </Link>
-                </GridTile>
+                  </GridTile>
+                </Link>
 
             </GridList>
           </div>
@@ -144,13 +144,13 @@ class Home extends React.Component {
               <h3>Activities</h3>
               <div style={styles.root}>
 
-                <GridTile
-                  title="Video"
-                  titleBackground="#00BCD4">
-                  <Link to="video">
+                <Link to="video">
+                  <GridTile
+                    title="Video"
+                    titleBackground="#00BCD4">
                     <img src="https://s3-us-west-1.amazonaws.com/skooledds-bucket/video.jpg" width="200" height="150" />
-                  </Link>
-                </GridTile>
+                  </GridTile>
+                </Link>
               </div>
             </ListItem>
           </List>
@@ -186,27 +186,27 @@ class Home extends React.Component {
               <h3>Activities</h3>
               <div style={styles.root}>
                 <GridList style={styles.gridlist} padding={10}>
-                  <GridTile
-                    title="Permission Slips"
-                    titleBackground="#00BCD4">
-                   <Link to="documents">  
-                    <img src="https://s3-us-west-1.amazonaws.com/skooledds-bucket/permission-slip.gif" width="200" height="150" />
+                  <Link to="documents">  
+                    <GridTile
+                      title="Permission Slips"
+                      titleBackground="#00BCD4">
+                      <img src="https://s3-us-west-1.amazonaws.com/skooledds-bucket/permission-slip.gif" width="200" height="150" />
+                    </GridTile>
                   </Link>
-                </GridTile>
-                <GridTile
-                  title="Video"
-                  titleBackground="#00BCD4">
                   <Link to="video">
-                    <img src="https://s3-us-west-1.amazonaws.com/skooledds-bucket/video.jpg" width="200" height="150" />
+                    <GridTile
+                      title="Video"
+                      titleBackground="#00BCD4">
+                      <img src="https://s3-us-west-1.amazonaws.com/skooledds-bucket/video.jpg" width="200" height="150" />
+                    </GridTile>
                   </Link>
-                </GridTile>
-                <GridTile
-                  title="Donate"
-                  titleBackground="#00BCD4">
                   <Link to="donate">
-                    <img src='http://www.nacasports.net/uploads/5/4/6/9/54696951/5508878_orig.png' width="200" height="150" />
+                    <GridTile
+                      title="Donate"
+                      titleBackground="#00BCD4">
+                      <img src='http://www.nacasports.net/uploads/5/4/6/9/54696951/5508878_orig.png' width="200" height="150" />
+                    </GridTile>
                   </Link>
-                </GridTile>
 
                 </GridList>
               </div>
