@@ -63,7 +63,7 @@ class Homework extends React.Component {
     this.handleSelectedClasses = this.handleSelectedClasses.bind(this);
   }
 
-  componentDidMount() {
+  componentWillMount() {
     axios.get('/forms/myHomework', config)
     .then(response => {
       this.setState({
@@ -156,7 +156,7 @@ class Homework extends React.Component {
       var props = {
         id: i,
         question: JSON.parse(question.content),
-        key: i
+        key: question.id
       }
       if (question.type === "shortEssay") {
         var question = <EssayFormReleased {...props}/>
