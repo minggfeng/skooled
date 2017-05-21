@@ -50,26 +50,28 @@ class Login extends React.Component {
       return (
         <div className="main container-fluid col-md-12" id="loginpage">
           <div id="loginform">
-          <div id="logintitle">
-            <h2 > Welcome to Skooled! </h2>
+            <div>
+              <img src="https://s3-us-west-1.amazonaws.com/skooledds-bucket/skooled_logo2.png" id="logintitle" />
+            </div>
             <h3 > Log in: </h3>
-          </div>
             <TextField
-              placeholder="Username"
+              placeholder=" Username"
               value={this.state.username}
               onChange={this.handleUsernameChange}
               id="username"
+              style={textFieldStyle}
             />
             <br></br>
             <TextField
-              placeholder="Password"
+              placeholder=" Password"
               value={this.state.password}
               onChange={this.handlePasswordChange}
               type="password"
               id="password"
+              style={textFieldStyle}
             />
             <br></br>
-            <RaisedButton label="Submit" primary={true} style={style} onClick={this.handleSubmit} />
+            <RaisedButton label="Submit" primary={true} style={buttonStyle} onClick={this.handleSubmit} />
           </div>
         </div>
       );
@@ -77,8 +79,12 @@ class Login extends React.Component {
   }
 }
 
-const style = {
-  margin: 12,
+const buttonStyle = {
+  margin: 12
+};
+
+const textFieldStyle = {
+  'background-color': 'white'
 };
 
 export default withRouter(Login);
