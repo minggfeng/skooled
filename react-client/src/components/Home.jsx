@@ -16,7 +16,6 @@ const styles = {
     display: 'flex',
     flexWrap: 'nowrap',
     overflowX: 'auto',
-    row:'1'
   },
   titleStyle: {
     color: 'FFF',
@@ -178,8 +177,7 @@ class Home extends React.Component {
               <div style={styles.root}>
                 <GridList 
                   style={styles.gridList} 
-                  padding={10}
-                  primaryText="My Children">
+                  padding={10}>
                   {studentList}
                 </GridList>
               </div>
@@ -187,7 +185,7 @@ class Home extends React.Component {
             <ListItem hoverColor="FFF">
               <h3>Activities</h3>
               <div style={styles.root}>
-                <GridList style={styles.gridlist} padding={10} primaryText="Activities">
+                <GridList style={styles.gridlist} padding={10}>
                   <GridTile
                     title="Permission Slips"
                     titleBackground="#00BCD4">

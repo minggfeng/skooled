@@ -37,10 +37,17 @@ const MoreMenuTeacher = (props) => (
     <Link to="/"><MenuItem primaryText="Home" /></Link>
     <Link to="studentList"><MenuItem primaryText="Students" /></Link>
     <Link to="classList"><MenuItem primaryText="Classes" /></Link>
+    <Link to="homework"><MenuItem primaryText="Homework Forms" /></Link>
+    <Link to="formBuilder"><MenuItem primaryText="Homework Builder" /></Link>
+    <Link to="grades"><MenuItem primaryText="GradeBook" /></Link>
+    <Link to="documents"><MenuItem primaryText="Permission Slips" /></Link>
+    <Link to="video"><MenuItem primaryText="Video" /></Link>
+    <Link to="message"><MenuItem primaryText="Message" /></Link>
+    <Link to="admin"><MenuItem primaryText="Create User" /></Link>
   </IconMenu>
 );
 
-const MoreMenuOthers = (props) => (
+const MoreMenuParent = (props) => (
   <IconMenu
     {...props}
     iconButtonElement={
@@ -50,29 +57,25 @@ const MoreMenuOthers = (props) => (
     anchorOrigin={{horizontal: 'right', vertical: 'top'}}
   >
     <Link to="/"><MenuItem primaryText="Home" /></Link>
+    <Link to="documents"><MenuItem primaryText="Permission Slips" /></Link>
+    <Link to="video"><MenuItem primaryText="Video" /></Link>
+    <Link to="donate"><MenuItem primaryText="Donate" /></Link>
   </IconMenu>
 );
 
-// const Nav = (props) => {
-//   // return (
-//   //   <div id="menuToggle">
-//   //   <input type="checkbox" />
-//   //   <span></span>
-//   //   <span></span>
-//   //   <span></span>
-//   //     <ul className="nav nav-pills nav-stacked col-md-3" id="menu">
-//   //     <li role="presentation"><Link to="logout">Sign Out</Link></li>
-//   //     <li role="presentation"><Link to="/">Home</Link></li>
-//   //     </ul>
-//   //   </div>
-//   // )
-//   return (
-//         <AppBar
-//           title="SkooledDS"
-//           iconElementRight={<Logged /> }
-//         />
-//       )
-// }
+const MoreMenuStudent = (props) => (
+  <IconMenu
+    {...props}
+    iconButtonElement={
+      <IconButton><MenuIcon /></IconButton>
+    }
+    targetOrigin={{horizontal: 'right', vertical: 'top'}}
+    anchorOrigin={{horizontal: 'right', vertical: 'top'}}
+  >
+    <Link to="/"><MenuItem primaryText="Home" /></Link>
+    <Link to="video"><MenuItem primaryText="Video" /></Link>
+  </IconMenu>
+);
 
 class Nav extends React.Component {
   constructor(props) {
@@ -102,14 +105,23 @@ class Nav extends React.Component {
         iconElementLeft={<MoreMenuTeacher />}
         iconElementRight={<Logged /> } />
     )
-  } else {
+  } else if (this.props.userType === 'student') {
     return (
     <AppBar
       title="SkooledDS"
       onTitleTouchTap={() => <Redirect/>}
-      iconElementLeft={<MoreMenuOther />}
+      iconElementLeft={<MoreMenuStudent />}
       iconElementRight={<Logged /> } />
-    )}
+    )
+  } else {
+    return (
+      <AppBar
+        title="SkooledDS"
+        onTitleTouchTap={() => <Redirect/>}
+        iconElementLeft={<MoreMenuParent />}
+        iconElementRight={<Logged /> } />
+      )
+    }
   }
 }
 
