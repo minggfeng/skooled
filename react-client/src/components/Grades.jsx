@@ -136,8 +136,6 @@ class Grades extends React.Component{
   }
 
   render(){
-    console.log('homework',this.state.homeworkPerClass)
-    console.log('student', this.state.studentsPerClass)
     return(
       <div>
          <h2>Grades</h2>

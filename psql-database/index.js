@@ -10,6 +10,8 @@ const Question = require('./models/questions.js');
 const Homework = require('./models/homework.js');
 const ClassesHomework = require('./models/classes_homework.js');
 const services = require('../services');
+var dbConfig = require('./config');
+var knex = require('knex')(dbConfig);
 
 module.exports = {
   // ADMIN PAGE: ADD USER
@@ -473,7 +475,39 @@ module.exports = {
     .catch((err) => {
       cb(err, null);
     })
+  },
+
+  //STUDENT HOMEPAGE: GRADES
+
+  fetchGradesOld: (first_name, callback) => {
+    console.log(first_name);
+    Student
+     .query({ where: {first_name: first_name }})
+     .fetch()
+     .then(student => {
+      console.log(student)
+      StudentHomework.forge({ student_id: student.id })
+        .fetchAll()
+        .then(grades => {
+          callback(null, grades)
+          })
+          .catch((err) => {
+            callback(err, null);
+          })
+      })
+  },
+  fetchGrades: (first_name, callback) => {
+    knex.table('student_homework').innerJoin('students', 'students.id', '=', 'student_homework.student_id')
+    .innerJoin('homework', 'student_homework.homework_id', '=', 'homework.id')
+    .where({first_name:first_name})
+    .then(function(res){
+      callback(null, res)
+    })
+    .catch((err) => {
+      callback(err, null)
+    })
   }
+
 };
 
 /*

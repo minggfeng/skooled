@@ -63,5 +63,18 @@ router.post('/insertgrades', (req, res) => {
   });
 });
 
+// STUDENT LOGIN: GRADES
+
+router.get('/student-grades', (req, res) => {
+  pg.fetchGrades(req.query.id, (error, data) => {
+    if (error) {
+      console.error('Error retrieving all homework for a class from db', error);
+      res.sendStatus(500);
+    } else {
+      res.send(data);
+    }
+  });
+});
+
 
 module.exports = router;

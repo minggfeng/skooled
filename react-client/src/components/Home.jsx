@@ -69,25 +69,25 @@ class Home extends React.Component {
           <div style={styles.root}>
             <GridList style={styles.gridlist}>
 
-              <Link to="studentList">  
+              <Link to="studentList">
                 <GridTile title="Student List" titleBackground="#00BCD4">
                   <img src="https://s3-us-west-1.amazonaws.com/skooledds-bucket/diverse_graduates.jpg" width="200" height="150" />
                 </GridTile>
               </Link>
 
-              <Link to="classList">  
+              <Link to="classList">
                 <GridTile title="Class List" titleBackground="#00BCD4">
                   <img src="https://s3-us-west-1.amazonaws.com/skooledds-bucket/subjects1.jpg" width="200" height="150" />
                 </GridTile>
               </Link>
 
-              <Link to="homework">  
+              <Link to="homework">
                 <GridTile title="My Forms" titleBackground="#00BCD4">
                   <img src="https://s3-us-west-1.amazonaws.com/skooledds-bucket/forms.jpg" width="200" height="150" />
                 </GridTile>
               </Link>
 
-              <Link to="formBuilder">  
+              <Link to="formBuilder">
                 <GridTile title="Form Builder" titleBackground="#00BCD4">
                   <img src="https://s3-us-west-1.amazonaws.com/skooledds-bucket/homework.jpg" width="200" height="150" />
                 </GridTile>
@@ -100,32 +100,32 @@ class Home extends React.Component {
           <ListItem hoverColor="FFF">
             <div style={styles.root}>
               <GridList style={styles.gridlist}>
- 
-                <Link to="grades">  
+
+                <Link to="grades">
                   <GridTile title="Grades" titleBackground="#00BCD4">
                     <img src="https://s3-us-west-1.amazonaws.com/skooledds-bucket/gradebook.jpg" width="200" height="150" />
                   </GridTile>
                 </Link>
 
-                <Link to="documents">  
+                <Link to="documents">
                   <GridTile title="Permission Slips" titleBackground="#00BCD4">
                     <img src="https://s3-us-west-1.amazonaws.com/skooledds-bucket/permission-slip.gif" width="200" height="150" />
                   </GridTile>
                 </Link>
-        
-                <Link to="video">  
+
+                <Link to="video">
                   <GridTile title="Video" titleBackground="#00BCD4">
                     <img src="https://s3-us-west-1.amazonaws.com/skooledds-bucket/video.jpg" width="200" height="150" />
                   </GridTile>
                 </Link>
-                
-                <Link to="message">  
+
+                <Link to="message">
                   <GridTile title="Message" titleBackground="#00BCD4">
                     <img src="https://s3-us-west-1.amazonaws.com/skooledds-bucket/lower-sms-prices.jpg" width="200" height="150" />
                   </GridTile>
                 </Link>
 
-                <Link to="admin">  
+                <Link to="admin">
                   <GridTile title="Create User" titleBackground="#00BCD4">
                     <img src="https://s3-us-west-1.amazonaws.com/skooledds-bucket/administrator.jpeg" width="200" height="150" />
                   </GridTile>
@@ -160,6 +160,13 @@ class Home extends React.Component {
                       <img src="https://s3-us-west-1.amazonaws.com/skooledds-bucket/video.jpg" width="200" height="150" />
                     </GridTile>
                   </Link>
+                  <Link to="studentgrades">
+                    <GridTile
+                      title="Grades"
+                      titleBackground="#00BCD4">
+                      <img src="https://s3-us-west-1.amazonaws.com/skooledds-bucket/gradebook.jpg" width="200" height="150" />
+                    </GridTile>
+                  </Link>
                 </GridList>
               </div>
             </ListItem>
@@ -186,8 +193,8 @@ class Home extends React.Component {
             <ListItem hoverColor="FFF">
               {this.state.myStudents.length > 1 &&
               <div style={styles.root}>
-                <GridList 
-                  style={styles.gridlist} 
+                <GridList
+                  style={styles.gridlist}
                   padding={10}>
                   {studentList}
                 </GridList>
@@ -206,7 +213,7 @@ class Home extends React.Component {
             <ListItem hoverColor="FFF">
               <div style={styles.root}>
                 <GridList style={styles.gridlist} padding={10}>
-                  <Link to="documents">  
+                  <Link to="documents">
                     <GridTile
                       title="Permission Slips"
                       titleBackground="#00BCD4">
