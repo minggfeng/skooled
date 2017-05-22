@@ -1,5 +1,6 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
+import CircularProgress from 'material-ui/CircularProgress';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 
@@ -17,16 +18,17 @@ class Login extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
 	}
 
-  componentWillMount() {
-    if (this.props.isLoggedIn) {
-      this.props.history.push('/');
-    }
-  }
-
   componentDidMount() {
-    setTimeout(() => {
-      this.setState({loading: false}); 
-    }, 500);
+    if (this.props.isLoggedIn) {
+      setTimeout(() => {
+        this.props.history.push('/');      
+        this.setState({loading: false}); 
+      }, 1000);
+    } else {
+      setTimeout(() => {
+        this.setState({loading: false}); 
+      }, 1000);
+    }
   }
 
   handleUsernameChange(event) {
@@ -44,7 +46,9 @@ class Login extends React.Component {
   render() {
     if(this.state.loading) {
       return (
-        null
+        <div className="loading">
+          <CircularProgress size={120} thickness={8} style={{'margin-left': '50%', 'left': '-65px', 'margin-top': '100px'}} />
+        </div>
       );
     } else {
       return (
