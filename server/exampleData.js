@@ -137,8 +137,8 @@ var makeStudentParentRelationships = () => {
         pg.selectAllStudents((err, students) => {
           if (students) {
             let numOfStudents = students.models.length;
-            let studentId = students.models[Math.floor(Math.random() * numOfStudents)].attributes.id;
             for (var i = 0; i < numberofParents; i++) {
+              let studentId = students.models[Math.floor(Math.random() * numOfStudents)].attributes.id;
               pg.insertUserStudent(users[i], studentId);
             }
           }

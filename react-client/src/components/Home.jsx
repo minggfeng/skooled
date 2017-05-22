@@ -168,29 +168,39 @@ class Home extends React.Component {
         );
 
     }else {
-    const studentList = this.state.myStudents.map((student) =>
-      <GridTile
-        title={`${student.first_name} ${student.last_name}`}
-        titleStyle={styles.titleStyle}
-        key={student.id}
-        onClick={() => {this.handleStudentClick(student)}}
-        titleBackground="linear-gradient(to top, rgba(0,0,0,0.7) 0%,rgba(0,0,0,0.3) 70%,rgba(0,0,0,0) 100%)"
-        subtitle={`GPA: ${student.gpa}`}>
-        <img src={student.photo}/>
-      </GridTile>
-    );
+      const studentList = this.state.myStudents.map((student) =>
+        <GridTile
+          title={`${student.first_name} ${student.last_name}`}
+          titleStyle={styles.titleStyle}
+          key={student.id}
+          onClick={() => {this.handleStudentClick(student)}}
+          titleBackground="linear-gradient(to top, rgba(0,0,0,0.7) 0%,rgba(0,0,0,0.3) 70%,rgba(0,0,0,0) 100%)"
+          subtitle={`GPA: ${student.gpa}`}>
+          <img src={student.photo}/>
+        </GridTile>
+      );
       return (
         <div>
           <List style={styles.list}>
             <ListItem hoverColor="FFF"><h3>My Children</h3></ListItem>
             <ListItem hoverColor="FFF">
+              {this.state.myStudents.length > 1 &&
               <div style={styles.root}>
                 <GridList 
-                  style={styles.gridList} 
+                  style={styles.gridlist} 
                   padding={10}>
                   {studentList}
                 </GridList>
               </div>
+            }
+            {this.state.myStudents.length === 1 &&
+              <div style={styles.root}>
+                <GridList cols={1} style={styles.gridlist}>
+                {studentList}
+                </GridList>
+              </div>
+            }
+
             </ListItem>
             <ListItem hoverColor="FFF"><h3>Activities</h3></ListItem>
             <ListItem hoverColor="FFF">
