@@ -144,14 +144,23 @@ class Home extends React.Component {
             <ListItem hoverColor="FFF"><h3>Activities</h3></ListItem>
             <ListItem hoverColor="FFF">
               <div style={styles.root}>
+                <GridList style={styles.gridlist} padding={10}>
+                  <Link to="assignments">
+                    <GridTile
+                      title="Homework"
+                      titleBackground="#00BCD4">
+                      <img src="https://s3-us-west-1.amazonaws.com/skooledds-bucket/homework.jpg" width="200" height="150" />
+                    </GridTile>
+                  </Link>
 
-                <Link to="video">
-                  <GridTile
-                    title="Video"
-                    titleBackground="#00BCD4">
-                    <img src="https://s3-us-west-1.amazonaws.com/skooledds-bucket/video.jpg" width="200" height="150" />
-                  </GridTile>
-                </Link>
+                  <Link to="video">
+                    <GridTile
+                      title="Video"
+                      titleBackground="#00BCD4">
+                      <img src="https://s3-us-west-1.amazonaws.com/skooledds-bucket/video.jpg" width="200" height="150" />
+                    </GridTile>
+                  </Link>
+                </GridList>
               </div>
             </ListItem>
           </List>

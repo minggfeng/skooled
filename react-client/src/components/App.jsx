@@ -18,6 +18,7 @@ import Grades from './Grades.jsx';
 import FormBuilder from './FormBuilder.jsx';
 import Homework from './forms/Homework.jsx';
 import ClassProfile from './ClassProfile.jsx';
+import Assignments from './forms/Assignments.jsx';
 
 
 class App extends React.Component {
@@ -70,6 +71,7 @@ class App extends React.Component {
             <Route name="formBuilder" path="/formBuilder" component={(props) => (<FormBuilder {...props}/> )} />
             <Route name="homework" path="/homework" component={(props) => (<Homework {...props}/>)} />
             <Route name="classProfile" path="/classProfile" component={() => (<ClassProfile currentClass={this.state.currentClass} />)} />
+            <Route name="assignments" path="/assignments" component={() => (<Assignments />)} />
             <Route name="logout" path="/logout" component={() => (<Logout revokeCredentials={this.props.revokeCredentials}/> )} />
             <Route name="donate" path="/donate" component={Donate} />
         </div>

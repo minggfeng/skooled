@@ -105,4 +105,53 @@ router.post('/assignForms', ensureAuthorized, (req, res) => {
   })
 })
 
+const selectClassesByIdAsync = Promise.promisify(pg.selectClassesById)
+
+router.get('/studentClasses', ensureAuthorized, (req, res) => {
+  let user_id = req.decoded.id;
+  pg.selectUserById(user_id, (err, user) => {
+    if (user) {
+      let email = user.attributes.email
+      let options = {
+        email: email
+      }
+      pg.selectStudentOptions(options, (err, student) => {
+        if (student) {
+          let student_id = student.attributes.id;
+          let options = {
+            student_id: student_id
+          }
+          pg.fetchStudentsInClass(options, (err, relations) => {
+            Promise.map(relations.models, (model) => {
+              let class_id = model.attributes.class_id;
+              let options = {
+                id: class_id
+              }
+              return selectClassesByIdAsync(options)
+              .then((classObj) => {
+                return classObj.models[0].attributes;
+              })
+
+            })
+            .then((classes) => {
+              res.send(classes);
+            })
+          })
+        }
+      })
+    }
+  })
+})
+
+router.post('/studentAssignments', ensureAuthorized, (req, res) => {
+  let classObj = req.body;
+  console.log(req.body)
+  pg.fetchClassesHomework(classObj, (err, relations) => {
+    Promise.map(relations.models, (model) => {
+      
+    })
+  })
+})
+
+
 module.exports = router;
