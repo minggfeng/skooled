@@ -68,8 +68,8 @@ var teacherMassInsert = () => {
   }
 }
 
-var studentMassInsert = () => {
-  for (var i = 0; i < alphabet.length; i++) {
+var studentMassInsertOne = () => {
+  for (var i = 0; i < 5; i++) {
     let letter = alphabet[i];
     let studentObj = studentGenerator(letter);
     pg.insertStudent(studentObj, (err, studentData) => {
@@ -95,6 +95,119 @@ var studentMassInsert = () => {
     })
   }
 }
+
+var studentMassInsertTwo = () => {
+  for (var i = 5; i < 10; i++) {
+    let letter = alphabet[i];
+    let studentObj = studentGenerator(letter);
+    pg.insertStudent(studentObj, (err, studentData) => {
+      if (err) {
+        console.log(`Error on student${letter}`);
+      }
+      if (studentData) {
+        console.log(`Inserted student${letter}`);
+        let studentUser = {
+          email: studentObj.email,
+          password: letter,
+          first_name: studentObj.firstName,
+          last_name: studentObj.lastName,
+          phone_number: '15556786789',
+          role: 'student'
+        }
+        pg.insertUser(studentUser, (err, studentDataUser) => {
+          if (studentDataUser) {
+            console.log(`Inserted on student user ${letter}`);
+          }
+        })
+      }
+    })
+  }
+}
+
+var studentMassInsertThree = () => {
+  for (var i = 10; i < 15; i++) {
+    let letter = alphabet[i];
+    let studentObj = studentGenerator(letter);
+    pg.insertStudent(studentObj, (err, studentData) => {
+      if (err) {
+        console.log(`Error on student${letter}`);
+      }
+      if (studentData) {
+        console.log(`Inserted student${letter}`);
+        let studentUser = {
+          email: studentObj.email,
+          password: letter,
+          first_name: studentObj.firstName,
+          last_name: studentObj.lastName,
+          phone_number: '15556786789',
+          role: 'student'
+        }
+        pg.insertUser(studentUser, (err, studentDataUser) => {
+          if (studentDataUser) {
+            console.log(`Inserted on student user ${letter}`);
+          }
+        })
+      }
+    })
+  }
+}
+
+var studentMassInsertFour = () => {
+  for (var i = 15; i < 20; i++) {
+    let letter = alphabet[i];
+    let studentObj = studentGenerator(letter);
+    pg.insertStudent(studentObj, (err, studentData) => {
+      if (err) {
+        console.log(`Error on student${letter}`);
+      }
+      if (studentData) {
+        console.log(`Inserted student${letter}`);
+        let studentUser = {
+          email: studentObj.email,
+          password: letter,
+          first_name: studentObj.firstName,
+          last_name: studentObj.lastName,
+          phone_number: '15556786789',
+          role: 'student'
+        }
+        pg.insertUser(studentUser, (err, studentDataUser) => {
+          if (studentDataUser) {
+            console.log(`Inserted on student user ${letter}`);
+          }
+        })
+      }
+    })
+  }
+}
+
+var studentMassInsertFive = () => {
+  for (var i = 20; i < 27; i++) {
+    let letter = alphabet[i];
+    let studentObj = studentGenerator(letter);
+    pg.insertStudent(studentObj, (err, studentData) => {
+      if (err) {
+        console.log(`Error on student${letter}`);
+      }
+      if (studentData) {
+        console.log(`Inserted student${letter}`);
+        let studentUser = {
+          email: studentObj.email,
+          password: letter,
+          first_name: studentObj.firstName,
+          last_name: studentObj.lastName,
+          phone_number: '15556786789',
+          role: 'student'
+        }
+        pg.insertUser(studentUser, (err, studentDataUser) => {
+          if (studentDataUser) {
+            console.log(`Inserted on student user ${letter}`);
+          }
+        })
+      }
+    })
+  }
+}
+
 
 var parentMassInsert = () => {
   for (var i = 0; i < 6; i++) {
@@ -204,28 +317,44 @@ var makeStudentRelationships = () => {
 
 
 var makeData = () => {
-  studentMassInsert();
+  studentMassInsertOne();
+
+  setTimeout(() => {
+    studentMassInsertTwo();
+  }, 5000)
+
+  setTimeout(() => {
+    studentMassInsertThree();
+  }, 10000)
+
+  setTimeout(() => {
+    studentMassInsertFour()
+  }, 15000)
+
+  setTimeout(() => {
+    studentMassInsertFive()
+  }, 20000)
 
   setTimeout(() => {
     teacherMassInsert();
     parentMassInsert();
     classMassInsert();
     
-  }, 5000)
+  }, 25000)
 
   setTimeout(() => {
     makeStudentParentRelationships();
     makeClassesTeacherRelationships();
-  }, 10000)
+  }, 30000)
 
   setTimeout(() => {
     makeStudentRelationships();
-  },15000)
+  },35000)
 
 
   setTimeout(() => {
     process.exit()
-  }, 25000)
+  }, 45000)
 }
 
 makeData();
