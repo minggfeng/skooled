@@ -1,7 +1,9 @@
 import React from 'react';
 import $ from 'jquery';
-import TextField from 'material-ui/TextField';
+import DropDownMenu from 'material-ui/DropDownMenu';
+import MenuItem from 'material-ui/MenuItem';
 import RaisedButton from 'material-ui/RaisedButton';
+import TextField from 'material-ui/TextField';
 import Phone, { isValidPhoneNumber } from 'react-phone-number-input'
 
 class Message extends React.Component { 
@@ -16,6 +18,7 @@ class Message extends React.Component {
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleMessageChange = this.handleMessageChange.bind(this);
+    this.prefill = this.prefill.bind(this);
   }
 
   handleMessageChange(event) {
@@ -48,6 +51,11 @@ class Message extends React.Component {
     }
   }
 
+  prefill(event, index, value) {
+    this.setState({ phoneNumber: value});
+    $('#phone-number').val(value);
+  }
+
   render() {
     let charCountDiv;
     if (this.state.characterCount >= 0 && this.state.characterCount < 160) {
@@ -63,14 +71,16 @@ class Message extends React.Component {
           <div id="message-title">
             <h2>Send Text Messages to Parents</h2>
           </div>
-          <div>
+          <DropDownMenu onChange={this.prefill} value="Please select" style={{'top': '-80px'}}>
+            <MenuItem value={'Please select'} primaryText="Please select" />
+            <MenuItem value={'+15551234567'} primaryText="Sick kid's parent" />
+          </DropDownMenu>
           <Phone
             country="US"
             placeholder="Enter valid phone number"
             value={ this.state.phoneNumber }
             onChange={ phoneNumber => this.setState({ phoneNumber }) } 
             id="phone-number"/>
-          </div>
           <br />
           <TextField hintText="Message text" 
                      onChange={this.handleMessageChange}
