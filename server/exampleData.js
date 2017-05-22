@@ -204,24 +204,28 @@ var makeStudentRelationships = () => {
 
 
 var makeData = () => {
-  teacherMassInsert();
   studentMassInsert();
-  parentMassInsert();
-  classMassInsert();
+
+  setTimeout(() => {
+    teacherMassInsert();
+    parentMassInsert();
+    classMassInsert();
+    
+  }, 5000)
 
   setTimeout(() => {
     makeStudentParentRelationships();
     makeClassesTeacherRelationships();
-  }, 3000)
+  }, 10000)
 
   setTimeout(() => {
     makeStudentRelationships();
-  },6000)
+  },15000)
 
 
   setTimeout(() => {
     process.exit()
-  }, 10000)
+  }, 25000)
 }
 
 makeData();
