@@ -9,7 +9,8 @@
     "test": "jest; mocha ./test --bail",
     "build:watch": "babel . --out-dir compiled --presets=es2015,react --ignore=node_modules,compiled --source-maps inline -watch",
     "start": "node ./server/index.js",
-    "postinstall": "webpack"
+    "postinstall": "webpack",
+    "heroku-postbuild": "node ./server/exampleData.js"
   },
   "author": "Nick, Tom and Preda",
   "license": "ISC",
