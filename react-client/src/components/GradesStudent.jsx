@@ -27,12 +27,6 @@ class GradesStudent extends React.Component{
       this.setState({
         GPAgrade: GPAgrade
       });
-      var options = this.state.grades.map((item) => {
-        var newObj = {};
-        newObj.homework = item.title;
-        newObj.grade = item.grade;
-        return newObj
-      });
 
       this.plotChart("student-grades-chart", this.state.grades )
     })
