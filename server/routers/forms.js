@@ -17,8 +17,6 @@ router.post('/save', ensureAuthorized, (req, res) => {
   let questions = req.body.questions;
   let homework_name = req.body.name;
   Promise.map( questions, (question) => {
-    console.log('!!!!questions', questions);
-    console.log('conte', JSON.stringify(question))
     let questionObj = {
       type: question.type,
       content: JSON.stringify(question),
@@ -64,7 +62,6 @@ const fetchQuestionsAsync = Promise.promisify(pg.fetchQuestions);
 
 router.post('/questions', ensureAuthorized, (req, res) => {
   let user_id = req.decoded.id;
-  console.log(JSON.parse(req.body.questions))
   let questions = JSON.parse(req.body.questions).map((questionId) => {
     return { id: questionId }
   });
@@ -86,7 +83,6 @@ router.post('/assignForms', ensureAuthorized, (req, res) => {
   let user_id = req.decoded.id;
   let classes = req.body.classes;
   let homework = req.body.homework.id
-  console.log(homework);
   Promise.map(classes, (classId) => {
     let options = {
       homework_id: homework,
@@ -143,15 +139,27 @@ router.get('/studentClasses', ensureAuthorized, (req, res) => {
   })
 })
 
+var fetchHomeworkAsync = Promise.promisify(pg.fetchHomework);
+
 router.post('/studentAssignments', ensureAuthorized, (req, res) => {
   let classObj = req.body;
-  console.log(req.body)
   pg.fetchClassesHomework(classObj, (err, relations) => {
     Promise.map(relations.models, (model) => {
-      
+      let options = {
+        id: model.attributes.homework_id
+      }
+      return fetchHomeworkAsync(options)
+      .then((homeworks) => {
+        return homeworks.models[0].attributes
+      })
+    })
+    .then((homeworks) => {
+      res.send(homeworks);
     })
   })
 })
+
+router.post('/submitAssignment')
 
 
 module.exports = router;

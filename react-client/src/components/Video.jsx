@@ -116,7 +116,6 @@ class Video extends React.Component {
             primary = {true}
             style = {style}
             onClick={this.handleSubmit}
-            class="btn"
             icon={<Callicon />}
            />
           <RaisedButton 

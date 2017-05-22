@@ -219,7 +219,7 @@ var makeData = () => {
   },6000)
 }
 
-// makeData();
+makeData();
 
 // run first 4
 

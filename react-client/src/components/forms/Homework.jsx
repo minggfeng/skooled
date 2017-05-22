@@ -20,7 +20,7 @@ const styles = {
     justifyContent: 'space-around',
   },
   gridList: {
-    width: '80%'
+    width: '90%'
   },
   questions: {
     overflowY: 'auto',
@@ -77,6 +77,8 @@ class Homework extends React.Component {
         .then(response => {
           this.setState({
             currentQuestions: response.data
+          }, () => {
+            this.forceUpdate();
           })
         })
       })
@@ -91,6 +93,47 @@ class Homework extends React.Component {
       console.log('Success getting classes list from db.', response.data);
       this.setState ({
         classes: response.data
+      }, () => {
+        this.forceUpdate();
+      });
+    })
+    .catch(error => {
+      console.error('Error getting classes list from db.', error);
+    });
+  }
+
+  componentDidMount() {
+    axios.get('/forms/myHomework', config)
+    .then(response => {
+      this.setState({
+        myHomework: response.data,
+        currentHomework: response.data.length - 1
+      }, () => {
+        let options = {
+          questions: this.state.myHomework[this.state.currentHomework].questions
+        }
+        axios.post('/forms/questions', options, config)
+        .then(response => {
+          this.setState({
+            currentQuestions: response.data
+          }, () => {
+            this.forceUpdate();
+          })
+        })
+      })
+    })
+    .catch(error => {
+      console.error('Failed to upload questions from db', error);
+    })
+
+
+    axios.get('/home/classes', config)
+    .then(response => {
+      console.log('Success getting classes list from db.', response.data);
+      this.setState ({
+        classes: response.data
+      }, () => {
+        this.forceUpdate();
       });
     })
     .catch(error => {
@@ -102,24 +145,14 @@ class Homework extends React.Component {
     this.setState({
       currentHomework: index
     }, () => {
-      axios.get('/forms/myHomework', config)
+      let options = {
+        questions: homework.questions
+      }
+      axios.post('/forms/questions', options, config)
       .then(response => {
         this.setState({
-          myHomework: response.data,
-        }, () => {
-          let options = {
-            questions: this.state.myHomework[this.state.currentHomework].questions
-          }
-          axios.post('/forms/questions', options, config)
-          .then(response => {
-            this.setState({
-              currentQuestions: response.data
-            })
-          })
+          currentQuestions: response.data
         })
-      })
-      .catch(error => {
-        console.error('Failed to upload questions from db', error);
       })
     })
   }
@@ -152,6 +185,8 @@ class Homework extends React.Component {
           </ListItem>)
     );
 
+    var currentHomeworkName = this.state.myHomework.length > 0 ? this.state.myHomework[this.state.currentHomework].title : "Select a Form";
+
     var questions = this.state.currentQuestions.map((question, i) => {
       var props = {
         id: i,
@@ -178,7 +213,7 @@ class Homework extends React.Component {
         <h2 className="header">My Forms</h2>
         <div style={styles.root}>
         <GridList style={styles.gridList} cols={10} padding={10} rows={2}>
-          <GridTile style={styles.questions} cols={8} rows={2} title="Current Form" titlePosition="top" titleStyle={styles.title} titleBackground="#00BCD4">
+          <GridTile style={styles.questions} cols={8} rows={2} title={currentHomeworkName} titlePosition="top" titleStyle={styles.title} titleBackground="#00BCD4">
             <br></br>
             <List>{questions}</List>
           </GridTile>
@@ -186,9 +221,11 @@ class Homework extends React.Component {
             <br></br>
             <List>{myHomework}</List>
           </GridTile>
+          <GridTile cols={8}>
+            <MultiSelectField classes={this.state.classes} handleSelectedClasses={this.handleSelectedClasses}/>
+          </GridTile>
         </GridList>
         </div>
-        <MultiSelectField classes={this.state.classes} handleSelectedClasses={this.handleSelectedClasses}/>
         <FloatingActionButton onClick={this.addNewForm} style={styles.button}>
           <ContentAdd />
         </FloatingActionButton>

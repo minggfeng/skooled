@@ -11,6 +11,7 @@ import ContentAdd from 'material-ui/svg-icons/content/add';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 import SelectClassField from './SelectClassField.jsx';
+import RaisedButton from 'material-ui/RaisedButton';
 
 
 const styles = {
@@ -20,7 +21,7 @@ const styles = {
     justifyContent: 'space-around',
   },
   gridList: {
-    width: '80%'
+    width: '90%'
   },
   questions: {
     overflowY: 'auto',
@@ -37,9 +38,7 @@ const styles = {
     margin: '5px'
   },
   button: {
-    position: 'absolute',
-    right:    '5%',
-    bottom:   '5%',
+    marginTop: '10'
   }
 };
 
@@ -59,6 +58,7 @@ class Assignments extends React.Component {
       }
     this.homeworkOnClick = this.homeworkOnClick.bind(this);
     this.handleSelected = this.handleSelected.bind(this)
+    this.handleSubmission = this.handleSubmission.bind(this);
   }
 
   componentWillMount() {
@@ -67,6 +67,23 @@ class Assignments extends React.Component {
       console.log('Success getting classes list from db.', response.data);
       this.setState ({
         classes: response.data
+      }, () => {
+        this.forceUpdate();
+      });
+    })
+    .catch(error => {
+      console.error('Error getting classes list from db.', error);
+    });
+  }
+
+  componentDidMount() {
+    axios.get('/forms/studentClasses', config)
+    .then(response => {
+      console.log('Success getting classes list from db.', response.data);
+      this.setState ({
+        classes: response.data
+      }, () => {
+        this.forceUpdate();
       });
     })
     .catch(error => {
@@ -78,11 +95,34 @@ class Assignments extends React.Component {
     this.setState({
       currentHomework: index
     }, () => {
-      axios.get('/forms/studentHomework', config)
+      let options = {
+        questions: homework.questions
+      }
+      axios.post('/forms/questions', options, config)
       .then(response => {
         this.setState({
-          myHomework: response.data,
-        }, () => {
+          currentQuestions: response.data
+        })
+      })
+    })
+  }
+
+
+
+  handleSubmission() {
+    console.log('clicked');
+  }
+
+  handleSelected(classId) {
+    let options = {
+      classes_id: classId
+    }
+    axios.post('/forms/studentAssignments', options, config)
+    .then(response => {
+      this.setState({
+        myHomework: response.data,
+        currentHomework: 0
+      }, () => {
           let options = {
             questions: this.state.myHomework[this.state.currentHomework].questions
           }
@@ -93,24 +133,6 @@ class Assignments extends React.Component {
             })
           })
         })
-      })
-      .catch(error => {
-        console.error('Failed to upload questions from db', error);
-      })
-    })
-  }
-
-  handleSubmission() {
-    console.log('submit')
-  }
-
-  handleSelected(classId) {
-    let options = {
-      classes_id: classId
-    }
-    axios.post('/forms/studentAssignments', options, config)
-    .then(response => {
-      console.log(response)
     })
     .catch(errpr => {
       console.error('Failed to upload assignments');
@@ -125,6 +147,8 @@ class Assignments extends React.Component {
           primaryText={`${homework.title}`}>
           </ListItem>)
     );
+
+    var currentHomeworkName = this.state.myHomework.length > 0 ? this.state.myHomework[this.state.currentHomework].title : "Select an Assignment";
 
     var questions = this.state.currentQuestions.map((question, i) => {
       var props = {
@@ -144,16 +168,27 @@ class Assignments extends React.Component {
     return (
       <div>
         <h2 className="header">My Homework</h2>
-        <div><SelectClassField handleSelected={this.handleSelected} classes={this.state.classes}/></div>
+        <GridList cols={10} cellHeight={'auto'}>
+          <GridTile cols={8}>
+            <SelectClassField handleSelected={this.handleSelected} classes={this.state.classes}/>
+          </GridTile>
+        </GridList>
         <div style={styles.root}>
         <GridList style={styles.gridList} cols={10} padding={10} rows={2}>
-          <GridTile style={styles.questions} cols={8} rows={2} title="Current Homework" titlePosition="top" titleStyle={styles.title} titleBackground="#00BCD4">
+          <GridTile style={styles.questions} cols={8} rows={2} title={currentHomeworkName} titlePosition="top" titleStyle={styles.title} titleBackground="#00BCD4">
             <br></br>
             <List>{questions}</List>
           </GridTile>
           <GridTile style={styles.toolbar} cols={2} rows={2} title="My Assignments" titlePosition="top" titleStyle={styles.title} titleBackground="#00BCD4">
             <br></br>
             <List>{myHomework}</List>
+          </GridTile>
+          <GridTile cols={8}>
+            <RaisedButton 
+              label="Submit Assignment"
+              style={styles.button}
+              onClick={this.handleSubmission}>
+            </RaisedButton>
           </GridTile>
         </GridList>
         </div>
