@@ -217,6 +217,11 @@ var makeData = () => {
   setTimeout(() => {
     makeStudentRelationships();
   },6000)
+
+
+  setTimeout(() => {
+    process.exit()
+  }, 10000)
 }
 
 makeData();
