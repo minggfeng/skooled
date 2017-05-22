@@ -42,11 +42,6 @@ const styles = {
   }
 };
 
-const currentToken = window.localStorage.accessToken;
-const config = {
-  headers: {'Authorization': currentToken}
-};
-
 class Assignments extends React.Component {
   constructor(props) {
     super(props);
@@ -61,22 +56,11 @@ class Assignments extends React.Component {
     this.handleSubmission = this.handleSubmission.bind(this);
   }
 
-  componentWillMount() {
-    axios.get('/forms/studentClasses', config)
-    .then(response => {
-      console.log('Success getting classes list from db.', response.data);
-      this.setState ({
-        classes: response.data
-      }, () => {
-        this.forceUpdate();
-      });
-    })
-    .catch(error => {
-      console.error('Error getting classes list from db.', error);
-    });
-  }
-
   componentDidMount() {
+    const currentToken = window.localStorage.accessToken;
+    const config = {
+      headers: {'Authorization': currentToken}
+    };
     axios.get('/forms/studentClasses', config)
     .then(response => {
       console.log('Success getting classes list from db.', response.data);
@@ -98,6 +82,10 @@ class Assignments extends React.Component {
       let options = {
         questions: homework.questions
       }
+      const currentToken = window.localStorage.accessToken;
+      const config = {
+        headers: {'Authorization': currentToken}
+      };
       axios.post('/forms/questions', options, config)
       .then(response => {
         this.setState({
@@ -117,6 +105,10 @@ class Assignments extends React.Component {
     let options = {
       classes_id: classId
     }
+    const currentToken = window.localStorage.accessToken;
+    const config = {
+      headers: {'Authorization': currentToken}
+    };
     axios.post('/forms/studentAssignments', options, config)
     .then(response => {
       this.setState({

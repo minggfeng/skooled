@@ -43,11 +43,6 @@ const styles = {
   }
 };
 
-const currentToken = window.localStorage.accessToken;
-const config = {
-  headers: {'Authorization': currentToken}
-};
-
 class Homework extends React.Component {
   constructor(props) {
     super(props);
@@ -62,47 +57,12 @@ class Homework extends React.Component {
     this.addNewForm = this.addNewForm.bind(this);
     this.handleSelectedClasses = this.handleSelectedClasses.bind(this);
   }
-
-  componentWillMount() {
-    axios.get('/forms/myHomework', config)
-    .then(response => {
-      this.setState({
-        myHomework: response.data,
-        currentHomework: response.data.length - 1
-      }, () => {
-        let options = {
-          questions: this.state.myHomework[this.state.currentHomework].questions
-        }
-        axios.post('/forms/questions', options, config)
-        .then(response => {
-          this.setState({
-            currentQuestions: response.data
-          }, () => {
-            this.forceUpdate();
-          })
-        })
-      })
-    })
-    .catch(error => {
-      console.error('Failed to upload questions from db', error);
-    })
-
-
-    axios.get('/home/classes', config)
-    .then(response => {
-      console.log('Success getting classes list from db.', response.data);
-      this.setState ({
-        classes: response.data
-      }, () => {
-        this.forceUpdate();
-      });
-    })
-    .catch(error => {
-      console.error('Error getting classes list from db.', error);
-    });
-  }
-
+  
   componentDidMount() {
+    const currentToken = window.localStorage.accessToken;
+    const config = {
+      headers: {'Authorization': currentToken}
+    };
     axios.get('/forms/myHomework', config)
     .then(response => {
       this.setState({
@@ -148,6 +108,10 @@ class Homework extends React.Component {
       let options = {
         questions: homework.questions
       }
+      const currentToken = window.localStorage.accessToken;
+      const config = {
+        headers: {'Authorization': currentToken}
+      };
       axios.post('/forms/questions', options, config)
       .then(response => {
         this.setState({
@@ -162,12 +126,15 @@ class Homework extends React.Component {
   }
 
   handleSelectedClasses(classIds) {
-    console.log(classIds)
     if (classIds.length > 0) {
       let options = {
         homework: this.state.myHomework[this.state.currentHomework],
         classes: classIds
       }
+      const currentToken = window.localStorage.accessToken;
+      const config = {
+        headers: {'Authorization': currentToken}
+      };
       axios.post('/forms/assignForms', options, config)
       .then(response => {
         this.props.history.push('/classList')
