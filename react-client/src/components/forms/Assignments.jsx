@@ -5,12 +5,13 @@ import axios from 'axios';
 import {List, ListItem} from 'material-ui/List';
 import MultipleChoiceReleased from './MultipleChoiceReleased.jsx';
 import EssayFormReleased from './EssayFormReleased.jsx';
-import MultiSelectField from './MultiSelectField.jsx';
 import {GridList, GridTile} from 'material-ui/GridList';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
+import SelectClassField from './SelectClassField.jsx';
+import RaisedButton from 'material-ui/RaisedButton';
 
 
 const styles = {
@@ -37,9 +38,7 @@ const styles = {
     margin: '5px'
   },
   button: {
-    position: 'absolute',
-    right:    '5%',
-    bottom:   '5%',
+    marginTop: '10'
   }
 };
 
@@ -48,47 +47,22 @@ const config = {
   headers: {'Authorization': currentToken}
 };
 
-class Homework extends React.Component {
+class Assignments extends React.Component {
   constructor(props) {
     super(props);
       this.state = {
         myHomework: [],
         currentHomework: null,
         currentQuestions: [],
-        classes: [],
-        selectedClasses: []
+        classes: []
       }
     this.homeworkOnClick = this.homeworkOnClick.bind(this);
-    this.addNewForm = this.addNewForm.bind(this);
-    this.handleSelectedClasses = this.handleSelectedClasses.bind(this);
+    this.handleSelected = this.handleSelected.bind(this)
+    this.handleSubmission = this.handleSubmission.bind(this);
   }
 
   componentWillMount() {
-    axios.get('/forms/myHomework', config)
-    .then(response => {
-      this.setState({
-        myHomework: response.data,
-        currentHomework: response.data.length - 1
-      }, () => {
-        let options = {
-          questions: this.state.myHomework[this.state.currentHomework].questions
-        }
-        axios.post('/forms/questions', options, config)
-        .then(response => {
-          this.setState({
-            currentQuestions: response.data
-          }, () => {
-            this.forceUpdate();
-          })
-        })
-      })
-    })
-    .catch(error => {
-      console.error('Failed to upload questions from db', error);
-    })
-
-
-    axios.get('/home/classes', config)
+    axios.get('/forms/studentClasses', config)
     .then(response => {
       console.log('Success getting classes list from db.', response.data);
       this.setState ({
@@ -103,31 +77,7 @@ class Homework extends React.Component {
   }
 
   componentDidMount() {
-    axios.get('/forms/myHomework', config)
-    .then(response => {
-      this.setState({
-        myHomework: response.data,
-        currentHomework: response.data.length - 1
-      }, () => {
-        let options = {
-          questions: this.state.myHomework[this.state.currentHomework].questions
-        }
-        axios.post('/forms/questions', options, config)
-        .then(response => {
-          this.setState({
-            currentQuestions: response.data
-          }, () => {
-            this.forceUpdate();
-          })
-        })
-      })
-    })
-    .catch(error => {
-      console.error('Failed to upload questions from db', error);
-    })
-
-
-    axios.get('/home/classes', config)
+    axios.get('/forms/studentClasses', config)
     .then(response => {
       console.log('Success getting classes list from db.', response.data);
       this.setState ({
@@ -157,23 +107,36 @@ class Homework extends React.Component {
     })
   }
 
-  addNewForm() {
-    this.props.history.push('/formBuilder');
+
+
+  handleSubmission() {
+    console.log('clicked');
   }
 
-  handleSelectedClasses(classIds) {
-    console.log(classIds)
-    if (classIds.length > 0) {
-      let options = {
-        homework: this.state.myHomework[this.state.currentHomework],
-        classes: classIds
-      }
-      axios.post('/forms/assignForms', options, config)
-      .then(response => {
-        this.props.history.push('/classList')
-      })
+  handleSelected(classId) {
+    let options = {
+      classes_id: classId
     }
-
+    axios.post('/forms/studentAssignments', options, config)
+    .then(response => {
+      this.setState({
+        myHomework: response.data,
+        currentHomework: 0
+      }, () => {
+          let options = {
+            questions: this.state.myHomework[this.state.currentHomework].questions
+          }
+          axios.post('/forms/questions', options, config)
+          .then(response => {
+            this.setState({
+              currentQuestions: response.data
+            })
+          })
+        })
+    })
+    .catch(errpr => {
+      console.error('Failed to upload assignments');
+    })
   }
 
   render() {
@@ -185,7 +148,7 @@ class Homework extends React.Component {
           </ListItem>)
     );
 
-    var currentHomeworkName = this.state.myHomework.length > 0 ? this.state.myHomework[this.state.currentHomework].title : "Select a Form";
+    var currentHomeworkName = this.state.myHomework.length > 0 ? this.state.myHomework[this.state.currentHomework].title : "Select an Assignment";
 
     var questions = this.state.currentQuestions.map((question, i) => {
       var props = {
@@ -202,36 +165,36 @@ class Homework extends React.Component {
       return question;
     }, this);
 
-    // var myClasses = this.state.classes.map((classObj, index) => (<MenuItem
-    //   key={classObj.id}
-    //   insetChildren={true}
-    //   value={classObj.name}
-    //   primaryText={classObj.name} />));
-
     return (
       <div>
-        <h2 className="header">My Forms</h2>
+        <h2 className="header">My Homework</h2>
+        <GridList cols={10} cellHeight={'auto'}>
+          <GridTile cols={8}>
+            <SelectClassField handleSelected={this.handleSelected} classes={this.state.classes}/>
+          </GridTile>
+        </GridList>
         <div style={styles.root}>
         <GridList style={styles.gridList} cols={10} padding={10} rows={2}>
           <GridTile style={styles.questions} cols={8} rows={2} title={currentHomeworkName} titlePosition="top" titleStyle={styles.title} titleBackground="#00BCD4">
             <br></br>
             <List>{questions}</List>
           </GridTile>
-          <GridTile style={styles.toolbar} cols={2} rows={2} title="My Saved Forms" titlePosition="top" titleStyle={styles.title} titleBackground="#00BCD4">
+          <GridTile style={styles.toolbar} cols={2} rows={2} title="My Assignments" titlePosition="top" titleStyle={styles.title} titleBackground="#00BCD4">
             <br></br>
             <List>{myHomework}</List>
           </GridTile>
           <GridTile cols={8}>
-            <MultiSelectField classes={this.state.classes} handleSelectedClasses={this.handleSelectedClasses}/>
+            <RaisedButton 
+              label="Submit Assignment"
+              style={styles.button}
+              onClick={this.handleSubmission}>
+            </RaisedButton>
           </GridTile>
         </GridList>
         </div>
-        <FloatingActionButton onClick={this.addNewForm} style={styles.button}>
-          <ContentAdd />
-        </FloatingActionButton>
       </div>
     )
   }
 }
 
-export default Homework;
+export default Assignments;

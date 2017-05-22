@@ -3,27 +3,23 @@ import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 import RaisedButton from 'material-ui/RaisedButton';
 
-class MultiSelectField extends Component {
+class SelectClassField extends Component {
   constructor(props) {
     super(props)
     this.state = {
       values: [],
     }
     this.handleChange = this.handleChange.bind(this);
-    this.handleSelect = this.handleSelect.bind(this);
   }
 
   handleChange(e, index, values) {
     this.setState({
       values: []
     }, () => {
-      this.setState({values})
+      this.setState({values}, () => {
+        this.props.handleSelected(values);
+      })
     })
-  }
-
-  handleSelect(e) {
-    e.preventDefault();
-    this.props.handleSelectedClasses(this.state.values);
   }
 
   menuItems(classes) {
@@ -41,22 +37,15 @@ class MultiSelectField extends Component {
     return (
       <div>
         <SelectField
-          multiple={true}
-          hintText="Assign to a Class"
+          hintText="Select Class"
           value={values}
           onChange={this.handleChange}
         >
           {this.menuItems(this.props.classes)}
         </SelectField>
-        <div>
-        <RaisedButton 
-          label="Assign"
-          onClick={this.handleSelect}>
-        </RaisedButton>
-        </div>
       </div>
     );
   }
 }
 
-export default MultiSelectField;
+export default SelectClassField;

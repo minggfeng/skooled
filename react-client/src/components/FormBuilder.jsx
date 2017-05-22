@@ -23,7 +23,7 @@ const styles = {
     justifyContent: 'space-around',
   },
   gridList: {
-    width: '80%'
+    width: '90%'
   },
   questions: {
     overflowY: 'auto',

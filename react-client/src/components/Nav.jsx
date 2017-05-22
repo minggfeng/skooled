@@ -73,6 +73,7 @@ const MoreMenuStudent = (props) => (
     anchorOrigin={{horizontal: 'right', vertical: 'top'}}
   >
     <Link to="/"><MenuItem primaryText="Home" /></Link>
+    <Link to="assignments"><MenuItem primaryText="Homework" /></Link>
     <Link to="video"><MenuItem primaryText="Video" /></Link>
   </IconMenu>
 );

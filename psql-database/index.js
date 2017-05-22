@@ -129,6 +129,18 @@ module.exports = {
     });
   },
 
+  selectStudentOptions : (options, callback) => {
+    Student
+    .query('where', options)
+    .fetch()
+    .then(student => {
+      callback(null, student);
+    })
+    .catch(error => {
+      callback(error, null);
+    });
+  },
+
   // DOC PAGE: GET SELECTED STUDENTS
   retrieveSelectedUsersStudents : (id_user, callback) => {
     UserStudent.forge()
@@ -420,6 +432,18 @@ module.exports = {
     .save()
     .then((relation) => {
       cb(null, relation);
+    })
+    .catch((err) => {
+      cb(err, null);
+    })
+  },
+
+  fetchClassesHomework : (options, cb) => {
+    ClassesHomework
+    .query('where', options)
+    .fetchAll()
+    .then((relations) => {
+      cb(null, relations);
     })
     .catch((err) => {
       cb(err, null);
