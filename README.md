@@ -1,13 +1,13 @@
-# Skooled
+# SkooledDS
 
 > An integrated platform for communication between teachers and parents. Teachers can share information on student progress, grades and scheduling updates. In addition, the platform provides parents the ability to give permission on pressing questions.
 
 ## Team
 
-  - David Gould
-  - Nick Anderson
-  - Preda Wen
-  - Tom Dickson
+  - Lavanya Ammi Chandrashekara
+  - Ming Feng
+  - Salih Abuelyaman
+  - Steven Kim
 
 ## Table of Contents
 
